@@ -5,9 +5,9 @@ import { Editor } from "../components";
 const Write: NextPage = () => {
   const editorRef = useRef(null);
   const onChange = () => {
+    if (!editorRef.current) return;
     const data = editorRef.current.getInstance().getMarkdown();
-    console.log(data);
-    // return data;
+    if (data) console.log(data);
   };
 
   return (

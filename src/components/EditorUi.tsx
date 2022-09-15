@@ -13,14 +13,16 @@ interface EditorWithForwardProps extends EditorProps {
   editorRef: React.MutableRefObject<null>;
 }
 
-const EditorUi = forwardRef((props: EditorWithForwardProps) => (
-  <Editor
-    height={props.height}
-    theme={props.theme}
-    plugins={[colorSyntax]}
-    ref={props.editorRef}
-    onChange={props.onChange}
-  />
-));
+const EditorUi = forwardRef(
+  ({ height, theme, editorRef, onChange }: EditorWithForwardProps) => (
+    <Editor
+      height={height}
+      theme={theme}
+      plugins={[colorSyntax]}
+      ref={editorRef}
+      onChange={onChange}
+    />
+  ),
+);
 
 export default EditorUi;
