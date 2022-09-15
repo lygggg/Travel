@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import type { NextPage } from "next";
-import { Editor } from "../components";
+import { EditorBox } from "../components";
+import { Editor } from "@toast-ui/react-editor";
 
 const Write: NextPage = () => {
-  const editorRef = useRef(null);
+  const editorRef = useRef<Editor>(null);
   const onChange = () => {
     if (!editorRef.current) return;
     const data = editorRef.current.getInstance().getMarkdown();
@@ -12,7 +13,7 @@ const Write: NextPage = () => {
 
   return (
     <>
-      <Editor
+      <EditorBox
         height="600px"
         theme="dark"
         onChange={onChange}

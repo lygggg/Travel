@@ -10,10 +10,10 @@ interface EditorWithForwardProps extends EditorProps {
   theme: string;
   height: string;
   onChange: (x: string) => void;
-  editorRef: React.MutableRefObject<null>;
+  editorRef: React.LegacyRef<Editor>;
 }
 
-const EditorUi = forwardRef(
+const EditorBox = forwardRef(
   ({ height, theme, editorRef, onChange }: EditorWithForwardProps) => (
     <Editor
       height={height}
@@ -25,4 +25,4 @@ const EditorUi = forwardRef(
   ),
 );
 
-export default EditorUi;
+export default EditorBox;
