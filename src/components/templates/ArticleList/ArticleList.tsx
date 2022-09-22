@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { findArticles } from "../../../api/article";
-import { Button, Input } from "../../UI/atoms";
-import { ArticleBox } from "../../UI/molecules";
+import { findArticles } from "src/api/article";
+import { ArticleBox } from "src/components/UI//molecules";
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);

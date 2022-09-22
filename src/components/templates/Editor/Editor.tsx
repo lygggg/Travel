@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { postArticle } from "../../../api/article";
-import { Button, Input } from "../../UI/atoms";
-import { EditorBox } from "../../UI/molecules";
+import { postArticle } from "src/api/article";
+import { Button, Input } from "src/components/UI/atoms";
+import { EditorBox } from "src/components/UI/molecules";
 
 const Editor = () => {
   const [content, setContent] = useState("");
