@@ -1,17 +1,20 @@
 import router from "./index";
 import Article from "./models/article";
-import connectMongo from "./utils/connectMongo.js";
 
-router.post(async (req, res) => {
-  const { content, tag, title } = req.body;
-  console.log(content, tag, title);
-  const article = await Article.create({
-    content: content,
-    tag: tag,
-    title: title,
+router
+  .get(async (req, res) => {
+    const articles = await Article.find();
+    res.json(articles);
+  })
+  .post(async (req, res) => {
+    const { content, tag, title } = req.body;
+    const article = await Article.create({
+      content: content,
+      tag: tag,
+      title: title,
+    });
+    res.json(article);
   });
-  res.json({ article: article });
-});
 
 export default router.handler({
   onError: (err, req, res) => {
