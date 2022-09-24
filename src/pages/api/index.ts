@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter, expressWrapper } from "next-connect";
+import { createRouter } from "next-connect";
 import connectMongo from "./utils/connectMongo.js";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
