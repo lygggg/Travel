@@ -1,17 +1,20 @@
-import { Article } from "src/model/article";
+import { ArticleInteface } from "interface/article";
+import Link from "next/link";
 
 interface ArticleProps {
-  article: Article;
+  article: ArticleInteface;
 }
 
 const ArticleBox = ({ article }: ArticleProps) => {
   const { title, tag } = article;
   return (
     <>
-      <div>
-        {title}
-        {tag}
-      </div>
+      <Link href={`/articles/${article._id}`}>
+        <div>
+          {title}
+          {tag}
+        </div>
+      </Link>
     </>
   );
 };
