@@ -1,11 +1,7 @@
-import { ArticleInteface } from "interface/article";
+import { Article as ArticleProps } from "src/types/article";
 import Link from "next/link";
 
-interface ArticleProps {
-  article: ArticleInteface;
-}
-
-const ArticleBox = ({ article }: ArticleProps) => {
+const ArticleBox = ({ article }: { article: ArticleProps }) => {
   const { title, tag } = article;
   return (
     <>
