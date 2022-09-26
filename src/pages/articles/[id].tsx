@@ -39,8 +39,9 @@ export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   await connectMongo();
-  const res = await ArticleModel.findById(params?.id);
-  const { title, tag, content } = JSON.parse(JSON.stringify(res));
+  const { title, tag, content } = await ArticleModel.findById(
+    params?.id,
+  ).lean();
   const MDXdata = await serialize(content);
 
   return { props: { title, tag, MDXdata } };
