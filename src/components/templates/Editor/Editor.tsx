@@ -27,12 +27,9 @@ const Editor = () => {
         onChange={(e) => setTag(e.target.value)}
       />
       <EditorBox height="600px" theme="dark" onChange={setContent} />
-      <Button
-        width="100px"
-        height="40px"
-        children={"버튼"}
-        onClick={createArticle}
-      />
+      <Button width="100px" height="40px" onClick={createArticle}>
+        버튼
+      </Button>
     </>
   );
 };

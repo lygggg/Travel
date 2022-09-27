@@ -6,6 +6,6 @@ const articleSchema = new Schema({
   content: { type: String, required: true },
   syncTime: { type: Date, default: Date.now },
 });
-const Article = models.Article || model("Article", articleSchema);
+const ArticleModel = models.Article || model("Article", articleSchema);
 
-export default Article;
+export default ArticleModel;
