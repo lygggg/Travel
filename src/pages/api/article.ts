@@ -1,17 +1,29 @@
 import router from "./index";
 import Article from "./models/article";
+import { getToken } from "next-auth/jwt";
 
+const secret = process.env.SECRET;
 router
   .get(async (req, res) => {
-    const articles = await Article.find();
+    const { email }: any = await getToken({
+      req: req,
+      secret: secret,
+    });
+    const articles = await Article.find({ email: email });
     res.json(articles);
   })
   .post(async (req, res) => {
     const { content, tag, title } = req.body;
+    const { name, email }: any = await getToken({
+      req: req,
+      secret: secret,
+    });
     const article = await Article.create({
       content: content,
       tag: tag,
       title: title,
+      name: name,
+      email: email,
     });
     res.json(article);
   });
