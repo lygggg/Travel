@@ -5,6 +5,7 @@ import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 import React, { useRef, Dispatch, SetStateAction } from "react";
+import { useS3Upload } from "next-s3-upload";
 
 interface EditorUiProps extends EditorProps {
   theme: string;
@@ -13,10 +14,16 @@ interface EditorUiProps extends EditorProps {
 }
 const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
   const editorRef = useRef<Editor>(null);
+  let { uploadToS3 } = useS3Upload();
   const onChangeText = () => {
     if (!editorRef.current) return;
     const data = editorRef.current.getInstance().getMarkdown();
     onChange(data);
+  };
+
+  const uploadImage = async (file: any) => {
+    let { url } = await uploadToS3(file);
+    return url;
   };
 
   return (
@@ -26,6 +33,13 @@ const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
         theme={theme}
         plugins={[colorSyntax]}
         onChange={onChangeText}
+        hooks={{
+          addImageBlobHook: async (blob, callback) => {
+            const uploadedImageURL = await uploadImage(blob);
+            callback(uploadedImageURL, "alt text");
+            return false;
+          },
+        }}
         ref={editorRef}
       />
     </>
