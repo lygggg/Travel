@@ -2,7 +2,7 @@ import { useState } from "react";
 import { postArticle } from "src/api/article";
 import { Button, Input } from "src/components/UI/atoms";
 import { EditorBox } from "src/components/UI/molecules";
-
+import { ImageUploadModal } from "src/components/UI/molecules";
 const Editor = () => {
   const [content, setContent] = useState("");
   const [tag, setTag] = useState("");
@@ -14,6 +14,7 @@ const Editor = () => {
 
   return (
     <>
+      <ImageUploadModal></ImageUploadModal>
       <Input
         width="100px"
         height="100px"
