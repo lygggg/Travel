@@ -10,14 +10,22 @@ const ImageUploadBox = () => {
   const { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
 
   const handleFileChange = async (file: File) => {
-    const { url, key }: { url: string; key: string } = await uploadToS3(file);
-    setImageKey(key);
-    setImageUrl(url);
+    try {
+      const { url, key } = await uploadToS3(file);
+      setImageKey(key);
+      setImageUrl(url);
+    } catch {
+      alert("upload failed.");
+    }
   };
-
+  // TODO error handling
   const handleFileRemove = async () => {
-    const res = await deletefiles(imageKey);
-    if (res.status === 200) setImageUrl("");
+    try {
+      await deletefiles(imageKey);
+      setImageUrl("");
+    } catch (e) {
+      alert("Deletion failed.");
+    }
   };
   return (
     <>

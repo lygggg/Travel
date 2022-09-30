@@ -21,9 +21,17 @@ const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
     onChange(data);
   };
 
-  const uploadImage = async (file: any) => {
+  const uploadImage = async (file: File) => {
     const { url } = await uploadToS3(file);
     return url;
+  };
+
+  const addImageBolb = async (
+    blob: any,
+    callback: (url: string, text: string) => void,
+  ) => {
+    const uploadedImageURL = await uploadImage(blob);
+    callback(uploadedImageURL, "alt text");
   };
 
   return (
@@ -34,11 +42,8 @@ const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
         plugins={[colorSyntax]}
         onChange={onChangeText}
         hooks={{
-          addImageBlobHook: async (blob, callback) => {
-            const uploadedImageURL = await uploadImage(blob);
-            callback(uploadedImageURL, "alt text");
-            return false;
-          },
+          addImageBlobHook: async (blob, callback) =>
+            addImageBolb(blob, callback),
         }}
         ref={editorRef}
       />

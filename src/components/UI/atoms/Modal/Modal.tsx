@@ -2,10 +2,10 @@ import { useRef, useEffect, useState, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
-interface TModal {
+interface Props {
   children: ReactNode;
 }
-const Modal = (props: TModal) => {
+const Modal = (props: Props) => {
   const ref = useRef<Element | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -13,14 +13,17 @@ const Modal = (props: TModal) => {
     ref.current = document.querySelector<HTMLLIElement>("#portal");
     setMounted(true);
   }, []);
-  return mounted && ref.current
-    ? createPortal(
-        <Overlay>
-          <ModalContainer>{props.children}</ModalContainer>
-        </Overlay>,
-        ref.current,
-      )
-    : null;
+
+  if (!mounted || !ref.current) {
+    return null;
+  }
+
+  return createPortal(
+    <Overlay>
+      <ModalContainer>{props.children}</ModalContainer>
+    </Overlay>,
+    ref.current,
+  );
 };
 
 export default Modal;
