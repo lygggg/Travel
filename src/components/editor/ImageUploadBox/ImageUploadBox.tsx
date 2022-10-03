@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { useS3Upload } from "next-s3-upload";
 import { useState } from "react";
-import { Button } from "src/components/UI/atoms";
+
+import { Button, Modal } from "src/components/commons";
 import { deletefiles } from "src/api/file";
 
 const ImageUploadBox = () => {
@@ -28,7 +29,7 @@ const ImageUploadBox = () => {
     }
   };
   return (
-    <>
+    <Modal>
       <FileInput onChange={handleFileChange} />
       <ButtonContainer>
         {imageUrl ? (
@@ -42,7 +43,7 @@ const ImageUploadBox = () => {
         )}
       </ButtonContainer>
       <ImageContainer>{imageUrl && <img src={imageUrl} />}</ImageContainer>
-    </>
+    </Modal>
   );
 };
 

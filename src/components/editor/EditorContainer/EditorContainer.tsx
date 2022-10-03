@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { postArticle } from "src/api/article";
-import { Button, Input } from "src/components/UI/atoms";
-import { EditorBox } from "src/components/UI/molecules";
-import { ImageUploadModal } from "src/components/UI/molecules";
-const Editor = () => {
+import { Button, Input } from "src/components/commons";
+import { EditorBox, ImageUploadBox } from "../index";
+const EditorContainer = () => {
   const [content, setContent] = useState("");
   const [tag, setTag] = useState("");
   const [title, setTitle] = useState("");
@@ -14,7 +13,7 @@ const Editor = () => {
 
   return (
     <>
-      <ImageUploadModal></ImageUploadModal>
+      <ImageUploadBox></ImageUploadBox>
       <Input
         width="100px"
         height="100px"
@@ -35,4 +34,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default EditorContainer;

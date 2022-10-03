@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button } from "src/components/UI/atoms";
+import { Button } from "src/components/commons";
 
 const HeaderBox = () => {
   const { data: session, status } = useSession();

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { findArticles } from "src/api/article";
-import { ArticleBox } from "src/components/UI//molecules";
+import { ArticleBox } from "../index";
 import { Article as ArticleProps } from "src/types";
 
 const ArticleList = () => {
