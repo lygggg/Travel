@@ -1,19 +1,27 @@
 import { useState } from "react";
-import { postArticle } from "src/api/article";
 import { Button, Input } from "src/components/commons";
-import { EditorBox, ImageUploadBox } from "../index";
-const EditorContainer = () => {
-  const [content, setContent] = useState("");
-  const [tag, setTag] = useState("");
-  const [title, setTitle] = useState("");
+import { EditorBox, UploadModal } from "../index";
 
-  const createArticle = async () => {
-    await postArticle({ content, tag, title });
+const EditorContainer = () => {
+  const [content, setContent] = useState<string>("");
+  const [tag, setTag] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [isOpen, setOpen] = useState<boolean>(false);
+
+  const handleModalOpen = async () => {
+    setOpen((isOpen) => !isOpen);
   };
 
   return (
     <>
-      <ImageUploadBox></ImageUploadBox>
+      {isOpen && (
+        <UploadModal
+          content={content}
+          tag={tag}
+          title={title}
+          handleModalOpen={handleModalOpen}
+        />
+      )}
       <Input
         width="100px"
         height="100px"
@@ -27,7 +35,7 @@ const EditorContainer = () => {
         onChange={(e) => setTag(e.target.value)}
       />
       <EditorBox height="600px" theme="dark" onChange={setContent} />
-      <Button width="100px" height="40px" onClick={createArticle}>
+      <Button width="100px" height="40px" onClick={handleModalOpen}>
         버튼
       </Button>
     </>

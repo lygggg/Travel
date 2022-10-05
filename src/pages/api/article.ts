@@ -13,7 +13,7 @@ router
     res.json(articles);
   })
   .post(async (req, res) => {
-    const { content, tag, title } = req.body;
+    const { content, tag, title, thumbnailUrl } = req.body;
     const { name, email }: any = await getToken({
       req: req,
       secret: secret,
@@ -24,6 +24,7 @@ router
       title: title,
       name: name,
       email: email,
+      thumbnailUrl: thumbnailUrl,
     });
     res.json(article);
   });
