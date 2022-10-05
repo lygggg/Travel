@@ -2,13 +2,13 @@ name: lint-format
 
 on:
   pull_request:
-    branches: -"main"
+    branches: - main
 
     jobs:
       test:
         name: lint-test
         runs-on: ubuntu-latest
-        setps:
+        steps:
           - uses: actions/checkout@v2
           - name: Install packages
             run: yarn install --immutable --immutable-cache --check-cache
