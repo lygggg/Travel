@@ -1907,15 +1907,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/next-auth@npm:^3.15.0":
-  version: 3.15.0
-  resolution: "@types/next-auth@npm:3.15.0"
-  dependencies:
-    next-auth: "*"
-  checksum: f37b3574fc619a2d1bef9c1a7c22975b9b73c40adb90d6f764a89153fc945372ed33bfd3afae3fa9a536400dc41fdc2391ad472b5eb0fc470834f94badd2114d
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:*":
   version: 18.7.23
   resolution: "@types/node@npm:18.7.23"
@@ -2276,9 +2267,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1228.0":
-  version: 2.1228.0
-  resolution: "aws-sdk@npm:2.1228.0"
+"aws-sdk@npm:^2.1230.0":
+  version: 2.1230.0
+  resolution: "aws-sdk@npm:2.1230.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -2290,7 +2281,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: e08bc4234c3a116d0186f347efd6d07d458d86d075ea3be803e7c928a4584db4639f94a068b4c103191c88d27059fb60c6032c756dadeecfcd4967ea10ac1a6b
+  checksum: 1f33c0ecd9edaf786064a5ab4c5541a253f861a64b2d8f2b880f205067f9bb02d4581e100f4146a88f0e9ac708a63c8c99177fe6bccf7701188801cc508834d6
   languageName: node
   linkType: hard
 
@@ -4721,13 +4712,12 @@ __metadata:
     "@toast-ui/editor-plugin-color-syntax": ^3.1.0
     "@toast-ui/react-editor": ^3.2.0
     "@types/cors": ^2.8.12
-    "@types/next-auth": ^3.15.0
     "@types/node": 18.7.15
     "@types/react": 18.0.18
     "@types/react-dom": 18.0.6
     "@typescript-eslint/eslint-plugin": ^5.36.2
     "@typescript-eslint/parser": ^5.36.2
-    aws-sdk: ^2.1228.0
+    aws-sdk: ^2.1230.0
     axios: ^0.27.2
     eslint: ^8.23.0
     eslint-config-next: 12.2.5
@@ -4764,7 +4754,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-auth@npm:*, next-auth@npm:^4.12.2":
+"next-auth@npm:^4.12.2":
   version: 4.12.2
   resolution: "next-auth@npm:4.12.2"
   dependencies:

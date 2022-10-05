@@ -24,7 +24,7 @@ jobs:
           node-version: "16.17.1"
 
       - name: Install dependencies
-        uses: yarn install --immutable --immutable-cache --check-cache
+        uses: bahmutov/npm-install@v1
 
       - name: Restore next build
         uses: actions/cache@v2
