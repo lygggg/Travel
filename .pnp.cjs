@@ -65,7 +65,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prosemirror-transform", "npm:1.7.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:18.2.0"],\
-            ["typescript", "patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"]\
+            ["typescript", "patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"],\
+            ["yarn", "npm:1.22.19"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -5732,7 +5733,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prosemirror-transform", "npm:1.7.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:18.2.0"],\
-            ["typescript", "patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"]\
+            ["typescript", "patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"],\
+            ["yarn", "npm:1.22.19"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -7685,6 +7687,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yaml-npm-1.10.2-0e780aebdf-ce4ada136e.zip/node_modules/yaml/",\
           "packageDependencies": [\
             ["yaml", "npm:1.10.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["yarn", [\
+        ["npm:1.22.19", {\
+          "packageLocation": "./.yarn/unplugged/yarn-npm-1.22.19-6ba13b96dc/node_modules/yarn/",\
+          "packageDependencies": [\
+            ["yarn", "npm:1.22.19"]\
           ],\
           "linkType": "HARD"\
         }]\
