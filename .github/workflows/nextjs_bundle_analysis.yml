@@ -21,10 +21,10 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v1
         with:
-          node-version: "15.x"
+          node-version: "16.x"
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install --frozen-lockfile
 
       - name: Restore next build
         uses: actions/cache@v2
