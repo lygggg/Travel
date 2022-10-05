@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { ArticleList } from "../components/templates";
-import { HeaderBox } from "src/components/UI/molecules";
+import { ArticleList } from "src/components/article";
+import { HeaderBox } from "src/components/header";
 
 const Home: NextPage = () => {
   return (

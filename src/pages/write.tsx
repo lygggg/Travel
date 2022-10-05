@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import { Editor } from "../components/templates";
+import { EditorContainer } from "src/components/editor";
 
 const Write: NextPage = () => {
   return (
     <>
-      <Editor />
+      <EditorContainer />
     </>
   );
 };

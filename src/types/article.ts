@@ -1,6 +1,8 @@
 export interface Article {
-  [key: string]: string;
+  _id: string;
   title: string;
   tag: string;
   content: string;
+  thumbnailUrl: string;
+  syncTime: string;
 }
