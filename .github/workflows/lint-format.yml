@@ -2,17 +2,17 @@ name: lint-format
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: -"main"
 
     jobs:
       test:
-      name: lint-test
-      runs-on: ubuntu-latest
-      setps:
-        - uses: actions/checkout@v2
-        - name: Install packages
-          run: yarn install
-        - name: Prettier
-          run: yarn format
-        - name: Prettier
-          run: yarn lint
+        name: lint-test
+        runs-on: ubuntu-latest
+        setps:
+          - uses: actions/checkout@v2
+          - name: Install packages
+            run: yarn install --immutable --immutable-cache --check-cache
+          - name: Prettier
+            run: yarn format
+          - name: Lint
+            run: yarn lint
