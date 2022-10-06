@@ -24,8 +24,8 @@ jobs:
           node-version: "14.x"
 
       - name: Install dependencies
-        uses: yarn install
-
+        uses: bahmutov/npm-install@v1.4.5
+      - run: npm t
       - name: Restore next build
         uses: actions/cache@v2
         id: restore-build-cache
