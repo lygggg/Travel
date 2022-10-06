@@ -1,0 +1,20 @@
+name: test
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  RUN_JEST:
+    name: RUN_JEST
+    runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: yarn install --immutable --immutable-cache --check-cache
+          run: yarn
+
+        - name: run test
+          run: yarn test
