@@ -4,23 +4,22 @@ on:
   pull_request:
   push:
     branches:
-      - main # change this if your default branch is named differently
+      - main
 
 jobs:
   analyze:
-    name: Analyze
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
+          node-version: 16
 
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
 
       - name: Restore next build
         uses: actions/cache@v2
