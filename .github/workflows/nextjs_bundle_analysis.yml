@@ -40,7 +40,7 @@ jobs:
 
       - name: Build next.js app
         # change this if your site requires a custom build command
-        run: ./node_modules/.bin/next build
+        run: yarn build
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
 
@@ -57,6 +57,7 @@ jobs:
 
       - name: Download base branch bundle stats
         uses: dawidd6/action-download-artifact@v2
+        continue-on-error: true
         if: success() && github.event.number
         with:
           workflow: nextjs_bundle_analysis.yml
