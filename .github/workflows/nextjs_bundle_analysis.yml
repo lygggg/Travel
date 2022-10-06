@@ -40,7 +40,7 @@ jobs:
 
       - name: Build next.js app
         # change this if your site requires a custom build command
-        run: yarn build
+        run: ./node_modules/.bin/next build
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
 
