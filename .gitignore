@@ -13,6 +13,7 @@
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+!.yarn/analyze
 
 # testing
 /coverage
