@@ -14,4 +14,6 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer], nextConfig);
+const config = withPlugins([withBundleAnalyzer], nextConfig);
+
+export default config;
