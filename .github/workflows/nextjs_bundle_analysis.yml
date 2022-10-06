@@ -24,7 +24,7 @@ jobs:
           node-version: "14.x"
 
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        uses: yarn --frozen-lockfile
 
       - name: Restore next build
         uses: actions/cache@v2
@@ -40,7 +40,7 @@ jobs:
 
       - name: Build next.js app
         # change this if your site requires a custom build command
-        run: yarn build
+        run: ./node_modules/.bin/next build
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
 
@@ -61,7 +61,6 @@ jobs:
         with:
           workflow: nextjs_bundle_analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
-          name: bundle
           path: .next/analyze/base
 
       # And here's the second place - this runs after we have both the current and
