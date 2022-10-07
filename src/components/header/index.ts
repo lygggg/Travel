@@ -1,1 +1,1 @@
-export * from "./HeaderBox";
+export * from "./HeaderBar";
