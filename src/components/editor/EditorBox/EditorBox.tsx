@@ -1,9 +1,8 @@
+import React, { useRef, Dispatch, SetStateAction } from "react";
+import { useS3Upload } from "next-s3-upload";
 import { Editor, EditorProps } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
-import React, { useRef, Dispatch, SetStateAction } from "react";
-import { useS3Upload } from "next-s3-upload";
-
 interface EditorUiProps extends EditorProps {
   theme: string;
   height: string;
