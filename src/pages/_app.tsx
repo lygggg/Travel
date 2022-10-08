@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
+import { HeaderBar } from "src/components/header";
 
 function MyApp({
   Component,
@@ -10,6 +11,7 @@ function MyApp({
 }>) {
   return (
     <SessionProvider session={pageProps.session}>
+      <HeaderBar />
       <Component {...pageProps} />
     </SessionProvider>
   );
