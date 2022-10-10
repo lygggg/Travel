@@ -16,7 +16,7 @@ const MenuDropdown = () => {
       <Button width="50px" height="50px" onClick={() => setIsActive(!isActive)}>
         {"메뉴"}
       </Button>
-      <Nav ref={dropdownRef} {...{ isActive: isActive }}>
+      <Nav ref={dropdownRef} isActive={isActive}>
         <Ul>
           {menus.map((item) => (
             <div key={item.title}>
