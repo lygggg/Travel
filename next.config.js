@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const { withPlaiceholder } = require("@plaiceholder/next");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -13,6 +14,6 @@ const nextConfig = {
 };
 
 module.exports = (_phase, { defaultConfig }) => {
-  const plugins = [withBundleAnalyzer];
+  const plugins = [withPlaiceholder, withBundleAnalyzer];
   return plugins.reduce((acc, plugin) => plugin(acc), { ...nextConfig });
 };
