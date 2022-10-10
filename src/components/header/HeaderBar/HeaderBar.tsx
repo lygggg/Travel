@@ -3,6 +3,15 @@ import { useSession, signIn } from "next-auth/react";
 import { Button } from "src/components/commons";
 import { MenuDropdown } from "../index";
 
+declare module "next-auth" {
+  interface User {
+    id: number;
+  }
+  interface Session {
+    user: User;
+  }
+}
+
 const HeaderBar = () => {
   const { data: session } = useSession();
 
@@ -11,7 +20,7 @@ const HeaderBar = () => {
       <HeaderLayout>
         <HeaderLeftContainer>
           <Span>HOME</Span>
-          {session && <Span>{session?.user?.name}</Span>}
+          {session && <Span>{session.user.name}</Span>}
         </HeaderLeftContainer>
         <HeaderRightContainer>
           <Span>다크모드</Span>
