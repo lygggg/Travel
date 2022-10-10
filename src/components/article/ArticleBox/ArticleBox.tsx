@@ -1,4 +1,4 @@
-import { Article as ArticleProps } from "src/types/article";
+import { Article as ArticleProps } from "src/models";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
