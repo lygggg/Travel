@@ -6,7 +6,7 @@ interface ButtonStyled extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   width: string;
   height: string;
   buttonColor?: string;
-  hasBorder?: boolean;
+  hasBorder?: string;
   borderRadius?: string;
   fontColor?: string;
   fontSize?: string;
@@ -22,7 +22,7 @@ const ButtonStyled = styled.button<ButtonStyled>`
   width: ${(rest) => rest.width};
   height: ${(rest) => rest.height};
   background-color: ${(rest) => rest.buttonColor || "white"};
-  border: ${(rest) => rest.hasBorder || true};
+  border: ${(rest) => rest.hasBorder || "none"};
   border-radius: ${(rest) => rest.borderRadius || "4px"};
   color: ${(rest) => rest.fontColor || "black"};
   font-size: ${(rest) => rest.fontSize || "15px"};
