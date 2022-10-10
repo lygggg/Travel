@@ -8,7 +8,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import ArticleModel from "src/pages/api/models/article";
 import connectMongo from "src/pages/api/utils/connectMongo";
-import { Article as ArticleProps } from "src/types";
+import { Article as ArticleProps } from "src/models";
 
 const Article = ({
   title,
