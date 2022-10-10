@@ -17,6 +17,7 @@
     "@emotion/jest": "^11.10.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@plaiceholder/next": "^2.5.0",
     "@toast-ui/editor": "^3.2.1",
     "@toast-ui/react-editor": "^3.2.2",
     "@types/cors": "^2.8.12",
@@ -28,9 +29,11 @@
     "next-connect": "^1.0.0-next.3",
     "next-mdx-remote": "^4.1.0",
     "next-s3-upload": "^0.2.3",
+    "plaiceholder": "^2.5.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
     "uuid": "^9.0.0"
+    "sharp": "^0.31.1"
+    "react-dom": "18.2.0",
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.3.1",
