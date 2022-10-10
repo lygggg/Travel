@@ -3,15 +3,6 @@ import { useSession, signIn } from "next-auth/react";
 import { Button } from "src/components/commons";
 import { MenuDropdown } from "../index";
 
-declare module "next-auth" {
-  interface User {
-    id: number;
-  }
-  interface Session {
-    user: User;
-  }
-}
-
 const HeaderBar = () => {
   const { data: session } = useSession();
 
