@@ -10,6 +10,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ["mlog-lygggg.s3.ap-northeast-2.amazonaws.com"],
+    formats: ["image/webp"],
   },
 };
 
