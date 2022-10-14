@@ -3,7 +3,7 @@ export interface Article {
   title: string;
   tag: string;
   content: string;
-  thumbnailUrl: string;
+  img: string;
   syncTime: string;
   name: string;
   email: string;

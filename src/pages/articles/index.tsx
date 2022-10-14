@@ -31,20 +31,20 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   await connectMongo();
   const session = await getSession(context);
+  context.res.setHeader(
+    "Cache-Control",
+    "public, max-age=0, s-maxage=31536000",
+  );
   try {
     const data = await Article.find({ email: session?.user?.email }).lean();
 
     const articles = await Promise.all(
-      data.map(async (src) => {
-        const { title, tag, content, thumbnailUrl, syncTime } = src;
-        const { base64, img } = await getPlaiceholder(thumbnailUrl);
+      data.map(async (article) => {
+        const { base64, img } = await getPlaiceholder(article.thumbnailUrl);
         return {
-          ...img,
-          title,
-          tag,
-          content,
-          syncTime,
+          ...article,
           base64,
+          img,
         };
       }),
     ).then((values) => values);

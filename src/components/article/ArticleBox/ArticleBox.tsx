@@ -4,18 +4,20 @@ import Link from "next/link";
 import Image from "next/image";
 
 const ArticleBox = ({ article }: { article: ArticleProps }) => {
-  const { title, tag, syncTime, src, base64 } = article;
+  const { title, tag, syncTime, img, base64 } = article;
   return (
     <>
       <Link href={`/articles/${article._id}`}>
         <Container>
           <ImageConatiner>
             <Image
-              src={src}
+              src={img}
               layout="fill"
               objectFit="cover"
+              objectPosition="center"
               placeholder="blur"
               blurDataURL={base64}
+              alt={title}
             />
           </ImageConatiner>
           <h2>{title}</h2>
