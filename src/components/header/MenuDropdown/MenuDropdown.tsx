@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
-import Image from "next/image";
 import { IconButton } from "src/components/commons";
 import { signOut } from "next-auth/react";
 import { useDetectOutsideClick } from "src/hooks";
@@ -14,7 +13,6 @@ const MenuDropdown = () => {
 
   return (
     <MenuContainer>
-      {/* <Image src="/myblog_sprites.png" width={30} height={30} /> */}
       <IconButton
         width="30px"
         height="30px"
