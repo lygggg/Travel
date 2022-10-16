@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 
-interface IconButtonStyled extends React.SVGAttributes<HTMLOrSVGElement> {
+interface IconButtonStyled extends React.HTMLAttributes<HTMLDivElement> {
   width: string;
   height: string;
   position?: string;
 }
 
 const IconButton = (props: IconButtonStyled) => {
-  return <IconButtonStyled {...props}></IconButtonStyled>;
+  return <IconButtonStyled {...props} />;
 };
 export default IconButton;
 
