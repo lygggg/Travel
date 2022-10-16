@@ -80,7 +80,7 @@ const InputContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   place-content: space-between;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
 `;
 
 const ButtonLayout = styled.span`
