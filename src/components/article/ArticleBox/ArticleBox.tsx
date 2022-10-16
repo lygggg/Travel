@@ -3,13 +3,17 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
 
-const ArticleBox = ({ article }: { article: ArticleProps }) => {
+interface Props {
+  article: ArticleProps;
+}
+
+const ArticleBox = ({ article }: Props) => {
   const { title, tag, syncTime, img, base64 } = article;
   return (
     <>
       <Link href={`/articles/${article._id}`}>
         <Container>
-          <ImageConatiner>
+          <ImageContainer>
             <Image
               src={img}
               layout="fill"
@@ -19,7 +23,7 @@ const ArticleBox = ({ article }: { article: ArticleProps }) => {
               blurDataURL={base64}
               alt={title}
             />
-          </ImageConatiner>
+          </ImageContainer>
           <h2>{title}</h2>
           <div>{tag}</div>
           <span>{syncTime}</span>
@@ -39,7 +43,7 @@ const Container = styled.article`
   cursor: pointer;
 `;
 
-const ImageConatiner = styled.div`
+const ImageContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;

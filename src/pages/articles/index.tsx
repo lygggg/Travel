@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getSession, signIn } from "next-auth/react";
 import { getPlaiceholder } from "plaiceholder";
@@ -12,9 +13,10 @@ interface Props {
   session: string;
 }
 const ArticleList = ({ articles, session }: Props) => {
-  if (!session) {
+  useEffect(() => {
+    if (session) return;
     signIn();
-  }
+  }, [session]);
   return (
     <>
       <Container>
