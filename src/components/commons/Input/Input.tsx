@@ -21,7 +21,7 @@ export default Input;
 const InputStyled = styled.input<InputStyled>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  background-color: ${(props) => props.inputColor || "white"};
+  background-color: ${(props) => props.inputColor || "transparent"};
   color: ${(props) => props.fontColor || "black"};
   font-size: ${(props) => props.fontSize || "15px"};
   font-weight: ${(props) => props.fontWeight};

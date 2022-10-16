@@ -2,7 +2,7 @@ import api from "./core";
 
 interface PostArticleRequest {
   content: string;
-  tag: string;
+  tags: string[];
   title: string;
   thumbnailUrl: string;
 }

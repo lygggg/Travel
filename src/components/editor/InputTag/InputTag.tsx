@@ -1,10 +1,18 @@
-import { useState, KeyboardEvent } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import styled from "@emotion/styled";
 import { Button, Input } from "src/components/commons";
 
-const InputTag = () => {
+interface Props {
+  onChange: (e: string[]) => void;
+}
+
+const InputTag = ({ onChange }: Props) => {
   const [tag, setTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
+
+  useEffect(() => {
+    onChange(tags);
+  }, [tags]);
 
   const onRemove = (tag: string) => {
     const newTags = tags.filter((e) => e !== tag);
@@ -44,7 +52,6 @@ const InputTag = () => {
         placeholder="태그를 입력해주세요"
         fontSize="1.5rem"
         fontColor="white"
-        inputColor="#222"
         onChange={(e) => setTag(e.target.value)}
         onKeyUp={onKeyUp}
         onKeyDown={onKeyDown}

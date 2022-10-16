@@ -41,6 +41,7 @@ const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
           addImageBlobHook: async (blob, callback) =>
             addImageBolb(blob, callback),
         }}
+        initialValue={"본문을 작성해주세요"}
         ref={editorRef}
       />
     </>

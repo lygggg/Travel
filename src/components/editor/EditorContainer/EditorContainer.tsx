@@ -5,11 +5,23 @@ import { EditorBox, UploadModal, InputTag } from "../index";
 
 const EditorContainer = () => {
   const [content, setContent] = useState<string>("");
-  const [tag, setTag] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
   const [title, setTitle] = useState<string>("");
   const [isOpen, setOpen] = useState<boolean>(false);
 
   const handleModalOpen = async () => {
+    if (!tags) {
+      alert("태그를 작성해주세요");
+      return;
+    }
+    if (!content) {
+      alert("본문을 작성해주세요");
+      return;
+    }
+    if (!title) {
+      alert("제목을 작성해주세요");
+      return;
+    }
     setOpen((isOpen) => !isOpen);
   };
 
@@ -18,7 +30,7 @@ const EditorContainer = () => {
       {isOpen && (
         <UploadModal
           content={content}
-          tag={tag}
+          tags={tags}
           title={title}
           handleModalOpen={handleModalOpen}
         />
@@ -31,10 +43,9 @@ const EditorContainer = () => {
           fontColor="white"
           fontSize="2.75rem"
           fontWeight="bold"
-          inputColor="#222"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <InputTag />
+        <InputTag onChange={setTags} />
       </InputContainer>
       <EditorBox height="600px" theme="dark" onChange={setContent} />
       <ButtonContainer>

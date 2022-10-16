@@ -8,12 +8,12 @@ import { deletefiles } from "src/api/file";
 
 interface Props {
   content: string;
-  tag: string;
+  tags: string[];
   title: string;
   handleModalOpen: () => void;
 }
 
-const UploadModal = ({ content, tag, title, handleModalOpen }: Props) => {
+const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
   const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
   const [imageKey, setImageKey] = useState<string>("");
   const { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
@@ -39,8 +39,12 @@ const UploadModal = ({ content, tag, title, handleModalOpen }: Props) => {
   };
 
   const handleFileUpload = async () => {
+    if (!thumbnailUrl) {
+      alert("썸네일을 업로드해주세요.");
+      return;
+    }
     try {
-      await postArticle({ content, tag, title, thumbnailUrl });
+      await postArticle({ content, tags, title, thumbnailUrl });
     } catch (e) {
       alert("upload failed.");
     }
