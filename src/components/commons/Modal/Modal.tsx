@@ -18,23 +18,11 @@ const Modal = (props: Props) => {
     return null;
   }
 
-  return createPortal(
-    <Overlay>
-      <ModalContainer>{props.children}</ModalContainer>
-    </Overlay>,
-    ref.current,
-  );
+  return createPortal(<Overlay>{props.children}</Overlay>, ref.current);
 };
 
 export default Modal;
 
-const ModalContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  place-content: center;
-`;
 const Overlay = styled.div`
   display: block;
   position: fixed;
