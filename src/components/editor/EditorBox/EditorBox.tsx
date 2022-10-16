@@ -35,6 +35,7 @@ const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
       <Editor
         height={height}
         theme={theme}
+        previewStyle="vertical"
         onChange={onChangeText}
         hooks={{
           addImageBlobHook: async (blob, callback) =>
