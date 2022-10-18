@@ -1,9 +1,8 @@
 import { useState, useEffect, KeyboardEvent } from "react";
 import styled from "@emotion/styled";
-import { Button, Input } from "src/components/commons";
 
 interface Props {
-  onChange: (e: string[]) => void;
+  onChange: (tags: string[]) => void;
 }
 
 const InputTag = ({ onChange }: Props) => {
@@ -15,6 +14,7 @@ const InputTag = ({ onChange }: Props) => {
   }, [tags]);
 
   const onRemove = (tag: string) => {
+    console.log(tags);
     const newTags = tags.filter((e) => e !== tag);
     setTags(newTags);
   };
@@ -49,9 +49,8 @@ const InputTag = ({ onChange }: Props) => {
         ))}
       <Input
         type="text"
+        aria-label="tag-input"
         placeholder="태그를 입력해주세요"
-        fontSize="1.5rem"
-        fontColor="white"
         onChange={(e) => setTag(e.target.value)}
         onKeyUp={onKeyUp}
         onKeyDown={onKeyDown}
@@ -78,5 +77,14 @@ const Tag = styled.div`
     opacity: 0.5;
     cursor: pointer;
   }
+`;
+
+const Input = styled.input`
+  background: transparent;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: "4px";
+  border: none;
+  outline: none;
 `;
 export default InputTag;
