@@ -14,7 +14,6 @@ const InputTag = ({ onChange }: Props) => {
   }, [tags]);
 
   const onRemove = (tag: string) => {
-    console.log(tags);
     const newTags = tags.filter((e) => e !== tag);
     setTags(newTags);
   };
@@ -28,14 +27,12 @@ const InputTag = ({ onChange }: Props) => {
   };
 
   const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (["Enter"].indexOf(e.key) == -1) {
-      return;
-    }
-
-    if (!tags.includes(tag)) {
-      setTags((tags) => [...tags, tag]);
-      setTag("");
-      e.preventDefault();
+    if (["Enter"].indexOf(e.key) !== -1) {
+      if (!tags.includes(tag)) {
+        setTags((tags) => [...tags, tag]);
+        setTag("");
+        e.preventDefault();
+      }
     }
   };
 
