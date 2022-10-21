@@ -1,4 +1,5 @@
 import { useState, useEffect, KeyboardEvent } from "react";
+import { Input } from "src/components/commons";
 import styled from "@emotion/styled";
 
 interface Props {
@@ -76,12 +77,12 @@ const Tag = styled.div`
   }
 `;
 
-const Input = styled.input`
-  background: transparent;
-  color: white;
-  font-size: 1.5rem;
-  border-radius: "4px";
-  border: none;
-  outline: none;
-`;
+// const Input = styled.input`
+//   background: transparent;
+//   color: white;
+//   font-size: 1.5rem;
+//   border-radius: "4px";
+//   border: none;
+//   outline: none;
+// `;
 export default InputTag;

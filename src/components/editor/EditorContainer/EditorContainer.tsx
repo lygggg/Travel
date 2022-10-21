@@ -42,7 +42,9 @@ const EditorContainer = () => {
           height="66px"
           fontColor="white"
           fontSize="2.75rem"
+          aria-label="editor-title-input"
           fontWeight="bold"
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <InputTag onChange={setTags} />
