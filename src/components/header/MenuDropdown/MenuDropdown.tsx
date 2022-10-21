@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { Button } from "src/components/commons";
+import { IconButton } from "src/components/commons";
 import { signOut } from "next-auth/react";
 import { useDetectOutsideClick } from "src/hooks";
 
@@ -13,9 +13,13 @@ const MenuDropdown = () => {
 
   return (
     <MenuContainer>
-      <Button width="50px" height="50px" onClick={() => setIsActive(!isActive)}>
-        {"메뉴"}
-      </Button>
+      <IconButton
+        width="30px"
+        height="30px"
+        position="-10px -107px"
+        onClick={() => setIsActive(!isActive)}
+      />
+
       <Nav ref={dropdownRef} isActive={isActive}>
         <Ul>
           {menus.map((item) => (
@@ -37,7 +41,7 @@ const MenuContainer = styled.div`
 `;
 
 const Nav = styled.nav<{ isActive: boolean }>`
-  background: rgba(0, 0, 0, 0.2);
+  background: #4e5968;
   border-radius: 8px;
   position: absolute;
   top: 60px;
@@ -50,10 +54,11 @@ const Nav = styled.nav<{ isActive: boolean }>`
   transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   padding: 10px;
-  z-index: 2;
+  z-index: 99;
   opacity: ${(props) => props.isActive && 1};
   visibility: ${(props) => props.isActive && "visible"};
   transform: ${(props) => props.isActive && "translateY(0)"};
+  cursor: pointer;
 `;
 
 const Ul = styled.ul`
@@ -62,9 +67,18 @@ const Ul = styled.ul`
   margin: 0;
 `;
 const Li = styled.li`
-  border-bottom: 1px solid #dddddd;
   text-decoration: none;
   padding: 15px 20px;
   display: block;
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+`;
+
+const Icon = styled.svg`
+  background: url("/myblog_sprites.png");
+  background-position: -80px -70px;
+  width: 50px;
+  height: 50px;
 `;
 export default MenuDropdown;

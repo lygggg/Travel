@@ -1,16 +1,7 @@
 import styled from "@emotion/styled";
 import { useSession, signIn } from "next-auth/react";
-import { Button } from "src/components/commons";
+import { Button, IconButton } from "src/components/commons";
 import { MenuDropdown } from "../index";
-
-declare module "next-auth" {
-  interface User {
-    id: number;
-  }
-  interface Session {
-    user: User;
-  }
-}
 
 const HeaderBar = () => {
   const { data: session } = useSession();
@@ -23,8 +14,8 @@ const HeaderBar = () => {
           {session && <Span>{session.user.name}</Span>}
         </HeaderLeftContainer>
         <HeaderRightContainer>
-          <Span>다크모드</Span>
-          <Span>검색</Span>
+          <IconButton width="30px" height="30px" position="-110px -10px" />
+          <IconButton width="30px" height="30px" position="-10px -10px" />
 
           {session ? (
             <MenuDropdown />

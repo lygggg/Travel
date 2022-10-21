@@ -13,10 +13,10 @@ export const useDetectOutsideClick = (
       }
     };
     if (isOpen) {
-      document.addEventListener("touchstart", onClick);
+      document.addEventListener("mousedown", onClick as EventListener);
     }
     return () => {
-      document.removeEventListener("touchstart", onClick);
+      document.removeEventListener("mousedown", onClick as EventListener);
     };
   }, [isOpen, el]);
 
