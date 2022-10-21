@@ -31,13 +31,12 @@
     "next-s3-upload": "^0.2.3",
     "plaiceholder": "^2.5.0",
     "react": "18.2.0",
-    "uuid": "^9.0.0"
-    "sharp": "^0.31.1"
     "react-dom": "18.2.0",
+    "sharp": "^0.31.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.3.1",
-    "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/react-hooks": "^8.0.1",
