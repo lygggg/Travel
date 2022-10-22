@@ -1,7 +1,7 @@
 export interface Article {
   _id: string;
   title: string;
-  tag: string;
+  tags: string[];
   content: string;
   img: string;
   syncTime: string;

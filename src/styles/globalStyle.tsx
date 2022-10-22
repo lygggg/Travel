@@ -2,7 +2,7 @@ import { Global, css, Theme } from "@emotion/react";
 import PALETTE from "./palette";
 
 export const theme: Theme = {
-  primary: PALETTE.ORANGE,
+  primary: PALETTE.BLACK,
   red: PALETTE.RED,
   orange: PALETTE.ORANGE,
   yellow: PALETTE.YELLOW,
@@ -146,8 +146,8 @@ export const GlobalStyle = () => (
       ${resetCSS};
       body {
         font-family: "Noto Sans KR", sans-serif;
-        background-color: #252525;
-        color: #ffffff;
+        background-color: ${theme.black[500]};
+        color: ${theme.white};
       }
       * {
         box-sizing: border-box;

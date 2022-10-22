@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 const articleSchema = new Schema({
   title: { type: String, required: true },
-  tag: { type: String, required: true },
+  tags: { type: [String], required: true },
   content: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },

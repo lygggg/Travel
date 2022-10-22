@@ -38,7 +38,7 @@ const InputTag = ({ onChange }: Props) => {
       <Input
         type="text"
         aria-label="tag-input"
-        placeholder="태그를 입력해주세요"
+        placeholder="태그를 입력후 엔터를 눌러주세요"
         variant="default"
         rounded="default"
         fontSize="small"

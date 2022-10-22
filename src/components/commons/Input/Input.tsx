@@ -51,7 +51,7 @@ const InputStyled = styled.input<InputStyled>`
     switch (props.fontSize) {
       case "mini":
         return css`
-          font-size: 0.2rem;
+          font-size: 0.5rem;
         `;
       case "small":
         return css`
