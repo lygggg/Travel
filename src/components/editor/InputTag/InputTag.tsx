@@ -19,21 +19,17 @@ const InputTag = ({ onChange }: Props) => {
     setTags(newTags);
   };
 
-  const onKeyDown = (
-    e: KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement },
-  ) => {
-    if (e.key === "Backspace" && !e.target.value) {
+  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && !e.currentTarget.value) {
       setTags((tags) => tags.slice(0, tags.length - 1));
     }
   };
 
   const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (["Enter"].indexOf(e.key) !== -1) {
-      if (!tags.includes(tag)) {
-        setTags((tags) => [...tags, tag]);
-        setTag("");
-        e.preventDefault();
-      }
+    if (e.key === "Enter" && !tags.includes(tag)) {
+      setTags((tags) => [...tags, tag]);
+      setTag("");
+      e.preventDefault();
     }
   };
 
