@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Input } from "src/components/commons";
 import { EditorBox, UploadModal, InputTag } from "../index";
+import Link from "next/link";
 
 const EditorContainer = () => {
   const [content, setContent] = useState<string>("");
@@ -50,9 +51,11 @@ const EditorContainer = () => {
       </InputContainer>
       <EditorBox height="600px" theme="dark" onChange={setContent} />
       <ButtonContainer>
-        <Button variant="primary" size="large" rounded="round">
-          나가기
-        </Button>
+        <Link href={"/"}>
+          <Button variant="primary" size="large" rounded="round">
+            나가기
+          </Button>
+        </Link>
         <ButtonLayout>
           <Button variant="primary" size="large" rounded="round">
             임시 저장
