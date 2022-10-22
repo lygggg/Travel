@@ -12,13 +12,12 @@ import { Article as ArticleProps } from "src/models";
 
 const Article = ({
   title,
-  tag,
+  tags,
   MDXdata,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <div>{title}</div>
-      <div>{tag}</div>
       <MDXRemote {...MDXdata} />
     </>
   );
@@ -39,11 +38,11 @@ export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   await connectMongo();
-  const { title, tag, content } = await ArticleModel.findById(
+  const { title, tags, content } = await ArticleModel.findById(
     params?.id,
   ).lean();
   const MDXdata = await serialize(content);
 
-  return { props: { title, tag, MDXdata } };
+  return { props: { title, tags, MDXdata } };
 };
 export default Article;

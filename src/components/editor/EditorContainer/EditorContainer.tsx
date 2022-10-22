@@ -11,7 +11,7 @@ const EditorContainer = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   const handleModalOpen = async () => {
-    if (!tags) {
+    if (!tags.length) {
       alert("태그를 작성해주세요");
       return;
     }
