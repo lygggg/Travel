@@ -59,15 +59,19 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
             <FileInput onChange={handleFileChange} />
             <ButtonContainer>
               {thumbnailUrl ? (
-                <Button width="100px" height="40px" onClick={handleFileRemove}>
+                <Button
+                  variant="primary"
+                  size="large"
+                  rounded="round"
+                  onClick={handleFileRemove}
+                >
                   사진 제거
                 </Button>
               ) : (
                 <Button
-                  width="120px"
-                  height="40px"
-                  fontColor="white"
-                  buttonColor="#252525"
+                  variant="primary"
+                  size="large"
+                  rounded="round"
                   onClick={openFileDialog}
                 >
                   사진 업로드
@@ -81,19 +85,17 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
             </ThumbnailContainer>
             <ButtonContainer>
               <Button
-                width="140px"
-                height="40px"
-                buttonColor="#252525"
-                fontColor="white"
+                variant="primary"
+                size="large"
+                rounded="round"
                 onClick={handleFileUpload}
               >
                 완료
               </Button>
               <Button
-                width="140px"
-                height="40px"
-                buttonColor="#252525"
-                fontColor="white"
+                variant="primary"
+                size="large"
+                rounded="round"
                 onClick={handleModalOpen}
               >
                 취소
@@ -144,9 +146,5 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: end;
   gap: 10px;
-`;
-const Thumbnail = styled.img`
-  height: 250px;
-  width: 400px;
 `;
 export default UploadModal;

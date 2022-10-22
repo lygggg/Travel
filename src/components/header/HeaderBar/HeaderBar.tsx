@@ -20,7 +20,12 @@ const HeaderBar = () => {
           {session ? (
             <MenuDropdown />
           ) : (
-            <Button width="70px" height="40px" onClick={() => signIn()}>
+            <Button
+              variant="primary"
+              size="large"
+              rounded="round"
+              onClick={() => signIn()}
+            >
               로그인
             </Button>
           )}

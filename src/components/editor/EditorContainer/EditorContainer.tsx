@@ -39,11 +39,10 @@ const EditorContainer = () => {
         <Input
           type="text"
           placeholder="제목을 입력해주세요"
-          height="66px"
-          fontColor="white"
-          fontSize="2.75rem"
+          variant="default"
+          rounded="default"
+          fontSize="large"
           aria-label="editor-title-input"
-          fontWeight="bold"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -51,28 +50,17 @@ const EditorContainer = () => {
       </InputContainer>
       <EditorBox height="600px" theme="dark" onChange={setContent} />
       <ButtonContainer>
-        <Button
-          width="120px"
-          height="50px"
-          buttonColor="black"
-          fontColor="white"
-        >
+        <Button variant="primary" size="large" rounded="round">
           나가기
         </Button>
         <ButtonLayout>
-          <Button
-            width="120px"
-            height="50px"
-            buttonColor="black"
-            fontColor="white"
-          >
+          <Button variant="primary" size="large" rounded="round">
             임시 저장
           </Button>
           <Button
-            width="120px"
-            height="50px"
-            buttonColor="rgba(0, 0, 0, 0.2)"
-            fontColor="white"
+            variant="default"
+            size="large"
+            rounded="round"
             onClick={handleModalOpen}
           >
             작성하기
@@ -88,6 +76,7 @@ const InputContainer = styled.div`
   flex-flow: column;
   margin-top: 3rem;
   margin-bottom: 2rem;
+  gap: 1rem;
 `;
 
 const ButtonContainer = styled.div`
