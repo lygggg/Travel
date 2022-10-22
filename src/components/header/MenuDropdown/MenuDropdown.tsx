@@ -25,7 +25,7 @@ const MenuDropdown = () => {
           {menus.map((item) => (
             <div key={item.title}>
               <Link href={item.url}>
-                <Li>{item.title}</Li>
+                <Li onClick={() => setIsActive(!isActive)}>{item.title}</Li>
               </Link>
             </div>
           ))}
