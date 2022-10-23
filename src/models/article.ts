@@ -9,4 +9,5 @@ export interface Article {
   email: string;
   src: string;
   base64: string;
+  introduction: string;
 }
