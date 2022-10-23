@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
 import { useS3Upload } from "next-s3-upload";
 import { useState } from "react";
 import Image from "next/image";
@@ -45,7 +47,16 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
       return;
     }
     try {
-      await postArticle({ content, tags, title, thumbnailUrl, introduction });
+      dayjs.locale("ko");
+      const syncTime = dayjs().format("YYYY년 MM월 DD일 HH:mm");
+      await postArticle({
+        content,
+        tags,
+        title,
+        thumbnailUrl,
+        introduction,
+        syncTime,
+      });
     } catch (e) {
       alert("upload failed.");
     }
