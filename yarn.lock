@@ -4026,6 +4026,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.6":
+  version: 1.11.6
+  resolution: "dayjs@npm:1.11.6"
+  checksum: 18bdfd927009b68eab08dca578e421d4a581cefcbe9337f54c5d9e0d941ffb6b221c4b2c1cab15cdd9d419940e768ac4c984531461a90bbe1c158b75fe160580
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:4.x, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
@@ -7486,6 +7493,7 @@ __metadata:
     aws-sdk: ^2.1231.0
     axios: ^0.27.2
     babel-jest: ^29.1.2
+    dayjs: ^1.11.6
     eslint: ^8.23.0
     eslint-config-next: 12.2.5
     eslint-config-prettier: ^8.5.0
