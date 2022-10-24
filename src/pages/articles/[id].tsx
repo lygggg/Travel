@@ -4,22 +4,29 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import styled from "@emotion/styled";
+import { getPlaiceholder } from "plaiceholder";
 import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
 import ArticleModel from "src/pages/api/models/article";
 import connectMongo from "src/pages/api/utils/connectMongo";
 import { Article as ArticleProps } from "src/models";
+import { ArticleDetail, ArticleTitle } from "src/components/article";
 
-const Article = ({
-  title,
-  tags,
-  MDXdata,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const ArticleDetailPage = (
+  article: InferGetStaticPropsType<typeof getStaticProps>,
+) => {
+  const { base64, img, title, tags, MDXdata, syncTime } = article;
   return (
-    <>
-      <div>{title}</div>
-      <MDXRemote {...MDXdata} />
-    </>
+    <Container>
+      <ArticleTitle
+        title={title}
+        tags={tags}
+        base64={base64}
+        img={img}
+        syncTime={syncTime}
+      ></ArticleTitle>
+      <ArticleDetail content={MDXdata} />
+    </Container>
   );
 };
 
@@ -37,12 +44,30 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  await connectMongo();
-  const { title, tags, content } = await ArticleModel.findById(
-    params?.id,
-  ).lean();
-  const MDXdata = await serialize(content);
-
-  return { props: { title, tags, MDXdata } };
+  try {
+    await connectMongo();
+    const data = await ArticleModel.findById(params?.id).lean();
+    const { thumbnailUrl, title, tags, content, syncTime } = data;
+    const { base64, img } = await getPlaiceholder(thumbnailUrl);
+    const MDXdata = await serialize(content);
+    const article = { base64, img, title, tags, MDXdata, syncTime };
+    return { props: article };
+  } catch (err) {
+    alert("get article failed.");
+    return {
+      props: {},
+    };
+  }
 };
-export default Article;
+export default ArticleDetailPage;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 100px;
+  width: 768px;
+  flex-grow: 10;
+  margin-left: auto;
+  margin-right: auto;
+`;
