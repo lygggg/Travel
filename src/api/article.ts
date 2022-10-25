@@ -6,6 +6,7 @@ interface PostArticleRequest {
   title: string;
   thumbnailUrl: string;
   introduction: string;
+  syncTime: string;
 }
 export const postArticle = async (data: PostArticleRequest) => {
   await api.post("/api/article", data);

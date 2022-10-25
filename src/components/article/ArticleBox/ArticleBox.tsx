@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ArticleBox = ({ article }: Props) => {
-  const { title, tags, syncTime, img, base64 } = article;
+  const { title, tags, syncTime, img, base64, introduction } = article;
   return (
     <>
       <Link href={`/articles/${article._id}`}>
@@ -24,13 +24,14 @@ const ArticleBox = ({ article }: Props) => {
               alt={title}
             />
           </ImageContainer>
-          <h2>{title}</h2>
+          <Title>{title}</Title>
+          <Introduction>{introduction}</Introduction>
           <TagList>
             {tags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
             ))}
           </TagList>
-          <span>{syncTime}</span>
+          <Time>{syncTime}</Time>
         </Container>
       </Link>
     </>
@@ -38,21 +39,33 @@ const ArticleBox = ({ article }: Props) => {
 };
 
 const Container = styled.div`
-  width: 410px;
-  height: 350px;
-  border-radius: 16px;
-  box-sizing: border-box;
+  width: 650px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  gap: 0.6rem;
 `;
 
+const Title = styled.h1`
+  font-size: 2rem;
+`;
+
+const Introduction = styled.h2`
+  font-size: 1.5rem;
+  color: ${(props) => props.theme.gray[400]};
+`;
+
+const Time = styled.h3`
+  font-size: 1rem;
+`;
 const Tag = styled.div`
   color: ${(props) => props.theme.white};
+  font-weight: bold;
   padding: 0.25rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   background-color: ${(props) => props.theme.gray[400]};
-  border-radius: 6px;
+  border-radius: 2rem;
 `;
 
 const TagList = styled.div`

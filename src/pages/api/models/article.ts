@@ -8,7 +8,7 @@ const articleSchema = new Schema({
   email: { type: String, required: true },
   thumbnailUrl: { type: String, required: true },
   introduction: { type: String, required: true },
-  syncTime: { type: Date, default: Date.now },
+  syncTime: { type: String, require: true },
 });
 const ArticleModel = models.Article || model("Article", articleSchema);
 

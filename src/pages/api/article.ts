@@ -13,19 +13,21 @@ router
     res.json(articles);
   })
   .post(async (req, res) => {
-    const { content, tags, title, thumbnailUrl, introduction } = req.body;
+    const { content, tags, title, thumbnailUrl, introduction, syncTime } =
+      req.body;
     const { name, email }: any = await getToken({
       req: req,
       secret: secret,
     });
     const article = await Article.create({
-      content: content,
-      tags: tags,
-      title: title,
-      name: name,
-      email: email,
-      thumbnailUrl: thumbnailUrl,
-      introduction: introduction,
+      content,
+      tags,
+      title,
+      name,
+      email,
+      thumbnailUrl,
+      introduction,
+      syncTime,
     });
     res.json(article);
   });
