@@ -11,13 +11,15 @@ import ArticleModel from "src/pages/api/models/article";
 import connectMongo from "src/pages/api/utils/connectMongo";
 import { Article as ArticleProps } from "src/models";
 import { ArticleDetail, ArticleTitle } from "src/components/article";
+import { HeadMeta } from "src/components/commons";
 
 const ArticleDetailPage = (
   article: InferGetStaticPropsType<typeof getStaticProps>,
 ) => {
-  const { base64, img, title, tags, MDXdata, syncTime } = article;
+  const { base64, img, title, tags, MDXdata, syncTime, introduction } = article;
   return (
     <Container>
+      <HeadMeta title={title} url={img} introduction={introduction} />
       <ArticleTitle
         title={title}
         tags={tags}
@@ -47,10 +49,18 @@ export const getStaticProps: GetStaticProps = async ({
   try {
     await connectMongo();
     const data = await ArticleModel.findById(params?.id).lean();
-    const { thumbnailUrl, title, tags, content, syncTime } = data;
+    const { thumbnailUrl, title, tags, content, syncTime, introduction } = data;
     const { base64, img } = await getPlaiceholder(thumbnailUrl);
     const MDXdata = await serialize(content);
-    const article = { base64, img, title, tags, MDXdata, syncTime };
+    const article = {
+      base64,
+      img,
+      title,
+      tags,
+      MDXdata,
+      syncTime,
+      introduction,
+    };
     return { props: article };
   } catch (err) {
     alert("get article failed.");

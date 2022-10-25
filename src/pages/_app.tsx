@@ -4,7 +4,7 @@ import { Session } from "next-auth";
 import { HeaderBar } from "src/components/header";
 import { GlobalStyle, theme } from "src/styles/globalStyle";
 import { ThemeProvider } from "@emotion/react";
-
+import { HeadMeta } from "src/components/commons";
 function MyApp({
   Component,
   pageProps,
@@ -13,6 +13,7 @@ function MyApp({
 }>) {
   return (
     <SessionProvider session={pageProps.session}>
+      <HeadMeta />
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <HeaderBar />
