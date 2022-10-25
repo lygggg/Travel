@@ -47,6 +47,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@toast-ui/editor", "npm:3.2.1"],\
             ["@toast-ui/react-editor", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.2.2"],\
             ["@types/cors", "npm:2.8.12"],\
+            ["@types/gtag.js", "npm:0.0.12"],\
             ["@types/jest", "npm:29.1.2"],\
             ["@types/node", "npm:18.7.15"],\
             ["@types/react", "npm:18.0.18"],\
@@ -3742,6 +3743,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@types/graceful-fs", "npm:4.1.5"],\
             ["@types/node", "npm:18.8.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/gtag.js", [\
+        ["npm:0.0.12", {\
+          "packageLocation": "./.yarn/cache/@types-gtag.js-npm-0.0.12-6390d727c7-34efc27fbf.zip/node_modules/@types/gtag.js/",\
+          "packageDependencies": [\
+            ["@types/gtag.js", "npm:0.0.12"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9517,6 +9527,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@toast-ui/editor", "npm:3.2.1"],\
             ["@toast-ui/react-editor", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.2.2"],\
             ["@types/cors", "npm:2.8.12"],\
+            ["@types/gtag.js", "npm:0.0.12"],\
             ["@types/jest", "npm:29.1.2"],\
             ["@types/node", "npm:18.7.15"],\
             ["@types/react", "npm:18.0.18"],\
