@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ArticleBox = ({ article }: Props) => {
-  const { title, tag, syncTime, img, base64 } = article;
+  const { title, tags, syncTime, img, base64 } = article;
   return (
     <>
       <Link href={`/articles/${article._id}`}>
@@ -25,7 +25,11 @@ const ArticleBox = ({ article }: Props) => {
             />
           </ImageContainer>
           <h2>{title}</h2>
-          <div>{tag}</div>
+          <TagList>
+            {tags.map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
+            ))}
+          </TagList>
           <span>{syncTime}</span>
         </Container>
       </Link>
@@ -33,7 +37,7 @@ const ArticleBox = ({ article }: Props) => {
   );
 };
 
-const Container = styled.article`
+const Container = styled.div`
   width: 410px;
   height: 350px;
   border-radius: 16px;
@@ -41,6 +45,20 @@ const Container = styled.article`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+`;
+
+const Tag = styled.div`
+  color: ${(props) => props.theme.white};
+  padding: 0.25rem;
+  font-size: 1.2rem;
+  background-color: ${(props) => props.theme.gray[400]};
+  border-radius: 6px;
+`;
+
+const TagList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
 `;
 
 const ImageContainer = styled.div`

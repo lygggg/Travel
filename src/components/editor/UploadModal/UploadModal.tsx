@@ -3,7 +3,7 @@ import { useS3Upload } from "next-s3-upload";
 import { useState } from "react";
 import Image from "next/image";
 import { postArticle } from "src/api/article";
-import { Button, Modal } from "src/components/commons";
+import { Button, Modal, TextArea } from "src/components/commons";
 import { deletefiles } from "src/api/file";
 
 interface Props {
@@ -14,8 +14,9 @@ interface Props {
 }
 
 const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
-  const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
-  const [imageKey, setImageKey] = useState<string>("");
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [imageKey, setImageKey] = useState("");
+  const [introduction, setIntroduction] = useState("");
   const { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
 
   const handleFileChange = async (file: File) => {
@@ -44,7 +45,7 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
       return;
     }
     try {
-      await postArticle({ content, tags, title, thumbnailUrl });
+      await postArticle({ content, tags, title, thumbnailUrl, introduction });
     } catch (e) {
       alert("upload failed.");
     }
@@ -59,15 +60,19 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
             <FileInput onChange={handleFileChange} />
             <ButtonContainer>
               {thumbnailUrl ? (
-                <Button width="100px" height="40px" onClick={handleFileRemove}>
+                <Button
+                  variant="primary"
+                  size="large"
+                  rounded="round"
+                  onClick={handleFileRemove}
+                >
                   사진 제거
                 </Button>
               ) : (
                 <Button
-                  width="120px"
-                  height="40px"
-                  fontColor="white"
-                  buttonColor="#252525"
+                  variant="primary"
+                  size="large"
+                  rounded="round"
                   onClick={openFileDialog}
                 >
                   사진 업로드
@@ -75,25 +80,35 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
               )}
             </ButtonContainer>
             <ThumbnailContainer>
-              {thumbnailUrl && (
+              {thumbnailUrl ? (
                 <Image src={thumbnailUrl} height={250} width={400} />
+              ) : (
+                "사진을 업로드해주세요"
               )}
             </ThumbnailContainer>
+            <IntroductionContainer>
+              <h1>{title}</h1>
+              <TextArea
+                rows={4}
+                maxLength={30}
+                label={"짧게 소개하기"}
+                value={introduction}
+                onChange={setIntroduction}
+              />
+            </IntroductionContainer>
             <ButtonContainer>
               <Button
-                width="140px"
-                height="40px"
-                buttonColor="#252525"
-                fontColor="white"
+                variant="primary"
+                size="large"
+                rounded="round"
                 onClick={handleFileUpload}
               >
                 완료
               </Button>
               <Button
-                width="140px"
-                height="40px"
-                buttonColor="#252525"
-                fontColor="white"
+                variant="primary"
+                size="large"
+                rounded="round"
                 onClick={handleModalOpen}
               >
                 취소
@@ -128,6 +143,8 @@ const ModalLayout = styled.div`
 const H2 = styled.h2`
   color: white;
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
 `;
 const UploadContainer = styled.div`
   place-self: center;
@@ -138,15 +155,27 @@ const UploadContainer = styled.div`
 const ThumbnailContainer = styled.div`
   height: 250px;
   width: 400px;
-  background-color: #252525;
+  background-color: ${(props) => props.theme.primary[500]};
+  display: flex;
+  place-items: center;
+  place-content: center;
+`;
+const IntroductionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+const Introduction = styled.textarea`
+  width: 100%;
+  height: 7rem;
+  background-color: ${(props) => props.theme.primary[500]};
+  border: none;
+  outline: none;
+  color: ${(props) => props.theme.white};
 `;
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: end;
   gap: 10px;
-`;
-const Thumbnail = styled.img`
-  height: 250px;
-  width: 400px;
 `;
 export default UploadModal;

@@ -2,7 +2,8 @@ import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
 import { HeaderBar } from "src/components/header";
-import GlobalStyle from "src/styles/globals";
+import { GlobalStyle, theme } from "src/styles/globalStyle";
+import { ThemeProvider } from "@emotion/react";
 
 function MyApp({
   Component,
@@ -12,9 +13,11 @@ function MyApp({
 }>) {
   return (
     <SessionProvider session={pageProps.session}>
-      <GlobalStyle />
-      <HeaderBar />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <HeaderBar />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </SessionProvider>
   );
 }

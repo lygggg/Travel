@@ -19,41 +19,40 @@ const InputTag = ({ onChange }: Props) => {
     setTags(newTags);
   };
 
-  const onKeyDown = (
-    e: KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement },
-  ) => {
-    if (e.key === "Backspace" && !e.target.value) {
+  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && !e.currentTarget.value) {
       setTags((tags) => tags.slice(0, tags.length - 1));
     }
   };
 
   const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (["Enter"].indexOf(e.key) !== -1) {
-      if (!tags.includes(tag)) {
-        setTags((tags) => [...tags, tag]);
-        setTag("");
-        e.preventDefault();
-      }
+    if (e.key === "Enter" && !tags.includes(tag)) {
+      setTags((tags) => [...tags, tag]);
+      setTag("");
+      e.preventDefault();
     }
   };
 
   return (
     <Container>
+      <Input
+        type="text"
+        aria-label="tag-input"
+        placeholder="태그를 입력후 엔터를 눌러주세요"
+        variant="default"
+        rounded="default"
+        fontSize="small"
+        onChange={(e) => setTag(e.target.value)}
+        onKeyUp={onKeyUp}
+        onKeyDown={onKeyDown}
+        value={tag}
+      />
       {tags &&
         tags.map((tag) => (
           <Tag key={tag} onClick={() => onRemove(tag)}>
             {tag}
           </Tag>
         ))}
-      <Input
-        type="text"
-        aria-label="tag-input"
-        placeholder="태그를 입력해주세요"
-        onChange={(e) => setTag(e.target.value)}
-        onKeyUp={onKeyUp}
-        onKeyDown={onKeyDown}
-        value={tag}
-      />
     </Container>
   );
 };
@@ -61,7 +60,7 @@ const InputTag = ({ onChange }: Props) => {
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 0.5rem;
 `;
 
 const Tag = styled.div`
@@ -77,12 +76,4 @@ const Tag = styled.div`
   }
 `;
 
-// const Input = styled.input`
-//   background: transparent;
-//   color: white;
-//   font-size: 1.5rem;
-//   border-radius: "4px";
-//   border: none;
-//   outline: none;
-// `;
 export default InputTag;
