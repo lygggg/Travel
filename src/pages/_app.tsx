@@ -7,7 +7,7 @@ import { ThemeProvider } from "@emotion/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import * as gtag from "src/libs/gtag";
-
+import { HeadMeta } from "src/components/commons";
 function MyApp({
   Component,
   pageProps,
@@ -26,15 +26,14 @@ function MyApp({
     };
   }, [router.events]);
   return (
-    <>
-      <SessionProvider session={pageProps.session}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <HeaderBar />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </SessionProvider>
-    </>
+    <SessionProvider session={pageProps.session}>
+      <HeadMeta />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <HeaderBar />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
 
