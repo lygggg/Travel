@@ -20,14 +20,14 @@ router
       secret: secret,
     });
     const article = await Article.create({
-      content: content,
-      tags: tags,
-      title: title,
-      name: name,
-      email: email,
-      thumbnailUrl: thumbnailUrl,
-      introduction: introduction,
-      syncTime: syncTime,
+      content,
+      tags,
+      title,
+      name,
+      email,
+      thumbnailUrl,
+      introduction,
+      syncTime,
     });
     res.json(article);
   });
