@@ -18,19 +18,19 @@ const HeadMeta: React.FC<Props> = ({ title, image, introduction }) => {
   };
   return (
     <Head>
-      <title>{title || metaTag.title}</title>
+      <title>{title ?? metaTag.title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <meta property="og:title" content={title || metaTag.title} />
+      <meta property="og:title" content={title ?? metaTag.title} />
       <meta
         property="og:description"
-        content={introduction || metaTag.introduction}
+        content={introduction ?? metaTag.introduction}
       />
       <meta
         property="og:url"
         content={`https://mlog.vercel.com${router.asPath}`}
       />
-      <meta property="og:image" content={image || metaTag.thumbnailUrl} />
+      <meta property="og:image" content={image ?? metaTag.thumbnailUrl} />
       <meta property="og:type" content="website" />
     </Head>
   );
