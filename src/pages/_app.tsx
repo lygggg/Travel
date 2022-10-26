@@ -8,6 +8,10 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import * as gtag from "src/libs/gtag";
 import { HeadMeta } from "src/components/commons";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import * as gtag from "src/libs/gtag";
+
 function MyApp({
   Component,
   pageProps,
