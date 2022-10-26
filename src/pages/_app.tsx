@@ -4,6 +4,7 @@ import { Session } from "next-auth";
 import { HeaderBar } from "src/components/header";
 import { GlobalStyle, theme } from "src/styles/globalStyle";
 import { ThemeProvider } from "@emotion/react";
+import { HeadMeta } from "src/components/commons";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import * as gtag from "src/libs/gtag";
@@ -26,15 +27,14 @@ function MyApp({
     };
   }, [router.events]);
   return (
-    <>
-      <SessionProvider session={pageProps.session}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <HeaderBar />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </SessionProvider>
-    </>
+    <SessionProvider session={pageProps.session}>
+      <HeadMeta />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <HeaderBar />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
 
