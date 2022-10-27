@@ -75,6 +75,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next-connect", "npm:1.0.0-next.3"],\
             ["next-mdx-remote", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.1.0"],\
             ["next-s3-upload", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:0.2.3"],\
+            ["next-sitemap", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.1.29"],\
             ["plaiceholder", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:2.5.0"],\
             ["prettier", "npm:2.7.1"],\
             ["prosemirror-transform", "npm:1.7.0"],\
@@ -4666,6 +4667,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/chakra-ui__system",\
             "@types/react",\
             "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@corex/deepmerge", [\
+        ["npm:4.0.29", {\
+          "packageLocation": "./.yarn/cache/@corex-deepmerge-npm-4.0.29-aacab9d89d-78626fd29c.zip/node_modules/@corex/deepmerge/",\
+          "packageDependencies": [\
+            ["@corex/deepmerge", "npm:4.0.29"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12194,6 +12204,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next-connect", "npm:1.0.0-next.3"],\
             ["next-mdx-remote", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.1.0"],\
             ["next-s3-upload", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:0.2.3"],\
+            ["next-sitemap", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.1.29"],\
             ["plaiceholder", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:2.5.0"],\
             ["prettier", "npm:2.7.1"],\
             ["prosemirror-transform", "npm:1.7.0"],\
@@ -12410,6 +12421,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react",\
             "next",\
             "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["next-sitemap", [\
+        ["npm:3.1.29", {\
+          "packageLocation": "./.yarn/cache/next-sitemap-npm-3.1.29-c252627980-e5f922bd96.zip/node_modules/next-sitemap/",\
+          "packageDependencies": [\
+            ["next-sitemap", "npm:3.1.29"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.1.29", {\
+          "packageLocation": "./.yarn/__virtual__/next-sitemap-virtual-8989242d28/0/cache/next-sitemap-npm-3.1.29-c252627980-e5f922bd96.zip/node_modules/next-sitemap/",\
+          "packageDependencies": [\
+            ["next-sitemap", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.1.29"],\
+            ["@corex/deepmerge", "npm:4.0.29"],\
+            ["@next/env", null],\
+            ["@types/next", null],\
+            ["@types/next__env", null],\
+            ["minimist", "npm:1.2.6"],\
+            ["next", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:12.3.1"]\
+          ],\
+          "packagePeers": [\
+            "@next/env",\
+            "@types/next",\
+            "@types/next__env",\
+            "next"\
           ],\
           "linkType": "HARD"\
         }]\
