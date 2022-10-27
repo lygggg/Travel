@@ -7,6 +7,7 @@ import { ThemeProvider } from "@emotion/react";
 import { HeadMeta } from "src/components/commons";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Script from "next/script";
 import * as gtag from "src/libs/gtag";
 
 function MyApp({
@@ -27,14 +28,34 @@ function MyApp({
     };
   }, [router.events]);
   return (
-    <SessionProvider session={pageProps.session}>
-      <HeadMeta />
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <HeaderBar />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </SessionProvider>
+    <>
+      <Script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ${gtag.GA_TRACKING_ID}, {
+            page_path: window.location.pathname,
+          });
+        `,
+        }}
+      />
+      <SessionProvider session={pageProps.session}>
+        <HeadMeta />
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <HeaderBar />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </SessionProvider>
+    </>
   );
 }
 
