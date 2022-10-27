@@ -152,6 +152,10 @@ export const GlobalStyle = () => (
       * {
         box-sizing: border-box;
       }
+      a {
+      text-decoration: none;
+      color: ${theme.white};
+      }
     `}
   />
 );
