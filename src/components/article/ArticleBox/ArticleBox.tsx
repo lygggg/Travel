@@ -16,9 +16,7 @@ const ArticleBox = ({ article }: Props) => {
           <ImageContainer>
             <Image
               src={img}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center"
+              fill
               placeholder="blur"
               blurDataURL={base64}
               alt={title}
