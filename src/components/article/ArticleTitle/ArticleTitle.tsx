@@ -18,9 +18,7 @@ const ArticleTitle: React.FC<Props> = (article) => {
       <ImageContainer>
         <Image
           src={img}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
+          fill
           placeholder="blur"
           blurDataURL={base64}
           alt={title}

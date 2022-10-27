@@ -92,7 +92,12 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
             </ButtonContainer>
             <ThumbnailContainer>
               {thumbnailUrl ? (
-                <Image src={thumbnailUrl} height={250} width={400} />
+                <Image
+                  src={thumbnailUrl}
+                  height={250}
+                  width={400}
+                  alt="upload image"
+                />
               ) : (
                 "사진을 업로드해주세요"
               )}
