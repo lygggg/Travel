@@ -32,6 +32,10 @@ const HeadMeta: React.FC<Props> = ({ title, image, introduction }) => {
       />
       <meta property="og:image" content={image ?? metaTag.thumbnailUrl} />
       <meta property="og:type" content="website" />
+      <meta
+        name="google-site-verification"
+        content={`${process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION}`}
+      />
     </Head>
   );
 };
