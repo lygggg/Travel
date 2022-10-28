@@ -43,7 +43,7 @@ const ButtonStyled = styled.button<ButtonStyled>`
         `;
       default:
         return css`
-          background-color: ${props.theme.white[500]};
+          background-color: ${props.theme.white};
           color: ${props.theme.black[500]};
         `;
     }
