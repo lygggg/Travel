@@ -5,7 +5,6 @@ import Input from "./Input";
 
 describe("Input", () => {
   const onChange = jest.fn();
-  const placeholder = "placeholder";
   const renderInput = (placeholder: string) =>
     render(
       <ThemeProvider theme={theme}>
@@ -20,6 +19,7 @@ describe("Input", () => {
       </ThemeProvider>,
     );
 
+  const placeholder = "placeholder";
   it("넘겨준 placeholder가 input placeholder에 반영된다.", () => {
     renderInput(placeholder);
 
@@ -36,7 +36,7 @@ describe("Input", () => {
     expect(onChange).toBeCalled();
   });
 
-  it("버튼 스타일 변경", () => {
+  it("input 스타일 변경", () => {
     const { getByPlaceholderText, rerender } = renderInput(placeholder);
     const testObject = [
       {
