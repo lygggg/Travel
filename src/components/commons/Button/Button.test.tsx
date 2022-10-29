@@ -1,34 +1,44 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "src/styles/globalStyle";
-import Button from "./Button";
+import Button, { ButtonStyled } from "./Button";
 
 describe("Button", () => {
   const onClick = jest.fn();
-  const renderButton = () =>
+  const renderButton = ({ children, variant, rounded, size }: ButtonStyled) =>
     render(
       <ThemeProvider theme={theme}>
         <Button
-          variant="default"
-          size="large"
-          rounded="default"
+          variant={variant}
+          size={size}
+          rounded={rounded}
           onClick={onClick}
         >
-          버튼
+          {children}
         </Button>
         ,
       </ThemeProvider>,
     );
 
   it("button을 클릭하면 onClick이 호출된다. ", () => {
-    const { getByText } = renderButton();
+    const { getByText } = renderButton({
+      children: "버튼",
+      variant: "default",
+      rounded: "default",
+      size: "large",
+    });
     const button = getByText("버튼");
     fireEvent.click(button);
     expect(onClick).toBeCalled();
   });
 
   it("버튼 스타일 변경", () => {
-    const { getByText, rerender } = renderButton();
+    const { getByText, rerender } = renderButton({
+      children: "버튼",
+      variant: "default",
+      rounded: "default",
+      size: "large",
+    });
     const testObject = [
       {
         variant: "primary",
