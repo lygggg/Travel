@@ -2,7 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-interface ButtonStyled extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonStyled
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string | number;
   fontSize?: string;
   variant: "default" | "primary" | "secondary" | "tertiary";
