@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "@emotion/styled";
 
-interface TextAreaStyled
+export interface TextAreaStyled
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   onChange: any; // TODO any
   label: string;
