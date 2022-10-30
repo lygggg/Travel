@@ -36,3 +36,10 @@ export interface PostArticleRequest {
   introduction: string;
   syncTime: string;
 }
+
+export interface ArticleTag {
+  _id: string;
+  categoryName: string;
+  articleId: string;
+  userId: string;
+}
