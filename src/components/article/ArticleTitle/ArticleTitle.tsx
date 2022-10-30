@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import { Tag } from "src/components/commons";
+import { TagList } from "src/components/commons";
 
 interface Props {
   title: string;
@@ -24,7 +24,7 @@ const ArticleTitle: React.FC<Props> = (article) => {
           alt={title}
         />
       </ImageContainer>
-      <Tag tags={tags} size="small" />
+      <TagList tags={tags} size="small" />
     </Container>
   );
 };
