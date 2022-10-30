@@ -1,5 +1,6 @@
 import router from "./index";
 import Article from "./models/article";
+import Category from "./models/category";
 import { getToken } from "next-auth/jwt";
 
 const secret = process.env.SECRET;
@@ -15,10 +16,12 @@ router
   .post(async (req, res) => {
     const { content, tags, title, thumbnailUrl, introduction, syncTime } =
       req.body;
+
     const { name, email }: any = await getToken({
       req: req,
       secret: secret,
     });
+
     const article = await Article.create({
       content,
       tags,
@@ -29,6 +32,16 @@ router
       introduction,
       syncTime,
     });
+
+    await Promise.all(
+      tags.map((tag: string) => {
+        return Category.create({
+          categoryName: tag,
+          articleId: article._id,
+          userId: email,
+        });
+      }),
+    );
     res.json(article);
   });
 
