@@ -1,13 +1,13 @@
 import { useState, useEffect, KeyboardEvent } from "react";
-import { Input } from "src/components/commons";
+import { Input, TagList } from "src/components/commons";
 import styled from "@emotion/styled";
 
 interface Props {
   onChange: (tags: string[]) => void;
 }
 
-const InputTag = ({ onChange }: Props) => {
-  const [tag, setTag] = useState<string>("");
+const InputTag: React.FC<Props> = ({ onChange }) => {
+  const [tag, setTag] = useState("");
   const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
@@ -47,12 +47,7 @@ const InputTag = ({ onChange }: Props) => {
         onKeyDown={onKeyDown}
         value={tag}
       />
-      {tags &&
-        tags.map((tag) => (
-          <Tag key={tag} onClick={() => onRemove(tag)}>
-            {tag}
-          </Tag>
-        ))}
+      <TagList tags={tags} size="small" onRemove={onRemove} />
     </Container>
   );
 };
@@ -61,19 +56,6 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-`;
-
-const Tag = styled.div`
-  color: white;
-  padding: 0.25rem;
-  cursor: pointer;
-  font-size: 1.5rem;
-  background-color: black;
-  border-radius: 6px;
-  &:hover {
-    opacity: 0.5;
-    cursor: pointer;
-  }
 `;
 
 export default InputTag;
