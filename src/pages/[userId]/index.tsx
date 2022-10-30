@@ -1,39 +1,36 @@
-import { useEffect } from "react";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { getSession, signIn } from "next-auth/react";
 import { getPlaiceholder } from "plaiceholder";
 import { ArticleList } from "src/components/article";
-import { Article as ArticleProps } from "src/models";
+import {
+  Article as ArticleProps,
+  ArticleTag as ArticleTagProps,
+} from "src/models";
 import Article from "src/pages/api/models/article";
+import Category from "src/pages/api/models/category";
 import connectMongo from "src/pages/api/utils/connectMongo";
 
 interface Props {
   articles: Array<ArticleProps>;
-  session: string;
+  tags: Array<ArticleTagProps>;
 }
-const ArticlePage = ({ articles, session }: Props) => {
-  useEffect(() => {
-    if (session) return;
-    signIn();
-  }, [session]);
+const ArticlePage = ({ articles, tags }: Props) => {
   return (
     <>
+      {console.log(articles)}
       <ArticleList articles={articles} />
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext,
-) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}: GetServerSidePropsContext) => {
   await connectMongo();
-  const session = await getSession(context);
-  context.res.setHeader(
-    "Cache-Control",
-    "public, max-age=0, s-maxage=31536000",
-  );
+  res.setHeader("Cache-Control", "public, max-age=0, s-maxage=31536000");
   try {
-    const data = await Article.find({ email: session?.user?.email }).lean();
+    const data = await Article.find({ email: query.userId }).lean();
+    const tags = await Category.find({ userId: query.userId });
 
     const articles = await Promise.all(
       data.map(async (article) => {
@@ -48,11 +45,11 @@ export const getServerSideProps: GetServerSideProps = async (
     return {
       props: {
         articles: JSON.parse(JSON.stringify(articles)),
-        session: session,
+        tags: tags,
       },
     };
   } catch (err) {
-    alert("Deletion failed.");
+    alert("article get failed.");
     return {
       props: {
         articles: {},
