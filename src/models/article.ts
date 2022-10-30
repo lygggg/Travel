@@ -11,3 +11,10 @@ export interface Article {
   base64: string;
   introduction: string;
 }
+
+export interface ArticleTag {
+  _id: string;
+  categoryName: string;
+  articleId: string;
+  userId: string;
+}
