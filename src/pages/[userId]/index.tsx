@@ -1,22 +1,25 @@
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { getPlaiceholder } from "plaiceholder";
-import { ArticleList } from "src/components/article";
-import {
-  Article as ArticleProps,
-  ArticleTag as ArticleTagProps,
-} from "src/models";
-import Article from "src/pages/api/models/article";
-import Category from "src/pages/api/models/category";
-import connectMongo from "src/pages/api/utils/connectMongo";
+import { ArticleList, Category } from "src/components/article";
+import { findArticles } from "src/api/article";
+import { findTag } from "src/api/tag";
+import { useArticle } from "src/hooks/query/useArticle";
+import { useTag } from "src/hooks/query/useTag";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
-interface Props {
-  articles: Array<ArticleProps>;
-  tags: Array<ArticleTagProps>;
-}
-const ArticlePage = ({ articles, tags }: Props) => {
+const ArticlePage = () => {
+  const {
+    query: { userId, tag },
+  } = useRouter();
+  const { data: articles, isLoading } = useArticle({ userId, tag });
+  const { data: tags } = useTag(userId as string);
+
+  if (isLoading) {
+    return null;
+  }
   return (
     <>
-      {console.log(articles)}
+      <Category tags={tags} />
       <ArticleList articles={articles} />
     </>
   );
@@ -25,37 +28,24 @@ const ArticlePage = ({ articles, tags }: Props) => {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
   res,
+  params,
 }: GetServerSidePropsContext) => {
-  await connectMongo();
+  const { userId, tag } = query;
   res.setHeader("Cache-Control", "public, max-age=0, s-maxage=31536000");
-  try {
-    const data = await Article.find({ email: query.userId }).lean();
-    const tags = await Category.find({ userId: query.userId });
-
-    const articles = await Promise.all(
-      data.map(async (article) => {
-        const { base64, img } = await getPlaiceholder(article.thumbnailUrl);
-        return {
-          ...article,
-          base64,
-          img,
-        };
-      }),
-    ).then((values) => values);
-    return {
-      props: {
-        articles: JSON.parse(JSON.stringify(articles)),
-        tags: tags,
-      },
-    };
-  } catch (err) {
-    alert("article get failed.");
-    return {
-      props: {
-        articles: {},
-      },
-    };
-  }
+  const queryClient = new QueryClient();
+  await Promise.all([
+    queryClient.prefetchQuery(["article", userId], () =>
+      findArticles({ userId, tag }),
+    ),
+    await queryClient.fetchQuery(["tag", userId], () =>
+      findTag(userId as string),
+    ),
+  ]);
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 };
 
 export default ArticlePage;
