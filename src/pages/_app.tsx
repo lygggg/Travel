@@ -6,7 +6,13 @@ import { GlobalStyle, theme } from "src/styles/globalStyle";
 import { ThemeProvider } from "@emotion/react";
 import { HeadMeta } from "src/components/commons";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+  DehydratedState,
+} from "@tanstack/react-query";
 import Script from "next/script";
 import * as gtag from "src/libs/gtag";
 
@@ -15,8 +21,10 @@ function MyApp({
   pageProps,
 }: AppProps<{
   session: Session;
+  dehydratedState: DehydratedState;
 }>) {
   const router = useRouter();
+  const [queryClient] = useState(() => new QueryClient());
 
   useEffect(() => {
     const handleRouteChange = (url: URL) => {
@@ -47,14 +55,18 @@ function MyApp({
         `,
         }}
       />
-      <SessionProvider session={pageProps.session}>
-        <HeadMeta />
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <HeaderBar />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <SessionProvider session={pageProps.session}>
+            <HeadMeta />
+            <ThemeProvider theme={theme}>
+              <GlobalStyle />
+              <HeaderBar />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </SessionProvider>
+        </Hydrate>
+      </QueryClientProvider>
     </>
   );
 }
