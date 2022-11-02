@@ -17,9 +17,14 @@ export interface ArticleTag {
   userId: string;
 }
 
-export interface findArticleRequest {
+export interface findArticlesRequest {
   userId: string | string[] | undefined;
   tag: string | string[] | undefined;
+}
+
+export interface findArticleRequest {
+  userId: string | string[] | undefined;
+  id: string | string[] | undefined;
 }
 
 export interface PostArticleRequest {

@@ -2,7 +2,7 @@ import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { ArticleList, Category } from "src/components/article";
 import { findArticles } from "src/api/article";
 import { findTag } from "src/api/tag";
-import { useArticle } from "src/hooks/query/useArticle";
+import { useArticles } from "src/hooks/query/useArticle";
 import { useTag } from "src/hooks/query/useTag";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -11,7 +11,7 @@ const ArticlePage = () => {
   const {
     query: { userId, tag },
   } = useRouter();
-  const { data: articles, isLoading } = useArticle({ userId, tag });
+  const { data: articles, isLoading } = useArticles({ userId, tag });
   const { data: tags } = useTag(userId as string);
 
   if (isLoading) {
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res.setHeader("Cache-Control", "public, max-age=0, s-maxage=31536000");
   const queryClient = new QueryClient();
   await Promise.all([
-    queryClient.prefetchQuery(["article", userId], () =>
+    queryClient.prefetchQuery(["articles", userId], () =>
       findArticles({ userId, tag }),
     ),
     await queryClient.fetchQuery(["tag", userId], () =>
