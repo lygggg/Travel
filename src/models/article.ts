@@ -18,12 +18,12 @@ export interface ArticleTag {
 }
 
 export interface findArticlesRequest {
-  userId: string | string[] | undefined;
+  userId: string | string[] | undefined; //TODO type
   tag: string | string[] | undefined;
 }
 
 export interface findArticleRequest {
-  userId: string | string[] | undefined;
+  userId: string | string[] | undefined; //TODO type
   id: string | string[] | undefined;
 }
 
