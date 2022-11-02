@@ -2,33 +2,24 @@ import { Article as ArticleProps } from "src/models";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
+import { TagList } from "src/components/commons";
 
 interface Props {
   article: ArticleProps;
 }
 
 const ArticleBox = ({ article }: Props) => {
-  const { title, tags, syncTime, img, base64, introduction } = article;
+  const { title, tags, syncTime, thumbnailUrl, introduction, email } = article;
   return (
     <>
-      <Link href={`/articles/${article._id}`}>
+      <Link href={`/${email}/${article._id}`}>
         <Container>
           <ImageContainer>
-            <Image
-              src={img}
-              fill
-              placeholder="blur"
-              blurDataURL={base64}
-              alt={title}
-            />
+            <Image src={thumbnailUrl} fill alt={title} />
           </ImageContainer>
           <Title>{title}</Title>
           <Introduction>{introduction}</Introduction>
-          <TagList>
-            {tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </TagList>
+          <TagList tags={tags} size="mini" />
           <Time>{syncTime}</Time>
         </Container>
       </Link>
@@ -56,20 +47,6 @@ const Introduction = styled.h2`
 
 const Time = styled.h3`
   font-size: 1rem;
-`;
-const Tag = styled.div`
-  color: ${(props) => props.theme.white};
-  font-weight: bold;
-  padding: 0.25rem;
-  font-size: 1rem;
-  background-color: ${(props) => props.theme.gray[400]};
-  border-radius: 2rem;
-`;
-
-const TagList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
 `;
 
 const ImageContainer = styled.div`
