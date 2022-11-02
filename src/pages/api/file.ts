@@ -1,6 +1,11 @@
-import router from "./index";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { createRouter } from "next-connect";
 import { deleteImage } from "./utils/s3Client.js";
 
+const router = createRouter<NextApiRequest, NextApiResponse>();
+router.use(async (req, _, next) => {
+  await next();
+});
 router.post(async (req, res) => {
   const imageKey = req.body;
   try {
