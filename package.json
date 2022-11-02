@@ -20,6 +20,7 @@
     "@emotion/styled": "^11.10.4",
     "@plaiceholder/next": "^2.5.0",
     "@tanstack/react-query": "^4.13.5",
+    "@sentry/nextjs": "^7.17.3",
     "@toast-ui/editor": "^3.2.1",
     "@toast-ui/react-editor": "^3.2.2",
     "@types/cors": "^2.8.12",
