@@ -45,7 +45,7 @@ const TagItem: React.FC<Props> = ({
   );
 };
 
-const TagStyle = styled.div<{ size: string }>`
+const TagStyle = styled.li<{ size: string }>`
   display: flex;
   color: ${(props) => props.theme.white};
   font-weight: 500;
