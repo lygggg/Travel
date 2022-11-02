@@ -1,20 +1,17 @@
 import {
-  GetStaticPaths,
-  GetStaticProps,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
 } from "next";
 import styled from "@emotion/styled";
 import { getPlaiceholder } from "plaiceholder";
 import { serialize } from "next-mdx-remote/serialize";
-import ArticleModel from "src/pages/api/models/article";
-import connectMongo from "src/pages/api/utils/connectMongo";
-import { Article as ArticleProps } from "src/models";
 import { ArticleDetail, ArticleTitle } from "src/components/article";
 import { HeadMeta } from "src/components/commons";
+import { findArticle } from "src/api/article";
 
 const ArticleDetailPage = (
-  article: InferGetStaticPropsType<typeof getStaticProps>,
+  article: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) => {
   const { base64, img, title, tags, MDXdata, syncTime, introduction } = article;
   return (
@@ -32,34 +29,23 @@ const ArticleDetailPage = (
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  await connectMongo();
-  const res = await ArticleModel.find();
-  const articles = JSON.parse(JSON.stringify(res));
-  const paths = articles.map((article: ArticleProps) => ({
-    params: { id: article?._id },
-  }));
-
-  return { paths, fallback: false };
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params,
-}: GetStaticPropsContext) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}: GetServerSidePropsContext) => {
+  const { userId, id } = query;
   try {
-    await connectMongo();
-    const data = await ArticleModel.findById(params?.id).lean();
-    const { thumbnailUrl, title, tags, content, syncTime, introduction } = data;
+    const { content, thumbnailUrl, ...rest } = await findArticle({
+      userId,
+      id,
+    });
     const { base64, img } = await getPlaiceholder(thumbnailUrl);
     const MDXdata = await serialize(content);
     const article = {
+      ...rest,
       base64,
       img,
-      title,
-      tags,
       MDXdata,
-      syncTime,
-      introduction,
     };
     return { props: article };
   } catch (err) {
