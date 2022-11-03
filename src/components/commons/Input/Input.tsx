@@ -2,7 +2,8 @@ import React, { useRef } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-interface InputStyled extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputStyled
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   variant: "default" | "primary" | "secondary" | "tertiary";
   rounded: "default" | "round";
   fontSize: "mini" | "small" | "medium" | "large";
