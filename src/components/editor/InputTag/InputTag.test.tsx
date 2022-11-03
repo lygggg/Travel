@@ -13,7 +13,7 @@ describe("InputTag", () => {
     );
   const text = "tag1";
 
-  it("input에 태그를 입력 ", () => {
+  it("input에 태그를 입력한다. ", () => {
     const { getByLabelText } = renderInputTag();
     const input = getByLabelText("tag-input") as HTMLInputElement;
 
@@ -21,7 +21,7 @@ describe("InputTag", () => {
     expect(input.value).toBe(text);
   });
 
-  it("입력된 input을 enter하면 tag render", async () => {
+  it("입력된 input을 enter하면 tag를 render한다.", async () => {
     const { getByText, getByLabelText } = renderInputTag();
     const input = getByLabelText("tag-input") as HTMLInputElement;
 
@@ -32,7 +32,7 @@ describe("InputTag", () => {
     expect(input.value).toBe("");
   });
 
-  it("태그의 close 이미지를 클릭시 삭제 ", async () => {
+  it("태그의 close 이미지를 클릭시 삭제한다. ", async () => {
     const { getByLabelText } = renderInputTag();
     const input = getByLabelText("tag-input");
 
@@ -44,7 +44,7 @@ describe("InputTag", () => {
     expect(screen.queryByText(text)).toBeNull();
   });
 
-  it("Backspace 누르면 태그를 삭제", async () => {
+  it("Backspace 누르면 태그를 삭제한다.", async () => {
     const { getByLabelText } = renderInputTag();
     const input = getByLabelText("tag-input");
 
