@@ -41,36 +41,31 @@ describe("TagItem", () => {
     });
   });
 
-  it("tag 스타일 변경", () => {
-    const { getByTestId, rerender } = renderTagItem({
-      size: "mini",
-      children: tagName,
-    });
-    const testObject = [
+  describe("스타일", () => {
+    const styleMock = [
       {
-        fontSize: "medium",
+        size: "medium",
         fontScale: "1.7rem",
       },
       {
-        fontSize: "small",
+        size: "small",
         fontScale: "1.3rem",
       },
       {
-        fontSize: "large",
+        size: "large",
         fontScale: "2rem",
       },
     ];
-    const tag = getByTestId("tag-item");
     // TODO 빨간줄??
-    testObject.forEach((obj) => {
-      rerender(
-        <ThemeProvider theme={theme}>
-          <TagItem onClick={onClick} onRemove={onRemove} size={obj.fontSize}>
-            {tagName}
-          </TagItem>
-        </ThemeProvider>,
-      );
-      expect(tag).toHaveStyle(`font-size: ${obj.fontScale}`);
+    styleMock.forEach((style) => {
+      it(`size가 ${style.size}이면 font-size가 ${style.fontScale}이다.`, () => {
+        const { getByTestId } = renderTagItem({
+          size: style.size,
+          children: tagName,
+        });
+        const tag = getByTestId("tag-item");
+        expect(tag).toHaveStyle(`font-size: ${style.fontScale}`);
+      });
     });
   });
 });
