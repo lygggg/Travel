@@ -1,17 +1,22 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "src/styles/globalStyle";
-import Input from "./Input";
+import Input, { InputStyled } from "./Input";
 
 describe("Input", () => {
   const onChange = jest.fn();
-  const renderInput = (placeholder: string) =>
+  const renderInput = ({
+    placeholder,
+    variant,
+    rounded,
+    fontSize,
+  }: InputStyled) =>
     render(
       <ThemeProvider theme={theme}>
         <Input
-          variant="default"
-          rounded="default"
-          fontSize="large"
+          variant={variant}
+          rounded={rounded}
+          fontSize={fontSize}
           onChange={onChange}
           placeholder={placeholder}
         />
@@ -21,24 +26,34 @@ describe("Input", () => {
 
   const placeholder = "placeholder";
   it("넘겨준 placeholder가 input placeholder에 반영된다.", () => {
-    renderInput(placeholder);
+    renderInput({
+      placeholder: placeholder,
+      variant: "default",
+      rounded: "default",
+      fontSize: "mini",
+    });
 
     screen.getByPlaceholderText(placeholder);
 
     expect(screen.queryByPlaceholderText(placeholder)).not.toBeNull();
   });
 
-  it("input에 입력하면 onChange 호출 ", () => {
-    const { getByPlaceholderText } = renderInput(placeholder);
+  it("input에 입력하면 onChange 호출된다. ", () => {
+    const { getByPlaceholderText } = renderInput({
+      placeholder: placeholder,
+      variant: "default",
+      rounded: "default",
+      fontSize: "mini",
+    });
+
     const input = getByPlaceholderText(placeholder);
     const value = "입력값";
     fireEvent.change(input, { target: { value } });
     expect(onChange).toBeCalled();
   });
 
-  it("input 스타일 변경", () => {
-    const { getByPlaceholderText, rerender } = renderInput(placeholder);
-    const testObject = [
+  describe("스타일", () => {
+    const styleMock = [
       {
         variant: "primary",
         fontSize: "small",
@@ -66,27 +81,33 @@ describe("Input", () => {
         fontScale: "0.5rem",
         borderRadius: "2rem",
       },
+      {
+        variant: "default",
+        fontSize: "large",
+        rounded: "default",
+        backgroundColor: "transparent",
+        color: `${theme.white}`,
+        fontScale: "2.5rem",
+        borderRadius: "0.3rem",
+      },
     ];
 
-    const input = getByPlaceholderText(placeholder);
-
     // TODO 빨간줄??
-    testObject.forEach((obj) => {
-      rerender(
-        <ThemeProvider theme={theme}>
-          <Input
-            variant={obj.variant}
-            fontSize={obj.fontSize}
-            rounded={obj.rounded}
-            onChange={onChange}
-            placeholder={placeholder}
-          />
-        </ThemeProvider>,
-      );
-      expect(input).toHaveStyle(`background-color: ${obj.backgroundColor}`);
-      expect(input).toHaveStyle(`font-size:  ${obj.fontScale}`);
-      expect(input).toHaveStyle(`border-radius: ${obj.borderRadius}`);
-      expect(input).toHaveStyle(`color: ${obj.color}`);
+    styleMock.forEach((style) => {
+      it(`variant, rounded, fontSize를 테스트한다.`, () => {
+        const { getByPlaceholderText } = renderInput({
+          placeholder: placeholder,
+          variant: style.variant,
+          rounded: style.rounded,
+          fontSize: style.fontSize,
+        });
+        const input = getByPlaceholderText(placeholder);
+
+        expect(input).toHaveStyle(`background-color: ${style.backgroundColor}`);
+        expect(input).toHaveStyle(`font-size:  ${style.fontScale}`);
+        expect(input).toHaveStyle(`border-radius: ${style.borderRadius}`);
+        expect(input).toHaveStyle(`color: ${style.color}`);
+      });
     });
   });
 });
