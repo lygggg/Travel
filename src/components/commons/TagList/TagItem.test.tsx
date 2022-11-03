@@ -15,8 +15,8 @@ describe("TagItem", () => {
         </TagItem>
       </ThemeProvider>,
     );
-  describe("onRemove가 있으면", () => {
-    it("클릭하면 tag 삭제. ", () => {
+  describe("onRemove가 있다면 tag에 x이미지가 보인다.", () => {
+    it("x 이미지를 클릭하면 tag를 삭제한다. ", () => {
       const { getByAltText } = renderTagItem({
         size: "mini",
         children: tagName,
@@ -28,8 +28,8 @@ describe("TagItem", () => {
     });
   });
 
-  describe("onClick 있으면", () => {
-    it("클릭하면 onClick 호출. ", () => {
+  describe("onClick 있으면 태그를 클릭할 수 있다", () => {
+    it("클릭하면 onClick 호출한다. ", () => {
       const { getByText } = renderTagItem({
         size: "mini",
         children: tagName,
