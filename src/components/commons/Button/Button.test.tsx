@@ -32,14 +32,8 @@ describe("Button", () => {
     expect(onClick).toBeCalled();
   });
 
-  it("버튼 스타일 변경", () => {
-    const { getByText, rerender } = renderButton({
-      children: "버튼",
-      variant: "default",
-      rounded: "default",
-      size: "large",
-    });
-    const testObject = [
+  describe("스타일", () => {
+    const styleMock = [
       {
         variant: "primary",
         size: "mini",
@@ -64,25 +58,35 @@ describe("Button", () => {
       },
     ];
 
-    const button = getByText("버튼");
-
     // TODO 빨간줄??
-    testObject.forEach((obj) => {
-      rerender(
-        <ThemeProvider theme={theme}>
-          <Button
-            variant={obj.variant}
-            size={obj.size}
-            rounded={obj.rounded}
-            onClick={onClick}
-          >
-            버튼
-          </Button>
-        </ThemeProvider>,
-      );
-      expect(button).toHaveStyle(`background-color: ${obj.backgroundColor}`);
-      expect(button).toHaveStyle(`padding:  ${obj.padding}`);
-      expect(button).toHaveStyle(`border-radius: ${obj.borderRadius}`);
+    styleMock.forEach((style) => {
+      it(`variant, size, rounded를 테스트한다.`, () => {
+        const { getByText, rerender } = renderButton({
+          children: "버튼",
+          variant: style.variant,
+          rounded: style.rounded,
+          size: style.size,
+        });
+
+        const button = getByText("버튼");
+        expect(button).toHaveStyle(
+          `background-color: ${style.backgroundColor}`,
+        );
+        expect(button).toHaveStyle(`padding:  ${style.padding}`);
+        expect(button).toHaveStyle(`border-radius: ${style.borderRadius}`);
+      });
+      // rerender(
+      //   <ThemeProvider theme={theme}>
+      //     <Button
+      //       variant={obj.variant}
+      //       size={obj.size}
+      //       rounded={obj.rounded}
+      //       onClick={onClick}
+      //     >
+      //       버튼
+      //     </Button>
+      //   </ThemeProvider>,
+      // );
     });
   });
 });
