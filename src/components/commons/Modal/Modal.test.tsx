@@ -10,7 +10,7 @@ describe("Modal", () => {
         </Modal>
       </div>,
     );
-  it("portal에 render되어야함.", () => {
+  it("portal에 modal이 들어가야 한다.", () => {
     const { getByTestId } = rederModal();
     const modal = getByTestId("modal");
     expect(modal).toBeInTheDocument();
