@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "@emotion/styled";
 
-interface TextAreaStyled
+export interface TextAreaStyled
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   onChange: any; // TODO any
   label: string;
@@ -9,11 +9,11 @@ interface TextAreaStyled
 
 const TextArea = (props: TextAreaStyled) => {
   const ref = useRef<HTMLTextAreaElement>(null);
-  const [textLength, setTextLength] = useState(0);
+  const [textLength, setTextLength] = useState<number | undefined>(0);
 
   const handleChange = () => {
     const text = ref.current?.value;
-    setTextLength(text?.length ?? 0);
+    setTextLength(text?.length);
     props.onChange?.(text);
   };
 
@@ -26,8 +26,9 @@ const TextArea = (props: TextAreaStyled) => {
           ref={ref}
           value={props.value}
           onChange={handleChange}
+          data-testid="textarea"
         />
-        <TextLength>
+        <TextLength data-testid="textarea-length">
           {props.maxLength && `${textLength}/${props.maxLength}`}
         </TextLength>
       </Label>
