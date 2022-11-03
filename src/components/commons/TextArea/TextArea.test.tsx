@@ -18,7 +18,26 @@ describe("TextArea", () => {
         ></TextArea>
       </ThemeProvider>,
     );
-  it("textarea에 입력하면 textarea 길이가 변경되어야함", () => {
+
+  it("textarea에 글을 입력하면 onChange가 호출되어야 한다.", () => {
+    const { getByTestId } = rederTextArea({ onChange, label: "라벨" });
+    const textArea = getByTestId("textarea");
+    const value = "textarea입력";
+    fireEvent.change(textArea, { target: { value } });
+    expect(onChange).toBeCalled();
+  });
+
+  it("label을 입력하면 label이 보여야 한다.", () => {
+    const labelText = "라벨";
+    const { getByText } = rederTextArea({
+      onChange,
+      label: labelText,
+    });
+    const labelNode = getByText(labelText);
+    expect(labelNode).toBeInTheDocument();
+  });
+
+  it("textarea에 입력하면 TextLength의 text가 변경되어야함", () => {
     const { getByTestId } = rederTextArea({ onChange, label: "라벨" });
     const textArea = getByTestId("textarea");
     const textAreaLen = getByTestId("textarea-length");
