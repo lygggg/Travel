@@ -1,20 +1,20 @@
+import Tag from "src/pages/api/models/tag";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
-import { deleteImage } from "./utils/s3Client.js";
+import connectMongo from "src/pages/api/utils/connectMongo";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
-router.use(async (req, _, next) => {
-  await next();
-});
-router.post(async (req, res) => {
-  const imageKey = req.body;
-  try {
-    await deleteImage(imageKey);
-  } catch {
-    res.status(400).end();
-  }
-  res.status(200).end();
-});
+
+router
+  .use(async (req, _, next) => {
+    await connectMongo();
+    await next();
+  })
+  .get(async (req, res) => {
+    const userId = req.query.userId;
+    const tags = await Tag.find({ userId: userId });
+    res.json(tags);
+  });
 
 export default router.handler({
   onError: (err, req, res) => {
