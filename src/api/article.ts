@@ -9,9 +9,17 @@ export const postArticle = async (data: PostArticleRequest) => {
   await api.post("/api/article", data);
 };
 
-export const findArticles = async ({ userId, tag }: findArticlesRequest) => {
+export const findArticles = async ({
+  userId,
+  tag,
+  pageNum,
+}: findArticlesRequest) => {
   const { data } = await api.get(
-    encodeURI(`/api/users/${userId as string}/articles?q=${tag as string}`),
+    encodeURI(
+      `/api/users/${userId as string}/articles?q=${
+        tag as string
+      }&page=${pageNum}`,
+    ),
   );
   return data;
 };
