@@ -3,6 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
 import connectMongo from "src/pages/api/utils/connectMongo";
 
+const NEXT_PAGE = 5;
+
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router
@@ -11,16 +13,23 @@ router
     await next();
   })
   .get(async (req, res) => {
-    const { userId, q } = req.query;
+    const { userId, q, page } = req.query;
+    const pageNum = parseInt(page) * NEXT_PAGE;
+    const total = await Article.find({ email: userId }).count();
     if (q === "undefined") {
-      const articles = await Article.find({ email: userId });
-      res.json(articles);
+      const articles = await Article.find({ email: userId })
+        .sort({ syncTime: 1 })
+        .limit(pageNum);
+      res.json({ articles, total });
     }
     const articles = await Article.find({
       email: userId,
       tags: { $in: q },
-    });
-    res.json(articles);
+    })
+      .sort({ syncTime: -1 })
+      .skip(0)
+      .limit(pageNum);
+    res.json({ articles, total });
   });
 
 export default router.handler({
