@@ -12,7 +12,7 @@ router
   })
   .get(async (req, res) => {
     const userId = req.query.userId;
-    const tags = await Tag.find({ userId: userId });
+    const tags = await Tag.find({ userId: userId }).distinct("tagName");
     res.json(tags);
   });
 
