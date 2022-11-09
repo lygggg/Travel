@@ -9346,7 +9346,6 @@ __metadata:
     "@next/bundle-analyzer": ^12.3.1
     "@plaiceholder/next": ^2.5.0
     "@tanstack/react-query": ^4.13.5
-    "@sentry/nextjs": ^7.17.3
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
     "@testing-library/react-hooks": ^8.0.1
