@@ -14,7 +14,7 @@ router
   })
   .get(async (req, res) => {
     const { userId, q, page } = req.query;
-    const pageNum = parseInt(page) * NEXT_PAGE;
+    const pageNum = parseInt(page as string) * NEXT_PAGE;
     const total = await Article.find({ email: userId }).count();
     if (q === "undefined") {
       const articles = await Article.find({ email: userId })
