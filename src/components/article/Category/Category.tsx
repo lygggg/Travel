@@ -9,7 +9,10 @@ interface Props {
 const Category: React.FC<Props> = ({ tags }) => {
   const router = useRouter();
   const moveUrl = (tag: string) => {
-    router.push(`/${router.query.userId}?tag=${tag}`);
+    router.push({
+      pathname: router.query.userId as string,
+      query: { tag },
+    });
   };
   return (
     <Container>
