@@ -38,6 +38,7 @@ jobs:
         run: yarn build
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       # Here's the first place where next-bundle-analysis' own script is used
       # This step pulls the raw bundle stats for the current bundle
