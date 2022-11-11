@@ -7346,6 +7346,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"intercept-stdout@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "intercept-stdout@npm:0.1.2"
+  dependencies:
+    lodash.toarray: ^3.0.0
+  checksum: 47816520f3f9e4f644b055922a132f085392722d52c1a5c73b5bc8af1bfa02173e66c77270bcc86cd3f5be6e8a3478ceb7505e43a6b965cd73ded6e67979f4ce
+  languageName: node
+  linkType: hard
+
 "internal-slot@npm:^1.0.3":
   version: 1.0.3
   resolution: "internal-slot@npm:1.0.3"
@@ -8465,6 +8474,52 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash._arraycopy@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "lodash._arraycopy@npm:3.0.0"
+  checksum: 4e46138de7cb88b2dd3df5b2527f2a01854536245063fa64ba70ae69848fa3f0b1cc939d0d376a4bbc25d379279f37ab4b60186c4063f9a4db93b7e9b2d9188c
+  languageName: node
+  linkType: hard
+
+"lodash._basevalues@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "lodash._basevalues@npm:3.0.0"
+  checksum: c5853dcc2b8e8f385a5511ea072c862b5806af1d815ea5f753b877fe7351856ce0b555b1d6985943b87b769d6a5726a011caf92be9d389eb17c57fe41f1668dd
+  languageName: node
+  linkType: hard
+
+"lodash._getnative@npm:^3.0.0":
+  version: 3.9.1
+  resolution: "lodash._getnative@npm:3.9.1"
+  checksum: ba2152bb10bf44beb54fcd273598197972c989c2181b54e533cec1ff1ebebdf8bb02d4ffc3d5a648480a48beb3026db191f5de99adecd7eac36bbd6025c9b048
+  languageName: node
+  linkType: hard
+
+"lodash.isarguments@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "lodash.isarguments@npm:3.1.0"
+  checksum: ae1526f3eb5c61c77944b101b1f655f846ecbedcb9e6b073526eba6890dc0f13f09f72e11ffbf6540b602caee319af9ac363d6cdd6be41f4ee453436f04f13b5
+  languageName: node
+  linkType: hard
+
+"lodash.isarray@npm:^3.0.0":
+  version: 3.0.4
+  resolution: "lodash.isarray@npm:3.0.4"
+  checksum: 3b298fb76ff16981353f7d0695d8680be9451b74d2e76714ddbd903a90fbaa8e1d84979d0ae99325f5a9033776771154b19e05027ab23de83202251c8abe81b5
+  languageName: node
+  linkType: hard
+
+"lodash.keys@npm:^3.0.0":
+  version: 3.1.2
+  resolution: "lodash.keys@npm:3.1.2"
+  dependencies:
+    lodash._getnative: ^3.0.0
+    lodash.isarguments: ^3.0.0
+    lodash.isarray: ^3.0.0
+  checksum: ac7c02c793334c48161a8e8a1f12576c73ee50d1371e75680afc6c2d3740d5e9bdc899517e6c0034014eaa2512c5f433a2e6985c9e16cf28b5c9013ec81bd35e
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:4.x":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -8483,6 +8538,17 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.mergewith@npm:4.6.2"
   checksum: a6db2a9339752411f21b956908c404ec1e088e783a65c8b29e30ae5b3b6384f82517662d6f425cc97c2070b546cc2c7daaa8d33f78db7b6e9be06cd834abdeb8
+  languageName: node
+  linkType: hard
+
+"lodash.toarray@npm:^3.0.0":
+  version: 3.0.2
+  resolution: "lodash.toarray@npm:3.0.2"
+  dependencies:
+    lodash._arraycopy: ^3.0.0
+    lodash._basevalues: ^3.0.0
+    lodash.keys: ^3.0.0
+  checksum: 9cc27811f6c59470a124ce69f4245f8481b38215fecc79646d998e3a020f0bf0dc3b44f5b6e31b5356ed82b408977b524f23a60498d57c7a049b9158221164d6
   languageName: node
   linkType: hard
 
@@ -9397,6 +9463,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
     framer-motion: ^7.6.1
+    intercept-stdout: ^0.1.2
     jest: ^29.1.2
     jest-dom: ^4.0.0
     jest-environment-jsdom: ^29.1.2

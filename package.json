@@ -28,6 +28,7 @@
     "aws-sdk": "^2.1231.0",
     "axios": "^0.27.2",
     "dayjs": "^1.11.6",
+    "intercept-stdout": "^0.1.2",
     "mongoose": "^6.6.1",
     "next": "^13.0.0",
     "next-auth": "^4.12.2",
