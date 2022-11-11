@@ -42,6 +42,15 @@ router
       }),
     );
     res.json(article);
+  })
+  .delete(async (req, res) => {
+    const { id } = req.query;
+    const { email }: any = await getToken({
+      req: req,
+      secret: secret,
+    });
+    const article = await Article.deleteOne({ email: email, _id: id });
+    res.json(article);
   });
 
 export default router.handler({

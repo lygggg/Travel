@@ -8,6 +8,10 @@ import {
 export const postArticle = async (data: PostArticleRequest) =>
   await api.post("/api/article", data);
 
+export const deleteArticle = async (id: string) => {
+  await api.delete(`/api/article?id=${id}`);
+};
+
 export const findArticles = async ({
   userId,
   tag,

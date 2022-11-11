@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { TagList } from "src/components/commons";
+import { useDeleteArticle } from "src/hooks/api/useArticle";
 
 interface Props {
   title: string;
@@ -13,9 +15,25 @@ interface Props {
   _id: string;
 }
 const ArticleTitle: React.FC<Props> = (article) => {
+  const {
+    query: { userId, id },
+    push,
+  } = useRouter();
   const { title, tags, img, base64, syncTime, _id } = article;
 
-  const removeArticle = useMutation;
+  const deleteArticleMutation = useDeleteArticle();
+
+  const handleRemoveArticle = () => {
+    deleteArticleMutation.mutate(id, {
+      onSuccess: () => {
+        push(`/${userId}`);
+      },
+      onError: () => {
+        alert("delete failed.");
+      },
+    });
+  };
+
   return (
     <Container>
       <Title>{title}</Title>
@@ -23,7 +41,7 @@ const ArticleTitle: React.FC<Props> = (article) => {
         <Link href={{ pathname: "/write", query: { id: _id } }}>
           <span>수정</span>
         </Link>
-        <span>삭제</span>
+        <span onClick={handleRemoveArticle}>삭제</span>
       </div>
       {syncTime}
       <ImageContainer>
