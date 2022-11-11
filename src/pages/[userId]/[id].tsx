@@ -13,7 +13,8 @@ import { findArticle } from "src/api/article";
 const ArticleDetailPage = (
   article: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) => {
-  const { base64, img, title, tags, MDXdata, syncTime, introduction } = article;
+  const { base64, img, title, tags, MDXdata, syncTime, introduction, _id } =
+    article;
   return (
     <Container>
       <HeadMeta title={title} url={img} introduction={introduction} />
@@ -23,6 +24,7 @@ const ArticleDetailPage = (
         base64={base64}
         img={img}
         syncTime={syncTime}
+        _id={_id}
       ></ArticleTitle>
       <ArticleDetail content={MDXdata} />
     </Container>

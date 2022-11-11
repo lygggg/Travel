@@ -1,41 +1,27 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { useRecoilState } from "recoil";
 import { Button, Input } from "src/components/commons";
 import { EditorBox, UploadModal, InputTag } from "../index";
-import Link from "next/link";
+import useModal from "src/hooks/useModal";
+import { articleState } from "src/store/article";
 
 const EditorContainer = () => {
-  const [content, setContent] = useState<string>("");
-  const [tags, setTags] = useState<string[]>([]);
-  const [title, setTitle] = useState<string>("");
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [ArticleState, setArticle] = useRecoilState(articleState);
+  const { title } = ArticleState;
+  const [openModal, closeModal, modalOpen] = useModal();
+  const {
+    query: { id },
+  } = useRouter();
 
-  const handleModalOpen = async () => {
-    if (!tags.length) {
-      alert("태그를 작성해주세요");
-      return;
-    }
-    if (!content) {
-      alert("본문을 작성해주세요");
-      return;
-    }
-    if (!title) {
-      alert("제목을 작성해주세요");
-      return;
-    }
-    setOpen((isOpen) => !isOpen);
-  };
+  // 모달 오픈
+  const handleModalOpen = () => openModal();
 
   return (
     <>
-      {isOpen && (
-        <UploadModal
-          content={content}
-          tags={tags}
-          title={title}
-          handleModalOpen={handleModalOpen}
-        />
-      )}
+      <UploadModal isActive={modalOpen} handleClose={closeModal} />
       <InputContainer>
         <Input
           type="text"
@@ -45,11 +31,17 @@ const EditorContainer = () => {
           fontSize="large"
           aria-label="editor-title-input"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) =>
+            setArticle({ ...ArticleState, title: e.target.value })
+          }
         />
-        <InputTag onChange={setTags} />
+        <InputTag onChange={(tags) => setArticle({ ...ArticleState, tags })} />
       </InputContainer>
-      <EditorBox height="600px" theme="dark" onChange={setContent} />
+      <EditorBox
+        height="600px"
+        theme="dark"
+        onChange={(content) => setArticle({ ...ArticleState, content })}
+      />
       <ButtonContainer>
         <Link href={"/"}>
           <Button variant="primary" size="large" rounded="round">

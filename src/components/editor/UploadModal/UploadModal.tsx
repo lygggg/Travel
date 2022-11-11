@@ -1,47 +1,44 @@
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
-import { useS3Upload } from "next-s3-upload";
-import { useState } from "react";
-import Image from "next/image";
+import { useMutation } from "@tanstack/react-query";
+import { useRecoilState } from "recoil";
 import { postArticle } from "src/api/article";
 import { Button, Modal, TextArea } from "src/components/commons";
-import { deletefiles } from "src/api/file";
+import { articleState } from "src/store/article";
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 interface Props {
-  content: string;
-  tags: string[];
-  title: string;
-  handleModalOpen: () => void;
+  isActive: boolean;
+  handleClose: () => void;
 }
 
-const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
-  const [imageKey, setImageKey] = useState("");
-  const [introduction, setIntroduction] = useState("");
-  const { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
+const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
+  const [ArticleState, setArticle] = useRecoilState(articleState);
+  const { thumbnailUrl, introduction, title, tags, content } = ArticleState;
 
-  const handleFileChange = async (file: File) => {
-    try {
-      const { url, key } = await uploadToS3(file);
-      setImageKey(key);
-      setThumbnailUrl(url);
-    } catch {
-      alert("upload failed.");
-    }
-  };
-
-  // TODO error handling
-  const handleFileRemove = async () => {
-    try {
-      await deletefiles(imageKey);
-      setThumbnailUrl("");
-    } catch (e) {
-      alert("Deletion failed.");
-    }
-  };
+  const updateArticle = useMutation(postArticle, {
+    onSuccess: () => {
+      alert("upload Success.");
+    },
+    onError: () => {
+      alert("upload Failed.");
+    },
+  });
 
   const handleFileUpload = async () => {
+    if (!tags.length) {
+      alert("태그를 작성해주세요");
+      return;
+    }
+    if (!content) {
+      alert("본문을 작성해주세요");
+      return;
+    }
+    if (!title) {
+      alert("제목을 작성해주세요");
+      return;
+    }
     if (!thumbnailUrl) {
       alert("썸네일을 업로드해주세요.");
       return;
@@ -49,6 +46,7 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
     try {
       dayjs.locale("ko");
       const syncTime = dayjs().format("YYYY년 MM월 DD일 HH:mm");
+      // updateArticle.mutate();
       await postArticle({
         content,
         tags,
@@ -63,45 +61,12 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
   };
 
   return (
-    <Modal>
+    <Modal isActive={isActive}>
       <ModalContainer>
         <ModalLayout>
           <H2>썸네일 미리보기</H2>
           <UploadContainer>
-            <FileInput onChange={handleFileChange} />
-            <ButtonContainer>
-              {thumbnailUrl ? (
-                <Button
-                  variant="primary"
-                  size="large"
-                  rounded="round"
-                  onClick={handleFileRemove}
-                >
-                  사진 제거
-                </Button>
-              ) : (
-                <Button
-                  variant="primary"
-                  size="large"
-                  rounded="round"
-                  onClick={openFileDialog}
-                >
-                  사진 업로드
-                </Button>
-              )}
-            </ButtonContainer>
-            <ThumbnailContainer>
-              {thumbnailUrl ? (
-                <Image
-                  src={thumbnailUrl}
-                  height={250}
-                  width={400}
-                  alt="upload image"
-                />
-              ) : (
-                "사진을 업로드해주세요"
-              )}
-            </ThumbnailContainer>
+            <ImageUpload />
             <IntroductionContainer>
               <h1>{title}</h1>
               <TextArea
@@ -109,7 +74,9 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
                 maxLength={30}
                 label={"짧게 소개하기"}
                 value={introduction}
-                onChange={setIntroduction}
+                onChange={(text: any) =>
+                  setArticle({ ...ArticleState, introduction: text })
+                }
               />
             </IntroductionContainer>
             <ButtonContainer>
@@ -125,7 +92,7 @@ const UploadModal = ({ content, tags, title, handleModalOpen }: Props) => {
                 variant="primary"
                 size="large"
                 rounded="round"
-                onClick={handleModalOpen}
+                onClick={handleClose}
               >
                 취소
               </Button>

@@ -6,7 +6,7 @@ import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 interface EditorUiProps extends EditorProps {
   theme: string;
   height: string;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: (e: string) => void;
 }
 const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
   const editorRef = useRef<Editor>(null);

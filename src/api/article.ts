@@ -5,9 +5,8 @@ import {
   PostArticleRequest,
 } from "src/models/article";
 
-export const postArticle = async (data: PostArticleRequest) => {
+export const postArticle = async (data: PostArticleRequest) =>
   await api.post("/api/article", data);
-};
 
 export const findArticles = async ({
   userId,

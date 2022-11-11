@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 
 interface Props {
   children: ReactNode;
+  isActive: boolean;
 }
 const Modal = (props: Props) => {
   const ref = useRef<Element | null>(null);
@@ -17,6 +18,8 @@ const Modal = (props: Props) => {
   if (!mounted || !ref.current) {
     return null;
   }
+
+  if (!props.isActive) return null;
 
   return createPortal(
     <Overlay data-testid="modal">{props.children}</Overlay>,
