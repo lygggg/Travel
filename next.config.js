@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { withPlaiceholder } = require("@plaiceholder/next");
 const { withSentryConfig } = require("@sentry/nextjs");
+const intercept = require("intercept-stdout");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -14,6 +15,16 @@ const nextConfig = {
     formats: ["image/webp"],
   },
 };
+
+// safely ignore recoil stdout warning messages
+const interceptStdout = (text) => {
+  if (text.includes("Duplicate atom key")) {
+    return "";
+  }
+  return text;
+};
+// Intercept in dev and prod
+intercept(interceptStdout);
 
 const moduleExports = {
   // Your existing module.exports
