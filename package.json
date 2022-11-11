@@ -38,6 +38,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-syntax-highlighter": "^15.5.0",
+    "recoil": "^0.7.6",
     "sharp": "^0.31.1",
     "uuid": "^9.0.0"
   },
