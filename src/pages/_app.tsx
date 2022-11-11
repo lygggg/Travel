@@ -13,6 +13,13 @@ import {
   QueryClientProvider,
   DehydratedState,
 } from "@tanstack/react-query";
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from "recoil";
 import Script from "next/script";
 import * as gtag from "src/libs/gtag";
 
@@ -55,18 +62,20 @@ function MyApp({
         `,
         }}
       />
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <SessionProvider session={pageProps.session}>
-            <HeadMeta />
-            <ThemeProvider theme={theme}>
-              <GlobalStyle />
-              <HeaderBar />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </SessionProvider>
-        </Hydrate>
-      </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <SessionProvider session={pageProps.session}>
+              <HeadMeta />
+              <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <HeaderBar />
+                <Component {...pageProps} />
+              </ThemeProvider>
+            </SessionProvider>
+          </Hydrate>
+        </QueryClientProvider>
+      </RecoilRoot>
     </>
   );
 }
