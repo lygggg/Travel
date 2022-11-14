@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { TagList } from "src/components/commons";
+import { useSession } from "next-auth/react";
+import { Button, TagList } from "src/components/commons";
 import { useDeleteArticle } from "src/hooks/api/useArticle";
 
 interface Props {
@@ -13,13 +13,16 @@ interface Props {
   base64: string;
   syncTime: string;
   _id: string;
+  name: string;
+  email: string;
 }
 const ArticleTitle: React.FC<Props> = (article) => {
   const {
     query: { userId, id },
     push,
   } = useRouter();
-  const { title, tags, img, base64, syncTime, _id } = article;
+  const { data: session } = useSession();
+  const { title, tags, img, base64, syncTime, _id, email } = article;
 
   const deleteArticleMutation = useDeleteArticle();
 
@@ -39,9 +42,11 @@ const ArticleTitle: React.FC<Props> = (article) => {
       <Title>{title}</Title>
       {session?.user.email === email && (
         <EndContainer>
-        <Link href={{ pathname: "/write", query: { id: _id } }}>
-          <span>수정</span>
-        </Link>
+          <Link href={{ pathname: "/write", query: { id: _id } }}>
+            <Button variant="primary" size="mini" rounded="default">
+              수정
+            </Button>
+          </Link>
           <Button
             variant="primary"
             size="mini"
@@ -53,6 +58,7 @@ const ArticleTitle: React.FC<Props> = (article) => {
         </EndContainer>
       )}
       {syncTime}
+      <TagList tags={tags} size="small" />
       <ImageContainer>
         <Image
           src={img}
@@ -62,7 +68,6 @@ const ArticleTitle: React.FC<Props> = (article) => {
           alt={title}
         />
       </ImageContainer>
-      <TagList tags={tags} size="small" />
     </Container>
   );
 };
@@ -78,8 +83,14 @@ const Container = styled.div`
 `;
 
 const EndContainer = styled.div`
+  display: flex;
+  gap: 0.3rem;
+  align-self: end;
+`;
+
 const Title = styled.h1`
   font-size: 2.4rem;
+  font-weight: 800;
 `;
 const ImageContainer = styled.div`
   width: 100%;

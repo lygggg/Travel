@@ -26,6 +26,7 @@ const Container = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 2.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   gap: 0.6rem;

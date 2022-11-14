@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
-import { useMutation } from "@tanstack/react-query";
-import { useRecoilState } from "recoil";
-import { postArticle } from "src/api/article";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { usePostArticle } from "src/hooks/api/useArticle";
 import { Button, Modal, TextArea } from "src/components/commons";
 import { articleState } from "src/store/article";
 import ImageUpload from "../ImageUpload/ImageUpload";
+import Router, { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 interface Props {
   isActive: boolean;
@@ -14,17 +15,12 @@ interface Props {
 }
 
 const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
+  const resetArticle = useResetRecoilState(articleState);
   const [ArticleState, setArticle] = useRecoilState(articleState);
   const { thumbnailUrl, introduction, title, tags, content } = ArticleState;
-
-  const updateArticle = useMutation(postArticle, {
-    onSuccess: () => {
-      alert("upload Success.");
-    },
-    onError: () => {
-      alert("upload Failed.");
-    },
-  });
+  const router = useRouter();
+  const { data: session } = useSession();
+  const postArticleMutation = usePostArticle();
 
   const handleFileUpload = async () => {
     if (!tags.length) {
@@ -43,21 +39,26 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
       alert("썸네일을 업로드해주세요.");
       return;
     }
-    try {
-      dayjs.locale("ko");
-      const syncTime = dayjs().format("YYYY년 MM월 DD일 HH:mm");
-      // updateArticle.mutate();
-      await postArticle({
+    dayjs.locale("ko");
+    postArticleMutation.mutate(
+      {
         content,
         tags,
         title,
         thumbnailUrl,
         introduction,
-        syncTime,
-      });
-    } catch (e) {
-      alert("upload failed.");
-    }
+        syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
+      },
+      {
+        onSuccess: () => {
+          router.push({ pathname: `/${session?.user.email}` });
+          resetArticle();
+        },
+        onError: () => {
+          alert("upload failed.");
+        },
+      },
+    );
   };
 
   return (

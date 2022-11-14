@@ -25,6 +25,7 @@ const Container = styled.div`
   flex-grow: 10;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 2rem;
 `;
 
 export default ArticleList;

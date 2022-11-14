@@ -1,6 +1,4 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { Button, Input } from "src/components/commons";
@@ -9,12 +7,9 @@ import useModal from "src/hooks/useModal";
 import { articleState } from "src/store/article";
 
 const EditorContainer = () => {
-  const [ArticleState, setArticle] = useRecoilState(articleState);
-  const { title } = ArticleState;
   const [openModal, closeModal, modalOpen] = useModal();
-  const {
-    query: { id },
-  } = useRouter();
+  const [ArticleState, setArticle] = useRecoilState(articleState);
+  const { title, tags, content } = ArticleState;
 
   // 모달 오픈
   const handleModalOpen = () => openModal();
@@ -35,11 +30,15 @@ const EditorContainer = () => {
             setArticle({ ...ArticleState, title: e.target.value })
           }
         />
-        <InputTag onChange={(tags) => setArticle({ ...ArticleState, tags })} />
+        <InputTag
+          tagList={tags}
+          onChange={(tags) => setArticle({ ...ArticleState, tags })}
+        />
       </InputContainer>
       <EditorBox
         height="600px"
         theme="dark"
+        content={content}
         onChange={(content) => setArticle({ ...ArticleState, content })}
       />
       <ButtonContainer>
@@ -84,4 +83,5 @@ const ButtonLayout = styled.span`
   display: flex;
   gap: 10px;
 `;
+
 export default EditorContainer;

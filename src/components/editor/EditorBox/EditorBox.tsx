@@ -7,8 +7,9 @@ interface EditorUiProps extends EditorProps {
   theme: string;
   height: string;
   onChange: (e: string) => void;
+  content: string;
 }
-const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
+const EditorBox = ({ height, theme, onChange, content }: EditorUiProps) => {
   const editorRef = useRef<Editor>(null);
   const { uploadToS3 } = useS3Upload();
   const onChangeText = () => {
@@ -41,7 +42,7 @@ const EditorBox = ({ height, theme, onChange }: EditorUiProps) => {
           addImageBlobHook: async (blob, callback) =>
             addImageBolb(blob, callback),
         }}
-        initialValue={"본문을 작성해주세요"}
+        initialValue={content || "본문을 작성해주세요"}
         ref={editorRef}
       />
     </>

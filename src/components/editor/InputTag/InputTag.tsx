@@ -1,14 +1,16 @@
 import { useState, useEffect, KeyboardEvent } from "react";
-import { Input, TagList } from "src/components/commons";
 import styled from "@emotion/styled";
+import { Input, TagList } from "src/components/commons";
+import { ArticleTag } from "src/models/article";
 
 interface Props {
   onChange: (tags: string[]) => void;
+  tagList: string[];
 }
 
-const InputTag: React.FC<Props> = ({ onChange }) => {
+const InputTag: React.FC<Props> = ({ onChange, tagList }) => {
   const [tag, setTag] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(tagList || "");
 
   useEffect(() => {
     onChange(tags);
