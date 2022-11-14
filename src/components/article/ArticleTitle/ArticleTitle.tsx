@@ -37,12 +37,21 @@ const ArticleTitle: React.FC<Props> = (article) => {
   return (
     <Container>
       <Title>{title}</Title>
-      <div>
+      {session?.user.email === email && (
+        <EndContainer>
         <Link href={{ pathname: "/write", query: { id: _id } }}>
           <span>수정</span>
         </Link>
-        <span onClick={handleRemoveArticle}>삭제</span>
-      </div>
+          <Button
+            variant="primary"
+            size="mini"
+            rounded="default"
+            onClick={handleRemoveArticle}
+          >
+            삭제
+          </Button>
+        </EndContainer>
+      )}
       {syncTime}
       <ImageContainer>
         <Image
@@ -68,6 +77,7 @@ const Container = styled.div`
   gap: 0.6rem;
 `;
 
+const EndContainer = styled.div`
 const Title = styled.h1`
   font-size: 2.4rem;
 `;

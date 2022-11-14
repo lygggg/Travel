@@ -38,6 +38,7 @@ router
         return Tag.create({
           tagName: tag,
           userId: email,
+          articleId: article._id,
         });
       }),
     );
@@ -50,6 +51,7 @@ router
       secret: secret,
     });
     const article = await Article.deleteOne({ email: email, _id: id });
+    await Tag.deleteMany({ email: email, articleId: id });
     res.json(article);
   });
 
