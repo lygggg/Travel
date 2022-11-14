@@ -5,12 +5,12 @@ import { ArticleTag } from "src/models/article";
 
 interface Props {
   onChange: (tags: string[]) => void;
-  tagList: string[];
+  tagList?: string[];
 }
 
 const InputTag: React.FC<Props> = ({ onChange, tagList }) => {
   const [tag, setTag] = useState("");
-  const [tags, setTags] = useState<string[]>(tagList || "");
+  const [tags, setTags] = useState<string[]>(tagList || []);
 
   useEffect(() => {
     onChange(tags);
