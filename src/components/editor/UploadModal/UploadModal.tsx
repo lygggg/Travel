@@ -5,7 +5,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { usePostArticle } from "src/hooks/api/useArticle";
 import { Button, Modal, TextArea } from "src/components/commons";
 import { articleState } from "src/store/article";
-import ImageUpload from "../ImageUpload/ImageUpload";
+import { ImageUpload } from "../index";
 import Router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
