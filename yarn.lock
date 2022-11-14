@@ -4210,6 +4210,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jest-plugin-context@npm:^2.9.5":
+  version: 2.9.5
+  resolution: "@types/jest-plugin-context@npm:2.9.5"
+  dependencies:
+    "@types/jest": "*"
+  checksum: af078e46a4215549cfa0adcfdce8aaa437be1ab1108cd74863c69f38a9e98816c8decca5a638085c35d9ef388e7f08ac233796b9b5dfee99046af5c0373b2202
+  languageName: node
+  linkType: hard
+
 "@types/jest@npm:*, @types/jest@npm:^29.1.2":
   version: 29.1.2
   resolution: "@types/jest@npm:29.1.2"
@@ -8005,6 +8014,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-plugin-context@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "jest-plugin-context@npm:2.9.0"
+  peerDependencies:
+    jest: "*"
+  checksum: 508ff501f755a34adbd97abf38812b6a7feffeebd524d0f476b7f90624fac1ae9e4d1fc0f06bac765513e9634666823d9ec63067d7bbe38bd892303d52ed3a2a
+  languageName: node
+  linkType: hard
+
 "jest-pnp-resolver@npm:^1.2.2":
   version: 1.2.2
   resolution: "jest-pnp-resolver@npm:1.2.2"
@@ -9447,6 +9465,7 @@ __metadata:
     "@types/cors": ^2.8.12
     "@types/gtag.js": ^0.0.12
     "@types/jest": ^29.1.2
+    "@types/jest-plugin-context": ^2.9.5
     "@types/node": 18.7.15
     "@types/react": 18.0.18
     "@types/react-dom": 18.0.6
@@ -9467,6 +9486,7 @@ __metadata:
     jest: ^29.1.2
     jest-dom: ^4.0.0
     jest-environment-jsdom: ^29.1.2
+    jest-plugin-context: ^2.9.0
     mongoose: ^6.6.1
     next: ^13.0.0
     next-auth: ^4.12.2
