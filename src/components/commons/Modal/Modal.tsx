@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
-interface Props {
+export interface Props {
   children: ReactNode;
   isActive: boolean;
 }
