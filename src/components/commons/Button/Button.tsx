@@ -4,11 +4,10 @@ import { css } from "@emotion/react";
 
 export interface ButtonStyled
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string | number;
   fontSize?: string;
-  variant: "default" | "primary" | "secondary" | "tertiary";
-  rounded: "default" | "round";
-  size: "mini" | "small" | "medium" | "large";
+  variant?: "default" | "primary" | "secondary" | "tertiary";
+  rounded?: "default" | "round";
+  size?: "mini" | "small" | "medium" | "large";
 }
 
 const Button = ({ children, ...rest }: ButtonStyled) => {
