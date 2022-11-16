@@ -146,7 +146,7 @@ export const GlobalStyle = () => (
       ${resetCSS};
       body {
         font-family: "Noto Sans KR", sans-serif;
-        background-color: ${theme.black[500]};
+        background-color: ${theme.black[600]};
         color: ${theme.white};
       }
       * {
