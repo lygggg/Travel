@@ -16,4 +16,8 @@ const IconButtonStyled = styled.div<IconButtonStyled>`
   background-position: ${(props) => props.position};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  cursor: pointer;
+  &:hover {
+    opacity: 0.3;
+  }
 `;

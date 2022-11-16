@@ -30,14 +30,16 @@ const Modal = (props: Props) => {
 export default Modal;
 
 const Overlay = styled.div`
-  display: block;
+  z-index: 120;
   position: fixed;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
+  display: flex;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 2;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
 `;
