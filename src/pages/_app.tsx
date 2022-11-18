@@ -20,7 +20,7 @@ import * as gtag from "src/libs/gtag";
 import { NextComponentType } from "next";
 
 type CustomAppProps = AppProps & {
-  Component: NextComponentType & { auth?: boolean };
+  Component: NextComponentType & { needAuth?: boolean };
   session: Session;
   dehydratedState: DehydratedState;
 };
@@ -67,7 +67,7 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
               <ThemeProvider theme={theme}>
                 <GlobalStyle />
                 <HeaderBar />
-                {Component?.auth ? (
+                {Component?.needAuth ? (
                   <Auth>
                     <Component {...pageProps} />
                   </Auth>

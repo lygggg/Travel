@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { EditorContainer } from "src/components/editor";
 
-const Write: NextPage & { auth?: boolean } = () => {
+const Write: NextPage & { needAuth?: boolean } = () => {
   return (
     <>
       <EditorContainer />
@@ -9,5 +9,5 @@ const Write: NextPage & { auth?: boolean } = () => {
   );
 };
 
-Write.auth = true;
+Write.needAuth = true;
 export default Write;
