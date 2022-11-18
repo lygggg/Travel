@@ -1,22 +1,10 @@
-import Tag from "src/pages/api/models/tag";
+import { TagModel } from "src/pages/api/models/tag";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter } from "next-connect";
-import connectMongo from "src/pages/api/utils/connectMongo";
+import nc from "next-connect";
+import { withSentry } from "@sentry/nextjs";
+import { connectMongo } from "src/pages/api/utils/connectMongo";
 
-const router = createRouter<NextApiRequest, NextApiResponse>();
-
-router
-  .use(async (req, _, next) => {
-    await connectMongo();
-    await next();
-  })
-  .get(async (req, res) => {
-    const userId = req.query.userId;
-    const tags = await Tag.find({ userId: userId }).distinct("tagName");
-    res.json(tags);
-  });
-
-export default router.handler({
+const handler = nc<NextApiRequest, NextApiResponse>({
   onError: (err, req, res) => {
     res.status(500).end("Something broke!");
   },
@@ -24,3 +12,16 @@ export default router.handler({
     res.status(404).end("Page is not found");
   },
 });
+
+handler
+  .use(async (req, _, next) => {
+    await connectMongo();
+    await next();
+  })
+  .get(async (req, res) => {
+    const userId = req.query.userId;
+    const tags = await TagModel.find({ userId: userId }).distinct("tagName");
+    res.json(tags);
+  });
+
+export default withSentry(handler);
