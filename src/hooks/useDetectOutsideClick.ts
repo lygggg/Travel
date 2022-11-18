@@ -10,7 +10,7 @@ export const useDetectOutsideClick = (
 
   useEffect(() => {
     const onClick = (e: TouchEvent) => {
-      if (el.current !== null && !el.current.contains(e.target as Node)) {
+      if (!el.current?.contains(e.target as Node)) {
         setIsActive((isActive) => !isActive);
       }
     };
