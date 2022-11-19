@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import { TagList } from "src/components/commons";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { Button, TagList } from "src/components/commons";
+import { useDeleteArticle } from "src/hooks/api/useArticle";
 
 interface Props {
   title: string;
@@ -8,13 +12,51 @@ interface Props {
   img: string;
   base64: string;
   syncTime: string;
+  _id: string;
+  name: string;
+  email: string;
 }
 const ArticleTitle: React.FC<Props> = (article) => {
-  const { title, tags, img, base64, syncTime } = article;
+  const {
+    query: { userId, id },
+    push,
+  } = useRouter();
+  const { data: session } = useSession();
+  const { title, tags, img, base64, syncTime, _id, email } = article;
+
+  const deleteArticleMutation = useDeleteArticle();
+
+  const handleRemoveArticle = () => {
+    try {
+      deleteArticleMutation.mutateAsync(id);
+      push(`/${userId}`);
+    } catch (err) {
+      alert("delete failed.");
+    }
+  };
+
   return (
     <Container>
       <Title>{title}</Title>
+      {session?.user.email === email && (
+        <EndContainer>
+          <Link href={{ pathname: "/write", query: { id: _id } }}>
+            <Button variant="primary" size="mini" rounded="default">
+              수정
+            </Button>
+          </Link>
+          <Button
+            variant="primary"
+            size="mini"
+            rounded="default"
+            onClick={handleRemoveArticle}
+          >
+            삭제
+          </Button>
+        </EndContainer>
+      )}
       {syncTime}
+      <TagList tags={tags} size="small" />
       <ImageContainer>
         <Image
           src={img}
@@ -24,7 +66,6 @@ const ArticleTitle: React.FC<Props> = (article) => {
           alt={title}
         />
       </ImageContainer>
-      <TagList tags={tags} size="small" />
     </Container>
   );
 };
@@ -39,8 +80,15 @@ const Container = styled.div`
   gap: 0.6rem;
 `;
 
+const EndContainer = styled.div`
+  display: flex;
+  gap: 0.3rem;
+  align-self: end;
+`;
+
 const Title = styled.h1`
   font-size: 2.4rem;
+  font-weight: 800;
 `;
 const ImageContainer = styled.div`
   width: 100%;

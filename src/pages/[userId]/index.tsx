@@ -6,8 +6,8 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ArticleList, Category } from "src/components/article";
 import { findArticles } from "src/api/article";
 import { findTag } from "src/api/tag";
-import { useArticles } from "src/hooks/query/useArticle";
-import { useTag } from "src/hooks/query/useTag";
+import { useArticles } from "src/hooks/api/useArticle";
+import { useTag } from "src/hooks/api/useTag";
 import { PaginationButton } from "src/components/commons/PaginationButton";
 import { Button } from "src/components/commons";
 

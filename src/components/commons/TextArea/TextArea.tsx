@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 
 export interface TextAreaStyled
@@ -16,6 +16,11 @@ const TextArea = (props: TextAreaStyled) => {
     setTextLength(text?.length);
     props.onChange?.(text);
   };
+
+  useEffect(() => {
+    const text = ref.current?.value;
+    setTextLength(text?.length);
+  }, []);
 
   return (
     <>

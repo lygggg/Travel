@@ -1,24 +1,28 @@
-import { useState, useEffect, MouseEvent } from "react";
+import { useState, useEffect } from "react";
 
 export const useDetectOutsideClick = (
   el: { current: HTMLElement | null },
   initialState: boolean,
 ) => {
-  const [isOpen, setIsOpen] = useState(initialState);
+  const [isActive, setIsActive] = useState(initialState);
+
+  const handleOpen = () => setIsActive((isActive) => !isActive);
 
   useEffect(() => {
-    const onClick = (e: TouchEvent): void => {
-      if (isOpen && el.current && !el.current.contains(e.target as Node)) {
-        setIsOpen(false);
+    const onClick = (e: TouchEvent) => {
+      if (!el.current?.contains(e.target as Node)) {
+        setIsActive((isActive) => !isActive);
       }
     };
-    if (isOpen) {
-      document.addEventListener("mousedown", onClick as EventListener);
-    }
-    return () => {
-      document.removeEventListener("mousedown", onClick as EventListener);
-    };
-  }, [isOpen, el]);
 
-  return [isOpen, setIsOpen] as const;
+    if (isActive) {
+      window.addEventListener("click", onClick as EventListener);
+    }
+
+    return () => {
+      window.removeEventListener("click", onClick as EventListener);
+    };
+  }, [isActive, el]);
+
+  return [isActive, handleOpen] as const;
 };

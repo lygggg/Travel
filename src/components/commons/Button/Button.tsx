@@ -9,7 +9,6 @@ export interface ButtonStyled
   variant: "default" | "primary" | "secondary" | "tertiary";
   rounded: "default" | "round";
   size: "mini" | "small" | "medium" | "large";
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({ children, ...rest }: ButtonStyled) => {

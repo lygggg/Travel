@@ -13,19 +13,21 @@ const MenuDropdown = () => {
 
   return (
     <MenuContainer>
-      <IconButton
-        width="30px"
-        height="30px"
-        position="-10px -107px"
-        onClick={() => setIsActive(!isActive)}
-      />
+      <span ref={dropdownRef}>
+        <IconButton
+          width="30px"
+          height="30px"
+          position="-10px -107px"
+          onClick={setIsActive}
+        />
+      </span>
 
-      <Nav ref={dropdownRef} isActive={isActive}>
+      <Nav onClick={setIsActive} isActive={isActive}>
         <Ul>
           {menus.map((item) => (
             <div key={item.title}>
               <Link href={item.url}>
-                <Li onClick={() => setIsActive(!isActive)}>{item.title}</Li>
+                <Li>{item.title}</Li>
               </Link>
             </div>
           ))}
@@ -75,10 +77,4 @@ const Li = styled.li`
   }
 `;
 
-const Icon = styled.svg`
-  background: url("/myblog_sprites.png");
-  background-position: -80px -70px;
-  width: 50px;
-  height: 50px;
-`;
 export default MenuDropdown;

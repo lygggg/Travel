@@ -38,9 +38,20 @@ router
         return Tag.create({
           tagName: tag,
           userId: email,
+          articleId: article._id,
         });
       }),
     );
+    res.json(article);
+  })
+  .delete(async (req, res) => {
+    const { id } = req.query;
+    const { email }: any = await getToken({
+      req: req,
+      secret: secret,
+    });
+    const article = await Article.deleteOne({ email: email, _id: id });
+    await Tag.deleteMany({ email: email, articleId: id });
     res.json(article);
   });
 
