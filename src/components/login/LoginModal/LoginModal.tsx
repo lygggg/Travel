@@ -2,9 +2,11 @@ import styled from "@emotion/styled";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { Modal, Button } from "src/components/commons";
-import github from "/public/github-logo.png";
+import googleIcon from "/public/icons-google.png"; // TODO image sprite로 바꿀예정
+import kakaoIcon from "/public/icons-kakao.png";
+import githubIcon from "/public/icons-github.png";
 
-interface Props {
+export interface Props {
   isActive: boolean;
   handleClose: () => void;
 }
@@ -16,33 +18,44 @@ const LoginModal: React.FC<Props> = ({ isActive, handleClose }) => {
         <ModalContainer>
           <Title>소셜 계정으로 로그인</Title>
           <LoginButton
+            data-testid="google-login-button"
             onClick={() => signIn("google")}
             variant="primary"
             rounded="default"
           >
-            Google 로그인
+            <Image src={googleIcon} alt="google" width={25} height={25} />
+            <LoginText>Google 로그인</LoginText>
           </LoginButton>
           <LoginButton
+            data-testid="github-login-button"
             onClick={() => signIn("github")}
             variant="default"
             rounded="default"
           >
-            Github 로그인
+            <Image src={githubIcon} alt="google" width={25} height={25} />
+            <LoginText>Github 로그인</LoginText>
           </LoginButton>
           <LoginButton
+            data-testid="kakao-login-button"
             onClick={() => signIn("kakao")}
             variant="secondary"
             rounded="default"
           >
-            Kakao 로그인
+            <Image src={kakaoIcon} alt="google" width={25} height={25} />
+            <LoginText>Kakao 로그인</LoginText>
           </LoginButton>
-          <Exit onClick={handleClose}>취소</Exit>
+          <Exit data-testid="login-close" onClick={handleClose}>
+            취소
+          </Exit>
         </ModalContainer>
       </Modal>
     </>
   );
 };
 
+const LoginText = styled.p`
+  width: 100%;
+`;
 const Title = styled.div`
   color: ${(props) => props.theme.white};
   font-size: 1.3rem;
@@ -61,7 +74,11 @@ const Exit = styled.div`
 const LoginButton = styled(Button)`
   height: 3.5rem;
   width: 18rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem;
 `;
 
 const ModalContainer = styled.div`
