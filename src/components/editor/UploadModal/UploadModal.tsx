@@ -6,7 +6,7 @@ import { usePostArticle } from "src/hooks/api/useArticle";
 import { Button, Modal, TextArea } from "src/components/commons";
 import { articleState } from "src/store/article";
 import { ImageUpload } from "../index";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 interface Props {
@@ -40,25 +40,20 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
       return;
     }
     dayjs.locale("ko");
-    postArticleMutation.mutate(
-      {
+    try {
+      postArticleMutation.mutateAsync({
         content,
         tags,
         title,
         thumbnailUrl,
         introduction,
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
-      },
-      {
-        onSuccess: () => {
-          router.push({ pathname: `/${session?.user.email}` });
-          resetArticle();
-        },
-        onError: () => {
-          alert("upload failed.");
-        },
-      },
-    );
+      });
+      router.push({ pathname: `/${session?.user.email}` });
+      resetArticle();
+    } catch (err) {
+      alert("upload failed.");
+    }
   };
 
   return (

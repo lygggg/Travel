@@ -27,14 +27,12 @@ const ArticleTitle: React.FC<Props> = (article) => {
   const deleteArticleMutation = useDeleteArticle();
 
   const handleRemoveArticle = () => {
-    deleteArticleMutation.mutate(id, {
-      onSuccess: () => {
-        push(`/${userId}`);
-      },
-      onError: () => {
-        alert("delete failed.");
-      },
-    });
+    try {
+      deleteArticleMutation.mutateAsync(id);
+      push(`/${userId}`);
+    } catch (err) {
+      alert("delete failed.");
+    }
   };
 
   return (
