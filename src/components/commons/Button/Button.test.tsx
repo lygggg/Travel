@@ -75,18 +75,6 @@ describe("Button", () => {
         expect(button).toHaveStyle(`padding:  ${style.padding}`);
         expect(button).toHaveStyle(`border-radius: ${style.borderRadius}`);
       });
-      // rerender(
-      //   <ThemeProvider theme={theme}>
-      //     <Button
-      //       variant={obj.variant}
-      //       size={obj.size}
-      //       rounded={obj.rounded}
-      //       onClick={onClick}
-      //     >
-      //       버튼
-      //     </Button>
-      //   </ThemeProvider>,
-      // );
     });
   });
 });
