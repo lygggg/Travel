@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, ReactNode } from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
@@ -7,23 +7,21 @@ export interface Props {
   isActive: boolean;
 }
 const Modal = (props: Props) => {
-  const ref = useRef<Element | null>(null);
-  const [mounted, setMounted] = useState(false);
+  if (typeof document == "undefined") return null;
 
-  useEffect(() => {
-    ref.current = document.querySelector<HTMLLIElement>("#portal");
-    setMounted(true);
-  }, []);
+  let modalRoot = document.getElementById("portal");
 
-  if (!mounted || !ref.current) {
-    return null;
+  if (!modalRoot) {
+    modalRoot = document.createElement("div");
+    modalRoot.setAttribute("id", "modal");
+    document.body.appendChild(modalRoot);
   }
 
   if (!props.isActive) return null;
 
   return createPortal(
     <Overlay data-testid="modal">{props.children}</Overlay>,
-    ref.current,
+    modalRoot,
   );
 };
 
