@@ -79,7 +79,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
               <Button
                 variant="primary"
                 size="large"
-                rounded="round"
+                rounded={true}
                 onClick={handleFileUpload}
               >
                 완료
@@ -87,7 +87,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
               <Button
                 variant="primary"
                 size="large"
-                rounded="round"
+                rounded={true}
                 onClick={handleClose}
               >
                 취소

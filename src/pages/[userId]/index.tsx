@@ -41,7 +41,6 @@ const ArticlePage = () => {
           button={
             <Button
               size="medium"
-              rounded="default"
               variant="primary"
               onClick={() => setPageNum((page) => page + 1)}
             >

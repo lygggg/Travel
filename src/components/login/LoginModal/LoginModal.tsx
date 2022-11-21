@@ -21,7 +21,6 @@ const LoginModal: React.FC<Props> = ({ isActive, handleClose }) => {
             data-testid="google-login-button"
             onClick={() => signIn("google")}
             variant="primary"
-            rounded="default"
           >
             <Image src={googleIcon} alt="google" width={25} height={25} />
             <LoginText>Google 로그인</LoginText>
@@ -30,7 +29,6 @@ const LoginModal: React.FC<Props> = ({ isActive, handleClose }) => {
             data-testid="github-login-button"
             onClick={() => signIn("github")}
             variant="default"
-            rounded="default"
           >
             <Image src={githubIcon} alt="google" width={25} height={25} />
             <LoginText>Github 로그인</LoginText>
@@ -39,7 +37,6 @@ const LoginModal: React.FC<Props> = ({ isActive, handleClose }) => {
             data-testid="kakao-login-button"
             onClick={() => signIn("kakao")}
             variant="secondary"
-            rounded="default"
           >
             <Image src={kakaoIcon} alt="google" width={25} height={25} />
             <LoginText>Kakao 로그인</LoginText>
