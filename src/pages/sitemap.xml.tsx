@@ -17,10 +17,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     },
   ];
 
-  // TODO 카테고리 sitemap 추가해야함
-
   const articleFields = articles.map((article) => ({
-    loc: `${process.env.NEXT_PUBLIC_URL}/articles/${article._id}`,
+    loc: `${process.env.NEXT_PUBLIC_URL}/${article.email}/${article._id}`,
     priority: 1.0,
     lastmod,
   }));
