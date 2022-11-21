@@ -97,9 +97,9 @@ describe("Input", () => {
       it(`variant, rounded, fontSize를 테스트한다.`, () => {
         const { getByPlaceholderText } = renderInput({
           placeholder: placeholder,
-          variant: style.variant,
-          rounded: style.rounded,
-          fontSize: style.fontSize,
+          variant: style.variant as InputStyled["variant"],
+          rounded: style.rounded as InputStyled["rounded"],
+          fontSize: style.fontSize as InputStyled["fontSize"],
         });
         const input = getByPlaceholderText(placeholder);
 

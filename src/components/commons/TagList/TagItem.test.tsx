@@ -60,7 +60,7 @@ describe("TagItem", () => {
     styleMock.forEach((style) => {
       it(`size가 ${style.size}이면 font-size가 ${style.fontScale}이다.`, () => {
         const { getByTestId } = renderTagItem({
-          size: style.size,
+          size: style.size as Props["size"],
           children: tagName,
         });
         const tag = getByTestId("tag-item");
