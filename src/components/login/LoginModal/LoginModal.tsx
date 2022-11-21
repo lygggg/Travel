@@ -69,8 +69,8 @@ const Exit = styled.div`
 `;
 
 const LoginButton = styled(Button)`
-  height: 3.5rem;
-  width: 18rem;
+  height: 55px;
+  width: 340px;
   font-size: 1.1rem;
   display: flex;
   align-items: center;

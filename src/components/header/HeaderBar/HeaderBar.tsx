@@ -56,7 +56,7 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 4rem;
+  height: 65px;
   z-index: 100;
   position: sticky;
   backdrop-filter: blur(30px);

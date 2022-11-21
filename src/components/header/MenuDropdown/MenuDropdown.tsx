@@ -52,7 +52,7 @@ const Nav = styled.nav<{ isActive: boolean }>`
   position: absolute;
   top: 60px;
   right: 0;
-  width: 10rem;
+  width: 160px;
   text-align: center;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
