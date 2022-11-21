@@ -69,6 +69,8 @@ const HeaderLayout = styled.div`
   padding: 20px;
   height: 100%;
   width: 100%;
+  margin: 0 auto;
+  width: 1200px;
 `;
 const HeaderRightContainer = styled.div`
   display: flex;
