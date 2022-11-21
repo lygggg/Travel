@@ -47,3 +47,10 @@ next-env.d.ts
 
 # Sentry
 .sentryclirc
+
+# Sitemap
+sitemap.xml
+sitemap-0.xml
+
+# Robots
+robots.txt
