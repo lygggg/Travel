@@ -1,5 +1,5 @@
 import { Global, css, Theme } from "@emotion/react";
-import { Ubuntu } from "@next/font/google";
+import { Roboto } from "@next/font/google";
 import PALETTE from "./palette";
 
 export const theme: Theme = {
@@ -141,7 +141,7 @@ const resetCSS = css`
   }
 `;
 
-const inter = Ubuntu({ weight:'400', subsets: ['latin'] })
+const inter = Roboto({ weight:'400', subsets: ['latin'] })
 
 export const GlobalStyle = () => (
   <Global
