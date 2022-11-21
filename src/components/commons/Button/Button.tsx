@@ -35,7 +35,7 @@ const ButtonStyled = styled.button<ButtonStyled>`
     switch (props.variant) {
       case "primary":
         return css`
-          background-color: ${props.theme.gray[500]};
+          background-color: ${props.theme.green[700]};
           color: ${props.theme.white};
         `;
       case "secondary":
@@ -72,7 +72,7 @@ const ButtonStyled = styled.button<ButtonStyled>`
       case "large":
         return css`
           padding: 0.75rem 1rem;
-          font-size: 1.25rem;
+          font-size: 1.1rem;
           font-weight: 700;
         `;
     }
