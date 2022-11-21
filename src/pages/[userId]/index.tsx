@@ -57,19 +57,20 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
   res,
 }: GetServerSidePropsContext) => {
-  let pageNum = 0;
   const { userId, tag = "all", page } = query;
-  if (page) {
-    pageNum = parseInt(page as string);
-  }
-  res.setHeader("Cache-Control", "public, max-age=0, s-maxage=31536000");
+  let pageNum = 0;
+
+  if (page) pageNum = parseInt(page as string);
+
   const queryClient = new QueryClient();
+
   await Promise.all([
     queryClient.prefetchQuery(["articles", userId], () =>
       findArticles({ userId, tag, pageNum }),
     ),
     queryClient.prefetchQuery(["tag", userId], () => findTag(userId as string)),
   ]);
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
