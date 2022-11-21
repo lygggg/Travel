@@ -19,6 +19,7 @@
     "@emotion/jest": "^11.10.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@next/font": "^13.0.4",
     "@plaiceholder/next": "^2.5.0",
     "@sentry/cli": "^2.8.1",
     "@sentry/nextjs": "^7.18.0",
