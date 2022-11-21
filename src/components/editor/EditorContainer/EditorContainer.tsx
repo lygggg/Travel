@@ -43,18 +43,18 @@ const EditorContainer = () => {
       />
       <ButtonContainer>
         <Link href={"/"}>
-          <Button variant="primary" size="large" rounded="round">
+          <Button variant="primary" size="large" rounded={true}>
             나가기
           </Button>
         </Link>
         <ButtonLayout>
-          <Button variant="primary" size="large" rounded="round">
+          <Button variant="primary" size="large" rounded={true}>
             임시 저장
           </Button>
           <Button
             variant="default"
             size="large"
-            rounded="round"
+            rounded={true}
             onClick={handleModalOpen}
           >
             작성하기

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "src/styles/globalStyle";
 import Button, { ButtonStyled } from "./Button";
@@ -24,7 +24,7 @@ describe("Button", () => {
     const { getByText } = renderButton({
       children: "버튼",
       variant: "default",
-      rounded: "default",
+      rounded: true,
       size: "large",
     });
     const button = getByText("버튼");
@@ -37,7 +37,7 @@ describe("Button", () => {
       {
         variant: "primary",
         size: "mini",
-        rounded: "round",
+        rounded: true,
         backgroundColor: `${theme.gray[500]}`,
         padding: "0 0.5rem",
         borderRadius: "2rem",
@@ -45,6 +45,7 @@ describe("Button", () => {
       {
         variant: "secondary",
         size: "small",
+        rounded: false,
         backgroundColor: `${theme.black[500]}`,
         padding: "0.25rem 0.5rem",
         borderRadius: "0.3rem",
@@ -52,6 +53,7 @@ describe("Button", () => {
       {
         variant: "tertiary",
         size: "medium",
+        rounded: false,
         backgroundColor: `${theme.purple[500]}`,
         padding: "0.625rem 0.875rem",
         borderRadius: "0.3rem",
@@ -61,11 +63,11 @@ describe("Button", () => {
     // TODO 빨간줄??
     styleMock.forEach((style) => {
       it(`variant, size, rounded를 테스트한다.`, () => {
-        const { getByText, rerender } = renderButton({
+        const { getByText } = renderButton({
           children: "버튼",
-          variant: style.variant,
+          variant: style.variant as ButtonStyled["variant"],
           rounded: style.rounded,
-          size: style.size,
+          size: style.size as ButtonStyled["size"],
         });
 
         const button = getByText("버튼");
@@ -75,18 +77,6 @@ describe("Button", () => {
         expect(button).toHaveStyle(`padding:  ${style.padding}`);
         expect(button).toHaveStyle(`border-radius: ${style.borderRadius}`);
       });
-      // rerender(
-      //   <ThemeProvider theme={theme}>
-      //     <Button
-      //       variant={obj.variant}
-      //       size={obj.size}
-      //       rounded={obj.rounded}
-      //       onClick={onClick}
-      //     >
-      //       버튼
-      //     </Button>
-      //   </ThemeProvider>,
-      // );
     });
   });
 });

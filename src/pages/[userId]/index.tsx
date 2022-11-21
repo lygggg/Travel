@@ -14,7 +14,7 @@ import { Button } from "src/components/commons";
 const ArticlePage = () => {
   const [pageNum, setPageNum] = useState(1);
   const {
-    query: { userId, tag },
+    query: { userId, tag = "all" },
   } = useRouter();
   const {
     data: { articles, total },
@@ -36,12 +36,11 @@ const ArticlePage = () => {
       <PaginationContainer>
         <PaginationButton
           total={total}
-          dataLength={articles.length}
+          dataLength={articles.length || 0}
           event={handleNextPage}
           button={
             <Button
               size="medium"
-              rounded="default"
               variant="primary"
               onClick={() => setPageNum((page) => page + 1)}
             >
@@ -59,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
 }: GetServerSidePropsContext) => {
   let pageNum = 0;
-  const { userId, tag, page } = query;
+  const { userId, tag = "all", page } = query;
   if (page) {
     pageNum = parseInt(page as string);
   }

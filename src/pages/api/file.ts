@@ -1,22 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter } from "next-connect";
+import nc from "next-connect";
 import { deleteImage } from "./utils/s3Client.js";
+import { withSentry } from "@sentry/nextjs";
 
-const router = createRouter<NextApiRequest, NextApiResponse>();
-router.use(async (req, _, next) => {
-  await next();
-});
-router.post(async (req, res) => {
-  const imageKey = req.body;
-  try {
-    await deleteImage(imageKey);
-  } catch {
-    res.status(400).end();
-  }
-  res.status(200).end();
-});
-
-export default router.handler({
+const handler = nc<NextApiRequest, NextApiResponse>({
   onError: (err, req, res) => {
     res.status(500).end("Something broke!");
   },
@@ -24,3 +11,18 @@ export default router.handler({
     res.status(404).end("Page is not found");
   },
 });
+handler
+  .use(async (req, _, next) => {
+    await next();
+  })
+  .post(async (req, res) => {
+    const imageKey = req.body;
+    try {
+      await deleteImage(imageKey);
+    } catch {
+      res.status(400).end();
+    }
+    res.status(200).end();
+  });
+
+export default withSentry(handler);

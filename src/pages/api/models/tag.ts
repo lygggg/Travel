@@ -5,6 +5,4 @@ const tagSchema = new Schema({
   userId: { type: String, require: true },
   articleId: { type: String, require: true },
 });
-const TagModel = models.Tag || model("Tag", tagSchema);
-
-export default TagModel;
+export const TagModel = models.Tag || model("Tag", tagSchema);

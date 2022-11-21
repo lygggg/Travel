@@ -40,7 +40,7 @@ const ImageUpload: React.FC = () => {
           <Button
             variant="primary"
             size="large"
-            rounded="round"
+            rounded={true}
             onClick={handleFileRemove}
           >
             사진 제거
@@ -49,7 +49,7 @@ const ImageUpload: React.FC = () => {
           <Button
             variant="primary"
             size="large"
-            rounded="round"
+            rounded={true}
             onClick={openFileDialog}
           >
             사진 업로드

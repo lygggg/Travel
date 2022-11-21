@@ -2,14 +2,18 @@ import { useRef } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { IconButton } from "src/components/commons";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useDetectOutsideClick } from "src/hooks";
 
 const MenuDropdown = () => {
   const dropdownRef = useRef<HTMLElement>(null);
+  const { data: session } = useSession();
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
-  const menus = [{ title: "글 작성", url: "/write" }];
+  const menus = [
+    { title: "새 글 작성", url: "/write" },
+    { title: "내 블로그 가기", url: `/${session?.user.email}` },
+  ];
 
   return (
     <MenuContainer>
@@ -43,12 +47,12 @@ const MenuContainer = styled.div`
 `;
 
 const Nav = styled.nav<{ isActive: boolean }>`
-  background: #4e5968;
+  background: ${(props) => props.theme.black[400]};
   border-radius: 8px;
   position: absolute;
   top: 60px;
   right: 0;
-  width: 150px;
+  width: 160px;
   text-align: center;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
@@ -72,8 +76,10 @@ const Li = styled.li`
   text-decoration: none;
   padding: 15px 20px;
   display: block;
+  font-weight: 700;
   &:hover {
     background: rgba(0, 0, 0, 0.05);
+    color: ${(props) => props.theme.green[100]};
   }
 `;
 

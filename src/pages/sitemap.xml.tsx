@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from "next";
 import { getServerSideSitemap } from "next-sitemap";
-import ArticleModel from "src/pages/api/models/article";
-import connectMongo from "src/pages/api/utils/connectMongo";
+import { ArticleModel } from "src/pages/api/models/article";
+import { connectMongo } from "src/pages/api/utils/connectMongo";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   await connectMongo();

@@ -10,6 +10,4 @@ const articleSchema = new Schema({
   introduction: { type: String, required: true },
   syncTime: { type: String, require: true },
 });
-const ArticleModel = models.Article || model("Article", articleSchema);
-
-export default ArticleModel;
+export const ArticleModel = models.Article || model("Article", articleSchema);

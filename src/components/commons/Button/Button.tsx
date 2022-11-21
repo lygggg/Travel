@@ -4,21 +4,28 @@ import { css } from "@emotion/react";
 
 export interface ButtonStyled
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string | number;
-  fontSize?: string;
-  variant: "default" | "primary" | "secondary" | "tertiary";
-  rounded: "default" | "round";
-  size: "mini" | "small" | "medium" | "large";
+  variant?: "default" | "primary" | "secondary" | "tertiary";
+  rounded?: boolean;
+  size?: "mini" | "small" | "medium" | "large";
 }
 
-const Button = ({ children, ...rest }: ButtonStyled) => {
-  return <ButtonStyled {...rest}>{children}</ButtonStyled>;
+const Button = ({
+  children,
+  variant,
+  rounded,
+  size,
+  ...rest
+}: ButtonStyled) => {
+  return (
+    <ButtonStyled variant={variant} rounded={rounded} size={size} {...rest}>
+      {children}
+    </ButtonStyled>
+  );
 };
 export default Button;
 
 const ButtonStyled = styled.button<ButtonStyled>`
   border: none;
-  font-size: ${(rest) => rest.fontSize || "15px"};
   font-weight: bold;
   &:hover {
     opacity: 0.5;
@@ -72,11 +79,11 @@ const ButtonStyled = styled.button<ButtonStyled>`
   }}
     ${(props) => {
     switch (props.rounded) {
-      case "round":
+      case true:
         return css`
           border-radius: 2rem;
         `;
-      default:
+      case false:
         return css`
           border-radius: 0.3rem;
         `;

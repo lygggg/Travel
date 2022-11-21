@@ -9490,7 +9490,7 @@ __metadata:
     mongoose: ^6.6.1
     next: ^13.0.0
     next-auth: ^4.12.2
-    next-connect: ^1.0.0-next.3
+    next-connect: ^0.13.0
     next-mdx-remote: ^4.1.0
     next-s3-upload: ^0.2.3
     next-sitemap: ^3.1.29
@@ -9574,12 +9574,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-connect@npm:^1.0.0-next.3":
-  version: 1.0.0-next.3
-  resolution: "next-connect@npm:1.0.0-next.3"
+"next-connect@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "next-connect@npm:0.13.0"
   dependencies:
-    regexparam: ^2.0.1
-  checksum: c8428955b072aad28e65eed847c3806a6c9a2ed7f5161556bc4b856ba8199debd5680af0858e1e9a061c03f37e1c109dcb2c2256b1144aec59a5cd540d275bdb
+    trouter: ^3.2.0
+  checksum: 1c63c17eafc94e6c18f2c08d201a81e69f3b24ddc3ba83449204832b4ec2b7b79df9a6cea53d44e7982b1f9e7214053d880b9fea302b8027de6cd49e2877c9b5
   languageName: node
   linkType: hard
 
@@ -10819,10 +10819,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regexparam@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "regexparam@npm:2.0.1"
-  checksum: 797998e96c995c200ebd4a7d5e734381b96d3979b4b6672ec65ed5ca9210b8a5149ad73109ec32115779674b526088704c2564e9fa07f8b747743beadc424803
+"regexparam@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "regexparam@npm:1.3.0"
+  checksum: ea6449d9984392cdf401d3d9b722a56357224fba7e9fdf2887f1901e0d3a838052d3b92b30f2276047bf5d5b6a1a90b7dff6aa1c89599b246a86285e7e3e3fd4
   languageName: node
   linkType: hard
 
@@ -11807,6 +11807,15 @@ __metadata:
   version: 2.1.0
   resolution: "trough@npm:2.1.0"
   checksum: a577bb561c2b401cc0e1d9e188fcfcdf63b09b151ff56a668da12197fe97cac15e3d77d5b51f426ccfd94255744a9118e9e9935afe81a3644fa1be9783c82886
+  languageName: node
+  linkType: hard
+
+"trouter@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "trouter@npm:3.2.0"
+  dependencies:
+    regexparam: ^1.3.0
+  checksum: 50beb18d4cf0239fe5ee81368d59f08b25298869d169d39c35b1c1d142e922025e14a648989382da70d4064d2ac7900b4348401caa0a235c3cccabaaa85351ef
   languageName: node
   linkType: hard
 

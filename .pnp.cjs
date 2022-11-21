@@ -78,7 +78,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mongoose", "npm:6.6.5"],\
             ["next", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:13.0.0"],\
             ["next-auth", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.12.3"],\
-            ["next-connect", "npm:1.0.0-next.3"],\
+            ["next-connect", "npm:0.13.0"],\
             ["next-mdx-remote", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.1.0"],\
             ["next-s3-upload", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:0.2.3"],\
             ["next-sitemap", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.1.29"],\
@@ -12791,7 +12791,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mongoose", "npm:6.6.5"],\
             ["next", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:13.0.0"],\
             ["next-auth", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.12.3"],\
-            ["next-connect", "npm:1.0.0-next.3"],\
+            ["next-connect", "npm:0.13.0"],\
             ["next-mdx-remote", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.1.0"],\
             ["next-s3-upload", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:0.2.3"],\
             ["next-sitemap", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:3.1.29"],\
@@ -12959,11 +12959,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["next-connect", [\
-        ["npm:1.0.0-next.3", {\
-          "packageLocation": "./.yarn/cache/next-connect-npm-1.0.0-next.3-8a37b60da1-c8428955b0.zip/node_modules/next-connect/",\
+        ["npm:0.13.0", {\
+          "packageLocation": "./.yarn/cache/next-connect-npm-0.13.0-c253551606-1c63c17eaf.zip/node_modules/next-connect/",\
           "packageDependencies": [\
-            ["next-connect", "npm:1.0.0-next.3"],\
-            ["regexparam", "npm:2.0.1"]\
+            ["next-connect", "npm:0.13.0"],\
+            ["trouter", "npm:3.2.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -14440,10 +14440,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["regexparam", [\
-        ["npm:2.0.1", {\
-          "packageLocation": "./.yarn/cache/regexparam-npm-2.0.1-703aa285b3-797998e96c.zip/node_modules/regexparam/",\
+        ["npm:1.3.0", {\
+          "packageLocation": "./.yarn/cache/regexparam-npm-1.3.0-47c2b50eae-ea6449d998.zip/node_modules/regexparam/",\
           "packageDependencies": [\
-            ["regexparam", "npm:2.0.1"]\
+            ["regexparam", "npm:1.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15518,6 +15518,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/trough-npm-2.1.0-20e92f46fc-a577bb561c.zip/node_modules/trough/",\
           "packageDependencies": [\
             ["trough", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["trouter", [\
+        ["npm:3.2.0", {\
+          "packageLocation": "./.yarn/cache/trouter-npm-3.2.0-518e678a20-50beb18d4c.zip/node_modules/trouter/",\
+          "packageDependencies": [\
+            ["trouter", "npm:3.2.0"],\
+            ["regexparam", "npm:1.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\
