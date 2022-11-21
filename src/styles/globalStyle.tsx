@@ -1,5 +1,5 @@
 import { Global, css, Theme } from "@emotion/react";
-import { Ubuntu } from "@next/font/google";
+import { Roboto } from "@next/font/google";
 import PALETTE from "./palette";
 
 export const theme: Theme = {
