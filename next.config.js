@@ -20,6 +20,11 @@ const nextConfig = {
     // autoInstrumentServerFunctions: false, 오류및 성능 모니터링, api 자동계측 설정
     hideSourceMaps: true,
   },
+  experimental: {
+    fontLoaders: [
+      { loader: "@next/font/google", options: { subsets: ["latin"] } },
+    ],
+  },
 };
 
 // safely ignore recoil stdout warning messages

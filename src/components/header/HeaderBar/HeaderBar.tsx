@@ -22,7 +22,7 @@ const HeaderBar = () => {
         <HeaderLayout>
           <HeaderLeftContainer>
             <StyledLink className={antonFont.className} href={"/"}>
-              Mlog
+              MLOG
             </StyledLink>
             {session && (
               <StyledLink href={`/${session.user.email}`}>
