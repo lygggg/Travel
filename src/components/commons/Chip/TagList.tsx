@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import TagItem from "./TagItem";
+import Chip from "./Chip";
 import { ArticleTag } from "src/models/article";
 
 interface Props {
@@ -13,14 +13,14 @@ const TagList: React.FC<Props> = ({ tags, size, onClick, onRemove }) => {
   return (
     <TagContainer>
       {tags.map((tag: any) => (
-        <TagItem
+        <Chip
           size={size}
           key={tag._id ?? tag}
           onClick={onClick}
           onRemove={onRemove}
         >
           {tag.tagName ?? tag}
-        </TagItem>
+        </Chip>
       ))}
     </TagContainer>
   );
