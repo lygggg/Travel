@@ -95,6 +95,7 @@ const Container = styled.div<StyleProps>`
   height: calc(100vh - 90px);
   box-sizing: border-box;
   position: relative;
+  width: 1200px;
 `;
 
 export default MyApp;

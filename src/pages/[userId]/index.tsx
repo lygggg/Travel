@@ -30,7 +30,7 @@ const ArticlePage = () => {
     setPageNum(2);
   }, []);
   return (
-    <>
+    <Container>
       <ArticleTagList tags={tags} />
       <ArticleList articles={articles} />
       <PaginationContainer>
@@ -49,7 +49,7 @@ const ArticlePage = () => {
           }
         />
       </PaginationContainer>
-    </>
+    </Container>
   );
 };
 
@@ -84,4 +84,8 @@ const PaginationContainer = styled.div`
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 3rem;
+`;
+
+const Container = styled.div`
+  padding-bottom: 2rem;
 `;

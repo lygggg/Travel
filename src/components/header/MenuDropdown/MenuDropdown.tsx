@@ -48,7 +48,7 @@ const MenuContainer = styled.div`
 
 const Nav = styled.nav<{ isActive: boolean }>`
   background: ${(props) => props.theme.black[400]};
-  border-radius: 8px;
+  border-radius: 2px;
   position: absolute;
   top: 60px;
   right: 0;
@@ -77,9 +77,11 @@ const Li = styled.li`
   padding: 15px 20px;
   display: block;
   font-weight: 700;
+  color: ${(props) => props.theme.gray[200]};
+
   &:hover {
     background: rgba(0, 0, 0, 0.05);
-    color: ${(props) => props.theme.green[100]};
+    color: ${(props) => props.theme.green[700]};
   }
 `;
 
