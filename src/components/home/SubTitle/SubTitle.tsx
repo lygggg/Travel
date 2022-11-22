@@ -6,7 +6,7 @@ interface Props {
   speed: number;
 }
 
-const TextBox: React.FC<Props> = ({ content, speed }) => {
+const SubTitle: React.FC<Props> = ({ content, speed }) => {
   const text = useTyping({ content, speed });
   return (
     <Container>
@@ -37,4 +37,4 @@ const Cursor = styled.h1`
   }
 `;
 
-export default TextBox;
+export default SubTitle;

@@ -2,10 +2,13 @@ import styled from "@emotion/styled";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Anton } from "@next/font/google";
 import { Button } from "src/components/commons";
-import { TextBox } from "src/components/home";
+import { SubTitle } from "src/components/home";
 
 const WELCOME = "블로그에서 나만의 스토리를 공유해 보세요.";
+
+const antonFont = Anton({ weight: "400", subsets: ["latin"] });
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -23,8 +26,8 @@ const Home: NextPage = () => {
 
   return (
     <Container>
-      <Title>MLOG</Title>
-      <TextBox content={WELCOME} speed={100}></TextBox>
+      <MainTitle className={antonFont.className}>MLOG</MainTitle>
+      <SubTitle content={WELCOME} speed={100}></SubTitle>
       <ButtonContainer>
         <Button onClick={handleClickWrite} variant="primary" size="large">
           글 작성하러 가기
@@ -47,8 +50,9 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Title = styled.h1`
+const MainTitle = styled.h1`
   font-size: 5rem;
+  color: ${(props) => props.theme.green[700]};
   @keyframes fadein {
     0% {
       opacity: 0;
