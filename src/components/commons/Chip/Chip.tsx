@@ -5,16 +5,16 @@ import closeImg from "/public/close.png"; // TODO image sprite로 바꿀예정
 
 export interface Props {
   children: string;
-  size: "mini" | "small" | "medium" | "large";
-  onClick?: (tag: string) => void;
-  onRemove?: (tag: string) => void;
+  size?: "mini" | "small" | "medium" | "large";
+  onClick?: (chip: string) => void;
+  onRemove?: (chip: string) => void;
 }
 
-const TagItem: React.FC<Props> = ({
+const Chip: React.FC<Props> = ({
   children,
   onClick,
   onRemove,
-  ...props
+  size = "mini",
 }) => {
   const handleRemove = () => {
     onRemove?.(children);
@@ -25,7 +25,7 @@ const TagItem: React.FC<Props> = ({
   };
   return (
     <>
-      <TagStyle data-testid="tag-item" {...props}>
+      <ChipStyle data-testid="chip-item" size={size}>
         <TextContainer clickable={onClick} onClick={handleClick}>
           {children}
         </TextContainer>
@@ -33,24 +33,25 @@ const TagItem: React.FC<Props> = ({
           <ImageContainer>
             <Image
               src={closeImg}
-              alt="removeTag"
+              alt="removeChip
+              "
               width={20}
               height={20}
               onClick={handleRemove}
             />
           </ImageContainer>
         )}
-      </TagStyle>
+      </ChipStyle>
     </>
   );
 };
 
-const TagStyle = styled.li<{ size: string }>`
+const ChipStyle = styled.li<{ size: string }>`
   display: flex;
   color: ${(props) => props.theme.white};
   font-weight: 500;
   padding: 0.25rem;
-  background-color: ${(props) => props.theme.gray[400]};
+  background-color: ${(props) => props.theme.green[700]};
   border-radius: 2rem;
   ${(props) => {
     switch (props.size) {
@@ -60,21 +61,24 @@ const TagStyle = styled.li<{ size: string }>`
         `;
       case "small":
         return css`
-          font-size: 1.3rem;
+          padding: 0.4rem;
+          font-size: 1.2rem;
         `;
       case "medium":
         return css`
+          padding: 0.5rem;
           font-size: 1.7rem;
         `;
       case "large":
         return css`
           font-size: 2rem;
+          padding: 0.7rem;
         `;
     }
   }}
 `;
 
-const TextContainer = styled.span<{ clickable?: (tag: string) => void }>`
+const TextContainer = styled.span<{ clickable?: (chip: string) => void }>`
   ${(props) =>
     props.clickable &&
     `&:hover {
@@ -83,10 +87,12 @@ const TextContainer = styled.span<{ clickable?: (tag: string) => void }>`
   }`}
 `;
 const ImageContainer = styled.span`
+  display: flex;
+  align-items: center;
   &:hover {
     opacity: 0.5;
     cursor: pointer;
   }
 `;
 
-export default TagItem;
+export default Chip;
