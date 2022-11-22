@@ -1,5 +1,4 @@
 import { Global, css, Theme } from "@emotion/react";
-import { Roboto } from "@next/font/google";
 import PALETTE from "./palette";
 
 export const theme: Theme = {
@@ -141,14 +140,12 @@ const resetCSS = css`
   }
 `;
 
-const inter = Roboto({ weight:'400', subsets: ['latin'] })
 
 export const GlobalStyle = () => (
   <Global
     styles={css`
       ${resetCSS};
       body {
-        font-family: ${inter.style.fontFamily};
         background-color: ${theme.black[500]};
         color: ${theme.white};
       }
