@@ -21,11 +21,10 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 100px;
-  width: 768px;
+  width: 100%;
   flex-grow: 10;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2rem;
 `;
 
 export default ArticleList;

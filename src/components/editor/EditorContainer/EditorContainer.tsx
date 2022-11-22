@@ -17,58 +17,62 @@ const EditorContainer = () => {
   return (
     <>
       <UploadModal isActive={modalOpen} handleClose={closeModal} />
-      <InputContainer>
-        <Input
-          type="text"
-          placeholder="제목을 입력해주세요"
-          variant="default"
-          rounded="default"
-          fontSize="large"
-          aria-label="editor-title-input"
-          value={title}
-          onChange={(e) =>
-            setArticle({ ...ArticleState, title: e.target.value })
-          }
-        />
-        <InputTag
-          tagList={tags}
-          onChange={(tags) => setArticle({ ...ArticleState, tags })}
-        />
-      </InputContainer>
-      <EditorBox
-        height="600px"
-        theme="dark"
-        content={content}
-        onChange={(content) => setArticle({ ...ArticleState, content })}
-      />
-      <ButtonContainer>
-        <Link href={"/"}>
-          <Button variant="primary" size="large" rounded={true}>
-            나가기
-          </Button>
-        </Link>
-        <ButtonLayout>
-          <Button variant="primary" size="large" rounded={true}>
-            임시 저장
-          </Button>
-          <Button
+      <Container>
+        <InputContainer>
+          <Input
+            type="text"
+            placeholder="제목을 입력해주세요"
             variant="default"
-            size="large"
-            rounded={true}
-            onClick={handleModalOpen}
-          >
-            작성하기
-          </Button>
-        </ButtonLayout>
-      </ButtonContainer>
+            rounded="default"
+            fontSize="large"
+            aria-label="editor-title-input"
+            value={title}
+            onChange={(e) =>
+              setArticle({ ...ArticleState, title: e.target.value })
+            }
+          />
+          <InputTag
+            tagList={tags}
+            onChange={(tags) => setArticle({ ...ArticleState, tags })}
+          />
+        </InputContainer>
+        <EditorBox
+          height="600px"
+          theme="dark"
+          content={content}
+          onChange={(content) => setArticle({ ...ArticleState, content })}
+        />
+        <ButtonContainer>
+          <Link href={"/"}>
+            <Button variant="primary" size="large" rounded={true}>
+              나가기
+            </Button>
+          </Link>
+          <ButtonLayout>
+            <Button variant="primary" size="large" rounded={true}>
+              임시 저장
+            </Button>
+            <Button
+              variant="default"
+              size="large"
+              rounded={true}
+              onClick={handleModalOpen}
+            >
+              작성하기
+            </Button>
+          </ButtonLayout>
+        </ButtonContainer>
+      </Container>
     </>
   );
 };
 
+const Container = styled.div`
+  padding: 1rem;
+`;
 const InputContainer = styled.div`
   display: flex;
   flex-flow: column;
-  margin-top: 3rem;
   margin-bottom: 2rem;
   gap: 1rem;
 `;
