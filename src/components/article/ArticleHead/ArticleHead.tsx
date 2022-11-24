@@ -6,23 +6,23 @@ import { useSession } from "next-auth/react";
 import { Button, TagList } from "src/components/commons";
 import { useDeleteArticle } from "src/hooks/api/useArticle";
 
-interface Props {
+export interface Props {
   title: string;
   tags: string[];
-  img: string;
+  thumbnailUrl: string;
   base64: string;
   syncTime: string;
   _id: string;
   name: string;
   email: string;
 }
-const ArticleTitle: React.FC<Props> = (article) => {
+const ArticleHead: React.FC<Props> = (article) => {
   const {
     query: { userId, id },
     push,
   } = useRouter();
   const { data: session } = useSession();
-  const { title, tags, img, base64, syncTime, _id, email } = article;
+  const { title, tags, thumbnailUrl, base64, syncTime, _id, email } = article;
 
   const deleteArticleMutation = useDeleteArticle();
 
@@ -41,11 +41,16 @@ const ArticleTitle: React.FC<Props> = (article) => {
       {session?.user.email === email && (
         <EndContainer>
           <Link href={{ pathname: "/write", query: { id: _id } }}>
-            <Button variant="primary" size="mini">
+            <Button data-testid="modify-article" variant="primary" size="mini">
               수정
             </Button>
           </Link>
-          <Button variant="primary" size="mini" onClick={handleRemoveArticle}>
+          <Button
+            data-testid="remove-article"
+            variant="primary"
+            size="mini"
+            onClick={handleRemoveArticle}
+          >
             삭제
           </Button>
         </EndContainer>
@@ -54,7 +59,7 @@ const ArticleTitle: React.FC<Props> = (article) => {
       <TagList tags={tags} size="small" />
       <ImageContainer>
         <Image
-          src={img}
+          src={thumbnailUrl}
           fill
           placeholder="blur"
           blurDataURL={base64}
@@ -65,7 +70,7 @@ const ArticleTitle: React.FC<Props> = (article) => {
   );
 };
 
-export default ArticleTitle;
+export default ArticleHead;
 
 const Container = styled.div`
   width: 100%;
