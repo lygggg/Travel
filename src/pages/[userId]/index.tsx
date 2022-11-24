@@ -3,7 +3,7 @@ import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { ArticleList, Category } from "src/components/article";
+import { ArticleList, ArticleTagList } from "src/components/article";
 import { findArticles } from "src/api/article";
 import { findTag } from "src/api/tag";
 import { useArticles } from "src/hooks/api/useArticle";
@@ -31,7 +31,7 @@ const ArticlePage = () => {
   }, []);
   return (
     <>
-      <Category tags={tags} />
+      <ArticleTagList tags={tags} />
       <ArticleList articles={articles} />
       <PaginationContainer>
         <PaginationButton
