@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Button, TagList } from "src/components/commons";
 import { useDeleteArticle } from "src/hooks/api/useArticle";
+import { deleteArticle } from "src/api/article";
 
 export interface Props {
   title: string;
@@ -26,12 +27,12 @@ const ArticleHead: React.FC<Props> = (article) => {
 
   const deleteArticleMutation = useDeleteArticle();
 
-  const handleRemoveArticle = () => {
+  const handleRemoveArticle = async () => {
     try {
-      deleteArticleMutation.mutateAsync(id);
-      push(`/${userId}`);
+      await deleteArticleMutation.mutateAsync(id);
+      await push(`/${userId}`);
     } catch (err) {
-      alert("delete failed.");
+      await alert("삭제 실패");
     }
   };
 
