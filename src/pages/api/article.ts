@@ -5,6 +5,7 @@ import { withSentry } from "@sentry/nextjs";
 import { ArticleModel } from "./models/article";
 import { TagModel } from "./models/tag";
 import { connectMongo } from "./utils/connectMongo.js";
+import next from "next";
 
 const secret = process.env.SECRET;
 
@@ -53,15 +54,23 @@ handler
     );
     res.json(article);
   })
-  .delete(async (req, res) => {
-    const { id } = req.query;
-    const { email }: any = await getToken({
-      req: req,
-      secret: secret,
-    });
-    const article = await ArticleModel.deleteOne({ email: email, _id: id });
-    await TagModel.deleteMany({ email: email, articleId: id });
-    res.json(article);
+  .delete(async (req, res, next) => {
+    try {
+      const { id } = req.query;
+      const { email }: any = await getToken({
+        req: req,
+        secret: secret,
+      });
+      const article = await ArticleModel.deleteOne({
+        email: email,
+        _id: id,
+      });
+      await TagModel.deleteMany({ email: email, articleId: id });
+      res.status(201).json(article);
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
   });
 
-export default withSentry(handler);
+export default handler;
