@@ -22,7 +22,7 @@ describe("Chip", () => {
         children: chipName,
         onRemove,
       });
-      const img = getByAltText("removeChip");
+      const img = getByAltText("Delete the tag");
       fireEvent.click(img);
       expect(onRemove).toBeCalled();
     });

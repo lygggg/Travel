@@ -33,8 +33,7 @@ const Chip: React.FC<Props> = ({
           <ImageContainer>
             <Image
               src={closeImg}
-              alt="removeChip
-              "
+              alt="Delete the tag"
               width={20}
               height={20}
               onClick={handleRemove}
