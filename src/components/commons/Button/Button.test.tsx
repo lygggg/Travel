@@ -38,7 +38,7 @@ describe("Button", () => {
         variant: "primary",
         size: "mini",
         rounded: true,
-        backgroundColor: `${theme.gray[500]}`,
+        backgroundColor: `${theme.green[700]}`,
         padding: "0 0.5rem",
         borderRadius: "2rem",
       },
