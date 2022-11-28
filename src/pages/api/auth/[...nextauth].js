@@ -4,6 +4,10 @@ import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
 
 export const authOptions = {
+  secret: process.env.SECRET,
+  theme: {
+    colorScheme: "light",
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
@@ -18,29 +22,52 @@ export const authOptions = {
       clientSecret: process.env.KAKAO_SECRET,
     }),
   ],
-  theme: {
-    colorScheme: "light",
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.role = token.role;
+      return session;
+    },
   },
-  secret: process.env.SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
-  callback: {
-    async session(session, token) {
-      const encodedToken = jwt.sign(token, process, process.env.SECRET, {
-        algorithm: "HS256",
-      });
-      session.id = token.id;
-      session.token = encodedToken;
-      return Promise.resolve(session);
+  jwt: {
+    secret: process.env.SECRET,
+  },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        path: "/",
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      },
     },
-    async jwt(token, user) {
-      const isUserSignedIn = user ? true : false;
-
-      if (isUserSignedIn) {
-        token.id = user.id.toString();
-      }
-      return Promise.resolve(token);
+    callbackUrl: {
+      name: `next-auth.callback-url`,
+      options: {
+        path: "/",
+        sameSite: "none",
+        secure: true,
+      },
+    },
+    csrfToken: {
+      name: `next-auth.csrf-token`,
+      options: {
+        path: "/",
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      },
     },
   },
 };
