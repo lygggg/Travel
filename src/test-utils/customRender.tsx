@@ -15,7 +15,7 @@ interface Props {
 
 const defaultQueryClient = queryClient;
 const defaultTheme = theme;
-const defaultRouter = createMockRouter();
+const defaultRouter = createMockRouter({});
 
 const customRender = (
   ui: ReactElement,
