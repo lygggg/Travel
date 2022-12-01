@@ -2,12 +2,12 @@ import { Heading, Text } from "@chakra-ui/react";
 
 type headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-export interface CustomHeadingProps {
+export interface Props {
   children: React.ReactNode;
   level: headings;
 }
 
-const CustomHeading = ({ children, level }: CustomHeadingProps) => {
+const CustomHeading: React.FC<Props> = ({ children, level }: Props) => {
   const headingHref = children?.toString().split(" ").join("-");
 
   return (

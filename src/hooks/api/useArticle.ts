@@ -30,7 +30,5 @@ export const usePostArticle = () => {
 };
 
 export const useDeleteArticle = () => {
-  return useMutation(deleteArticle, {
-    onError: (err) => console.error(err),
-  });
+  return useMutation({ mutationFn: deleteArticle });
 };

@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { TagList } from "src/components/commons";
 
-interface Props {
-  tags: any;
+export interface Props {
+  tags: string[];
 }
 
-const Category: React.FC<Props> = ({ tags }) => {
+const ArticleTagList: React.FC<Props> = ({ tags }) => {
   const router = useRouter();
   const moveUrl = (tag: string) => {
     router.push({
@@ -15,7 +15,7 @@ const Category: React.FC<Props> = ({ tags }) => {
     });
   };
   return (
-    <Container>
+    <Container data-testid="article-taglist">
       <TagList tags={tags} size="mini" onClick={moveUrl} />
     </Container>
   );
@@ -32,4 +32,4 @@ const Container = styled.div`
   gap: 0.6rem;
 `;
 
-export default Category;
+export default ArticleTagList;

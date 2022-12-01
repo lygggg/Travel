@@ -9,7 +9,8 @@ export const postArticle = async (data: PostArticleRequest) =>
   await api.post("/api/article", data);
 
 export const deleteArticle = async (id: string | string[] | undefined) => {
-  await api.delete(`/api/article?id=${id}`);
+  const { data } = await api.delete(`/api/article?id=${id}`);
+  return data;
 };
 
 export const findArticles = async ({

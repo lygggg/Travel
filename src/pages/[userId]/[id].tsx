@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 import { getPlaiceholder } from "plaiceholder";
 import { serialize } from "next-mdx-remote/serialize";
 import { useSetRecoilState } from "recoil";
-import { ArticleDetail, ArticleTitle } from "src/components/article";
+import { ArticleDetail, ArticleHead } from "src/components/article";
 import { HeadMeta } from "src/components/commons";
 import { findArticle } from "src/api/article";
 import { articleState } from "src/store/article";
@@ -21,7 +21,6 @@ const ArticleDetailPage = (
     content,
     thumbnailUrl,
     base64,
-    img,
     title,
     tags,
     MDXdata,
@@ -35,20 +34,19 @@ const ArticleDetailPage = (
   useEffect(() => {
     setArticle({ content, tags, title, thumbnailUrl, introduction, syncTime });
   }, []);
-
   return (
     <Container>
-      <HeadMeta title={title} url={img} introduction={introduction} />
-      <ArticleTitle
+      <HeadMeta title={title} url={thumbnailUrl} introduction={introduction} />
+      <ArticleHead
         title={title}
         tags={tags}
         base64={base64}
-        img={img}
+        thumbnailUrl={thumbnailUrl}
         syncTime={syncTime}
         _id={_id}
         name={name}
         email={email}
-      ></ArticleTitle>
+      ></ArticleHead>
       <ArticleDetail content={MDXdata} />
     </Container>
   );
@@ -69,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     const article = {
       ...data,
       base64,
-      img,
+      thumbnailUrl: img,
       MDXdata,
     };
     return { props: article };

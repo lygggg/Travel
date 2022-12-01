@@ -8,7 +8,7 @@ interface Props {
   article: ArticleProps;
 }
 
-const ArticleBox = ({ article }: Props) => {
+const ArticleBox: React.FC<Props> = ({ article }: Props) => {
   const { title, tags, syncTime, thumbnailUrl, introduction, email } = article;
   return (
     <>

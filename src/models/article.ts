@@ -6,7 +6,7 @@ export interface Article {
   syncTime: string;
   name: string;
   email: string;
-  src: string;
+  base64: string;
   introduction: string;
   thumbnailUrl: string;
 }

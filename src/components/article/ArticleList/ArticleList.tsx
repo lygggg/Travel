@@ -6,7 +6,7 @@ interface Props {
   articles: Array<ArticleProps>;
 }
 
-const ArticleList = ({ articles }: Props) => {
+const ArticleList: React.FC<Props> = ({ articles }: Props) => {
   return (
     <Container>
       {articles.map((article) => (
