@@ -140,13 +140,13 @@ const resetCSS = css`
   }
 `;
 
+
 export const GlobalStyle = () => (
   <Global
     styles={css`
       ${resetCSS};
       body {
-        font-family: "Noto Sans KR", sans-serif;
-        background-color: ${theme.black[600]};
+        background-color: ${theme.black[500]};
         color: ${theme.white};
       }
       * {

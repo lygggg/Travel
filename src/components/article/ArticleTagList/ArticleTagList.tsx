@@ -16,7 +16,7 @@ const ArticleTagList: React.FC<Props> = ({ tags }) => {
   };
   return (
     <Container data-testid="article-taglist">
-      <TagList tags={tags} size="mini" onClick={moveUrl} />
+      <TagList tags={tags} size="small" onClick={moveUrl} />
     </Container>
   );
 };
@@ -26,9 +26,7 @@ const Container = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 3rem;
   gap: 0.6rem;
 `;
 
