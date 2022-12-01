@@ -36,7 +36,11 @@ const ArticleDetailPage = (
   }, []);
   return (
     <Container>
-      <HeadMeta title={title} url={thumbnailUrl} introduction={introduction} />
+      <HeadMeta
+        title={title}
+        image={thumbnailUrl}
+        introduction={introduction}
+      />
       <ArticleHead
         title={title}
         tags={tags}

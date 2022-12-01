@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-interface Props {
+export interface Props {
   title?: string;
-  url?: string;
   image?: string;
   introduction?: string;
 }
