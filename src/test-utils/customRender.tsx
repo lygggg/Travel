@@ -2,9 +2,9 @@ import React, { ReactElement, ReactNode } from "react";
 import { render } from "@testing-library/react";
 import { ThemeProvider } from "@emotion/react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, MutableSnapshot } from "recoil";
 import { RouterContext } from "next/dist/shared/lib/router-context";
-
+import { articleState } from "src/store/article";
 import { createMockRouter } from "__mocks__/createMockRouter";
 import { theme } from "src/styles/globalStyle";
 import { queryClient } from "src/test-utils/ReactQueryWrapper";
@@ -20,9 +20,21 @@ const defaultRouter = createMockRouter({
   push: jest.fn(),
 });
 
+const defaultRecoilState = ({ set }: MutableSnapshot) => {
+  set(articleState, {
+    content: "",
+    tags: [],
+    title: "제목",
+    thumbnailUrl: "",
+    introduction: "",
+    syncTime: "",
+  });
+};
+
 const customRender = (
   ui: ReactElement,
   {
+    initializeState = defaultRecoilState,
     theme = defaultTheme,
     router = defaultRouter,
     queryClient = defaultQueryClient,
@@ -32,7 +44,7 @@ const customRender = (
   function Wrapper({ children }: Props) {
     return (
       <ThemeProvider theme={theme}>
-        <RecoilRoot>
+        <RecoilRoot initializeState={initializeState}>
           <QueryClientProvider client={queryClient}>
             <RouterContext.Provider value={router}>
               {children}
