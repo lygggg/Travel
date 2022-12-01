@@ -6,22 +6,22 @@ import ArticleHead, { Props } from "./ArticleHead";
 import { deleteArticle } from "src/api/article";
 import { render } from "src/test-utils/customRender";
 
-jest.mock("next-auth/react");
-jest.mock("src/api/article");
-const mockAlert = jest.fn();
-global.alert = mockAlert;
-
-const mockUseSession = (data: { email: string }) => {
-  (useSession as jest.Mock).mockImplementation(() => {
-    return {
-      data: {
-        user: data,
-      },
-    };
-  });
-};
-
 describe("ArticleHead", () => {
+  jest.mock("next-auth/react");
+  jest.mock("src/api/article");
+  const mockAlert = jest.fn();
+  global.alert = mockAlert;
+
+  const mockUseSession = (data: { email: string }) => {
+    (useSession as jest.Mock).mockImplementation(() => {
+      return {
+        data: {
+          user: data,
+        },
+      };
+    });
+  };
+
   const renderArticleHead = ({
     title,
     tags,
@@ -72,12 +72,14 @@ describe("ArticleHead", () => {
       it("수정 버튼이 보여야 한다.", () => {
         const { getByTestId } = renderArticleHead({ ...props, router });
         const modifyButton = getByTestId("modify-article");
+
         expect(modifyButton).toBeInTheDocument();
       });
 
       it("삭제 버튼이 보여야 한다.", () => {
         const { getByTestId } = renderArticleHead({ ...props, router });
         const removeButton = getByTestId("remove-article");
+
         expect(removeButton).toBeInTheDocument();
       });
 
@@ -85,6 +87,7 @@ describe("ArticleHead", () => {
         it("/write 페이지로 이동한다.", () => {
           const { getByTestId } = renderArticleHead({ ...props, router });
           const writeLink = getByTestId("modify-article").closest("a");
+
           expect(writeLink).toHaveAttribute("href", `/write?id=${props._id}`);
         });
       });
@@ -92,9 +95,9 @@ describe("ArticleHead", () => {
       context("삭제 버튼을 누르면", () => {
         context("삭제에 성공하면", () => {
           beforeEach(() =>
-            (deleteArticle as jest.Mock).mockImplementation(() =>
-              Promise.resolve({ response: { status: 200 } }),
-            ),
+            (deleteArticle as jest.Mock).mockResolvedValue({
+              response: { status: 200 },
+            }),
           );
           it(`/${props.email} 페이지로 이동한다.`, async () => {
             const { getByTestId } = renderArticleHead({ ...props, router });
@@ -110,12 +113,12 @@ describe("ArticleHead", () => {
       });
       context("삭제에 실패하면", () => {
         beforeEach(() =>
-          (deleteArticle as jest.Mock).mockImplementation(() =>
-            Promise.reject({ response: { status: 500 } }),
-          ),
+          (deleteArticle as jest.Mock).mockRejectedValue({
+            response: { status: 500 },
+          }),
         );
 
-        it(`alert가 뜬다`, async () => {
+        it(`삭제 실패 alert가 뜬다`, async () => {
           const { getByTestId } = renderArticleHead({ ...props, router });
           const removeButton = getByTestId("remove-article");
 
@@ -135,12 +138,14 @@ describe("ArticleHead", () => {
       it("수정 버튼이 안보여야 한다.", () => {
         const { queryByTestId } = renderArticleHead({ ...props, router });
         const modifyButton = queryByTestId("modify-article");
+
         expect(modifyButton).toBeNull();
       });
 
       it("삭제 버튼이 안보여야 한다.", () => {
         const { queryByTestId } = renderArticleHead({ ...props, router });
         const removeButton = queryByTestId("remove-article");
+
         expect(removeButton).toBeNull();
       });
     });
