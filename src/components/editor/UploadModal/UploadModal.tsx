@@ -9,7 +9,7 @@ import { ImageUpload } from "../index";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-interface Props {
+export interface Props {
   isActive: boolean;
   handleClose: () => void;
 }
@@ -21,27 +21,15 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
   const router = useRouter();
   const { data: session } = useSession();
   const postArticleMutation = usePostArticle();
+  dayjs.locale("ko");
 
   const handleFileUpload = async () => {
-    if (!tags.length) {
-      alert("태그를 작성해주세요");
-      return;
-    }
-    if (!content) {
-      alert("본문을 작성해주세요");
-      return;
-    }
     if (!title) {
       alert("제목을 작성해주세요");
       return;
     }
-    if (!thumbnailUrl) {
-      alert("썸네일을 업로드해주세요.");
-      return;
-    }
-    dayjs.locale("ko");
     try {
-      postArticleMutation.mutateAsync({
+      await postArticleMutation.mutateAsync({
         content,
         tags,
         title,
@@ -49,8 +37,8 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
         introduction,
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
       });
-      router.push({ pathname: `/${session?.user.email}` });
-      resetArticle();
+      await router.push({ pathname: `/${session?.user.email}` });
+      // resetArticle();
     } catch (err) {
       alert("upload failed.");
     }
@@ -81,6 +69,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 size="large"
                 rounded={true}
                 onClick={handleFileUpload}
+                data-testid="upload-button"
               >
                 완료
               </Button>
@@ -131,26 +120,10 @@ const UploadContainer = styled.div`
   flex-direction: column;
   gap: 30px;
 `;
-const ThumbnailContainer = styled.div`
-  height: 250px;
-  width: 400px;
-  background-color: ${(props) => props.theme.primary[500]};
-  display: flex;
-  place-items: center;
-  place-content: center;
-`;
 const IntroductionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`;
-const Introduction = styled.textarea`
-  width: 100%;
-  height: 7rem;
-  background-color: ${(props) => props.theme.primary[500]};
-  border: none;
-  outline: none;
-  color: ${(props) => props.theme.white};
 `;
 const ButtonContainer = styled.div`
   display: flex;
