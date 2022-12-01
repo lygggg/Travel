@@ -6,21 +6,22 @@ import ArticleHead, { Props } from "./ArticleHead";
 import { deleteArticle } from "src/api/article";
 import { render } from "src/test-utils/customRender";
 
+jest.mock("next-auth/react");
+jest.mock("src/api/article");
+
+const mockUseSession = (data: { email: string }) => {
+  (useSession as jest.Mock).mockImplementation(() => {
+    return {
+      data: {
+        user: data,
+      },
+    };
+  });
+};
+
 describe("ArticleHead", () => {
-  jest.mock("next-auth/react");
-  jest.mock("src/api/article");
   const mockAlert = jest.fn();
   global.alert = mockAlert;
-
-  const mockUseSession = (data: { email: string }) => {
-    (useSession as jest.Mock).mockImplementation(() => {
-      return {
-        data: {
-          user: data,
-        },
-      };
-    });
-  };
 
   const renderArticleHead = ({
     title,
