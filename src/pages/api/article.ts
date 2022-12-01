@@ -23,36 +23,31 @@ handler
     await connectMongo();
     await next();
   })
-  .post(async (req, res) => {
-    const { content, tags, title, thumbnailUrl, introduction, syncTime } =
-      req.body;
+  .post(async (req, res, next) => {
+    try {
+      const { content, tags, title, thumbnailUrl, introduction, syncTime } =
+        req.body;
 
-    const { name, email }: any = await getToken({
-      req: req,
-      secret: secret,
-    });
+      const { name, email }: any = await getToken({
+        req: req,
+        secret: secret,
+      });
+      const article = await ArticleModel.create({});
 
-    const article = await ArticleModel.create({
-      content,
-      tags,
-      title,
-      name,
-      email,
-      thumbnailUrl,
-      introduction,
-      syncTime,
-    });
-
-    await Promise.all(
-      tags.map((tag: string) => {
-        return TagModel.create({
-          tagName: tag,
-          userId: email,
-          articleId: article._id,
-        });
-      }),
-    );
-    res.json(article);
+      await Promise.all(
+        tags.map((tag: string) => {
+          return TagModel.create({
+            tagName: tag,
+            userId: email,
+            articleId: article._id,
+          });
+        }),
+      );
+      res.json(article);
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
   })
   .delete(async (req, res, next) => {
     try {
