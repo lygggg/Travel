@@ -16,12 +16,11 @@ describe("HeadMeta", () => {
   }: Props & { router?: NextRouter }) =>
     render(<HeadMeta {...rest}></HeadMeta>, { router: router });
 
-  context("headMeta props가 없으면", () => {
+  it("renders title", async () => {
     renderHeadMeta({
       router: router,
     });
-    it("renders title", async () => {
-      expect(document.title).toEqual("mlog");
-    });
+
+    expect(document.title).toEqual("mlog");
   });
 });
