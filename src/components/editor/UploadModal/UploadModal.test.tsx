@@ -9,8 +9,6 @@ import { postArticle } from "src/api/article";
 
 jest.mock("next-auth/react");
 jest.mock("src/api/article");
-const mockAlert = jest.fn();
-global.alert = mockAlert;
 
 const mockUseSession = (data: { email: string }) => {
   (useSession as jest.Mock).mockImplementation(() => {
@@ -23,11 +21,15 @@ const mockUseSession = (data: { email: string }) => {
 };
 
 describe("UploadModal", () => {
+  const mockAlert = jest.fn();
+  global.alert = mockAlert;
   const handleClose = jest.fn();
+
   const router = createMockRouter({
     query: { userId: "baayoo93@gmail.com", id: "idfsdfds" },
     push: jest.fn(),
   });
+
   const renderUploadModal = ({
     isActive,
     handleClose,
@@ -41,6 +43,7 @@ describe("UploadModal", () => {
     });
 
   beforeEach(() => mockUseSession({ email: "baayoo93@gmail.com" }));
+
   const initialRecoilState = ({ set }: MutableSnapshot) => {
     set(articleState, {
       content: "content",
@@ -52,6 +55,7 @@ describe("UploadModal", () => {
       syncTime: "syncTime",
     });
   };
+
   context("업로드 완료 버튼을 클릭했을 때. ", () => {
     context("제목을 작성하지 않으면", () => {
       const initialRecoilState = ({ set }: MutableSnapshot) => {
@@ -65,14 +69,17 @@ describe("UploadModal", () => {
           syncTime: "syncTime",
         });
       };
+
       it("제목을 작성해주세요 alert가 뜬다.", async () => {
         const { getByTestId } = renderUploadModal({
           isActive: true,
           handleClose,
           initializeState: initialRecoilState,
         });
+
         const button = getByTestId("upload-button");
         fireEvent.click(button);
+
         await waitFor(async () =>
           expect(mockAlert).toHaveBeenCalledWith("제목을 작성해주세요"),
         );
@@ -82,16 +89,18 @@ describe("UploadModal", () => {
     context("제목을 작성했다면", () => {
       context("post 요청이 실패하면", () => {
         beforeEach(() =>
-          (postArticle as jest.Mock).mockImplementation(() =>
-            Promise.reject({ response: { status: 500 } }),
-          ),
+          (postArticle as jest.Mock).mockRejectedValue({
+            response: { status: 500 },
+          }),
         );
+
         it("upload failed. alert가 나온다.", async () => {
           const { getByTestId } = renderUploadModal({
             isActive: true,
             handleClose,
             initializeState: initialRecoilState,
           });
+
           const button = getByTestId("upload-button");
           fireEvent.click(button);
 
@@ -108,14 +117,17 @@ describe("UploadModal", () => {
           response: { status: 200 },
         }),
       );
+
       it("내 블로그로 이동한다.", async () => {
         const { getByTestId } = renderUploadModal({
           isActive: true,
           handleClose,
           initializeState: initialRecoilState,
         });
+
         const button = getByTestId("upload-button");
         fireEvent.click(button);
+
         await waitFor(() => expect(router.push("baayoo93@gmail.com")));
       });
     });
@@ -127,8 +139,10 @@ describe("UploadModal", () => {
         isActive: true,
         handleClose,
       });
+
       const textArea = getByTestId("textarea");
       fireEvent.change(textArea, { target: { value: "짧은 소개글" } });
+
       expect(getByDisplayValue(/짧은 소개글/i)).toBeInTheDocument();
     });
   });
