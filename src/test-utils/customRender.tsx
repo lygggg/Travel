@@ -15,10 +15,7 @@ interface Props {
 
 const defaultQueryClient = queryClient;
 const defaultTheme = theme;
-const defaultRouter = createMockRouter({
-  query: { userId: "baayoo93@gmail.com", id: "idfsdfds" },
-  push: jest.fn(),
-});
+const defaultRouter = createMockRouter();
 
 const customRender = (
   ui: ReactElement,
