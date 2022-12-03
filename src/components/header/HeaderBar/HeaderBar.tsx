@@ -1,13 +1,10 @@
 import styled from "@emotion/styled";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Anton } from "@next/font/google";
 import { Button, IconButton } from "src/components/commons";
 import { LoginModal } from "src/components/login/LoginModal";
 import useModal from "src/hooks/useModal";
 import { MenuDropdown } from "../index";
-
-const antonFont = Anton({ weight: "400", subsets: ["latin"] });
 
 const HeaderBar = () => {
   const { data: session } = useSession();
@@ -21,13 +18,15 @@ const HeaderBar = () => {
       <HeaderContainer>
         <HeaderLayout>
           <HeaderLeftContainer>
-            <StyledLink className={antonFont.className} href={"/"}>
-              MLOG
-            </StyledLink>
+            <Title>
+              <StyledLink href={"/"}>MLOG</StyledLink>
+            </Title>
             {session && (
-              <StyledLink href={`/${session.user.email}`}>
-                {session.user.name + ".log"}
-              </StyledLink>
+              <Link href={`/${session.user.email}`}>
+                <UserTitle data-testid="nav-username">
+                  {session.user.name + ".log"}
+                </UserTitle>
+              </Link>
             )}
           </HeaderLeftContainer>
           <HeaderRightContainer>
@@ -82,14 +81,26 @@ const HeaderRightContainer = styled.div`
   align-items: center;
   gap: 20px;
 `;
-const StyledLink = styled(Link)`
-  color: white;
-  cursor: pointer;
-  font-size: 1.3rem;
-`;
 
 const HeaderLeftContainer = styled.div`
   display: flex;
   gap: 20px;
+  cursor: pointer;
+  align-items: center;
 `;
+
+const Title = styled.span`
+  font-weight: 800;
+  font-size: 1.8rem;
+`;
+
+const UserTitle = styled.span`
+  font-weight: 700;
+  font-size: 1.1rem;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${(props) => props.theme.green[700]};
+`;
+
 export default HeaderBar;
