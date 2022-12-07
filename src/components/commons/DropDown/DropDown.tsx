@@ -42,9 +42,9 @@ const DropDown = ({ trigger, children }: Props) => {
 
   return (
     <DropDownContext.Provider value={{ isActive, setIsActive }}>
-      <Container>
+      <Container data-testid="dropdown-id">
         <span ref={dropdownRef}>
-          <span data-testid="nav-menu-dropdown" onClick={setIsActive}>
+          <span data-testid="dropdown-trigger" onClick={setIsActive}>
             {trigger}
           </span>
         </span>
@@ -61,8 +61,10 @@ interface ListProps {
 const List = ({ children, ...props }: ListProps) => {
   const { isActive } = useContext(DropDownContext);
   return (
-    <HiddenContainer data-testid="dropdown-list" isActive={isActive}>
-      <Ul {...props}>{children}</Ul>
+    <HiddenContainer isActive={isActive}>
+      <Ul data-testid="dropdown-list" {...props}>
+        {children}
+      </Ul>
     </HiddenContainer>
   );
 };
@@ -96,10 +98,11 @@ const HiddenContainer = styled.span<{ isActive: boolean }>`
   right: 0;
   opacity: 0;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  visibility: hidden;
   transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   opacity: ${(props) => props.isActive && 1};
-  visibility: ${(props) => (props.isActive ? "visible" : "hidden")};
+  visibility: ${(props) => props.isActive && "visible"};
   transform: ${(props) => props.isActive && "translateY(0)"};
 `;
 
