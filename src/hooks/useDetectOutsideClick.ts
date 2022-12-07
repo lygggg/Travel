@@ -8,6 +8,8 @@ export const useDetectOutsideClick = (
 
   const handleOpen = () => setIsActive((isActive) => !isActive);
 
+  const handleClose = () => setIsActive(false);
+
   useEffect(() => {
     const onClick = (e: TouchEvent) => {
       if (!el.current?.contains(e.target as Node)) {
@@ -24,5 +26,5 @@ export const useDetectOutsideClick = (
     };
   }, [isActive, el]);
 
-  return [isActive, handleOpen] as const;
+  return [isActive, handleOpen, handleClose] as const;
 };
