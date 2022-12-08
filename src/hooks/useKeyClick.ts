@@ -11,16 +11,32 @@ interface KeyboardHandlerProps {
   events: KeyEvent[];
 }
 
-const keyMapper: { [key in KeyType]: string } = {
-  Escape: "Escape",
+const keys = {
   Space: " ",
-};
+  Enter: "Enter",
+  Escape: "Escape",
+  Backspace: "Backspace",
+  Delete: "Delete",
+
+  ArrowLeft: "ArrowLeft",
+  ArrowUp: "ArrowUp",
+  ArrowRight: "ArrowRight",
+  ArrowDown: "ArrowDown",
+
+  Home: "Home",
+  End: "End",
+
+  PageUp: "PageUp",
+  PageDown: "PageDown",
+
+  Tab: "Tab",
+} as const;
 
 const useKeyClick = ({ events }: KeyboardHandlerProps) => {
   useEffect(() => {
     const keyEvent = (e: KeyboardEvent) => {
       events.forEach(({ key, keyEvent }) => {
-        if (e.key === keyMapper[key]) keyEvent(e);
+        if (e.key === keys[key]) keyEvent(e);
       });
     };
 
