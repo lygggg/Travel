@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import type { FC } from "react";
+import { FC } from "react";
 
-interface HeadMockProps {
+interface Props {
   children: React.ReactNode;
 }
 
-const HeadMock: FC<HeadMockProps> = ({ children }) => {
+const HeadMock: FC<Props> = ({ children }) => {
   return <>{ReactDOM.createPortal(children, document.head)}</>;
 };
 
