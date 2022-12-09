@@ -31,9 +31,9 @@ const TextArea = (props: TextAreaStyled) => {
           ref={ref}
           value={props.value}
           onChange={handleChange}
-          data-testid="textarea"
+          role="textarea"
         />
-        <TextLength data-testid="textarea-length">
+        <TextLength role="textarea-length">
           {props.maxLength && `${textLength}/${props.maxLength}`}
         </TextLength>
       </Label>
