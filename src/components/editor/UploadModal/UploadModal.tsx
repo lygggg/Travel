@@ -37,8 +37,8 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
         introduction,
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
       });
+      resetArticle();
       await router.push({ pathname: `/${session?.user.email}` });
-      // resetArticle();
     } catch (err) {
       alert("upload failed.");
     }
@@ -69,7 +69,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 size="large"
                 rounded={true}
                 onClick={handleFileUpload}
-                data-testid="upload-button"
+                role="upload-button"
               >
                 완료
               </Button>

@@ -1,10 +1,11 @@
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { MutableSnapshot } from "recoil";
 import UploadModal, { Props } from "./UploadModal";
 import { createMockRouter } from "__mocks__/createMockRouter";
 import { articleState } from "src/store/article";
 import { render } from "src/test-utils/customRender";
+import { RecoilObserver, RecoilRootWrapper } from "src/test-utils";
 import { postArticle } from "src/api/article";
 
 jest.mock("next-auth/react");
@@ -24,6 +25,7 @@ describe("UploadModal", () => {
   const mockAlert = jest.fn();
   global.alert = mockAlert;
   const handleClose = jest.fn();
+  const onChange = jest.fn();
 
   const router = createMockRouter({
     query: { userId: "baayoo93@gmail.com", id: "idfsdfds" },
@@ -37,14 +39,19 @@ describe("UploadModal", () => {
   }: Props & {
     initializeState?: (mutableSnapshot: MutableSnapshot) => void;
   }) =>
-    render(<UploadModal isActive={isActive} handleClose={handleClose} />, {
-      router: router,
-      initializeState,
-    });
+    render(
+      <RecoilRootWrapper initializeState={initializeState}>
+        <RecoilObserver node={articleState} onChange={onChange} />
+        <UploadModal isActive={isActive} handleClose={handleClose} />
+      </RecoilRootWrapper>,
+      {
+        router: router,
+      },
+    );
 
   beforeEach(() => mockUseSession({ email: "baayoo93@gmail.com" }));
 
-  const initialRecoilState = ({ set }: MutableSnapshot) => {
+  const initialState = ({ set }: MutableSnapshot) => {
     set(articleState, {
       content: "content",
       tags: ["tag1"],
@@ -58,7 +65,7 @@ describe("UploadModal", () => {
 
   context("업로드 완료 버튼을 클릭했을 때. ", () => {
     context("제목을 작성하지 않으면", () => {
-      const initialRecoilState = ({ set }: MutableSnapshot) => {
+      const initialStateNotTitle = ({ set }: MutableSnapshot) => {
         set(articleState, {
           content: "content",
           tags: ["tag1"],
@@ -71,16 +78,16 @@ describe("UploadModal", () => {
       };
 
       it("제목을 작성해주세요 alert가 뜬다.", async () => {
-        const { getByTestId } = renderUploadModal({
+        renderUploadModal({
           isActive: true,
           handleClose,
-          initializeState: initialRecoilState,
+          initializeState: initialStateNotTitle,
         });
 
-        const button = getByTestId("upload-button");
+        const button = screen.getByRole("upload-button");
         fireEvent.click(button);
 
-        await waitFor(async () =>
+        await waitFor(() =>
           expect(mockAlert).toHaveBeenCalledWith("제목을 작성해주세요"),
         );
       });
@@ -95,16 +102,16 @@ describe("UploadModal", () => {
         );
 
         it("upload failed. alert가 나온다.", async () => {
-          const { getByTestId } = renderUploadModal({
+          renderUploadModal({
             isActive: true,
             handleClose,
-            initializeState: initialRecoilState,
+            initializeState: initialState,
           });
 
-          const button = getByTestId("upload-button");
+          const button = screen.getByRole("upload-button");
           fireEvent.click(button);
 
-          await waitFor(async () =>
+          await waitFor(() =>
             expect(mockAlert).toHaveBeenCalledWith("upload failed."),
           );
         });
@@ -119,31 +126,35 @@ describe("UploadModal", () => {
       );
 
       it("내 블로그로 이동한다.", async () => {
-        const { getByTestId } = renderUploadModal({
+        renderUploadModal({
           isActive: true,
           handleClose,
-          initializeState: initialRecoilState,
+          initializeState: initialState,
         });
 
-        const button = getByTestId("upload-button");
+        const button = screen.getByRole("upload-button");
         fireEvent.click(button);
 
-        await waitFor(() => expect(router.push("baayoo93@gmail.com")));
+        await waitFor(() =>
+          expect(router.push).toHaveBeenCalledWith({
+            pathname: "/baayoo93@gmail.com",
+          }),
+        );
       });
     });
   });
 
   context("짧게 소개하기에 텍스트를 입력하면", () => {
     it("화면에 텍스트가 보인다.", async () => {
-      const { getByTestId, getByDisplayValue } = renderUploadModal({
+      renderUploadModal({
         isActive: true,
         handleClose,
       });
 
-      const textArea = getByTestId("textarea");
+      const textArea = screen.getByRole("textarea");
       fireEvent.change(textArea, { target: { value: "짧은 소개글" } });
 
-      expect(getByDisplayValue(/짧은 소개글/i)).toBeInTheDocument();
+      expect(screen.getByDisplayValue(/짧은 소개글/i)).toBeInTheDocument();
     });
   });
 });
