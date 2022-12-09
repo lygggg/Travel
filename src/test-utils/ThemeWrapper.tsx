@@ -6,6 +6,8 @@ interface Props {
   children: ReactNode;
 }
 
+export const defaultTheme = theme;
+
 const ThemeWrapper = ({ children }: Props) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
