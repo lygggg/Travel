@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { NextRouter } from "next/router";
 import { createMockRouter } from "__mocks__/createMockRouter";
@@ -69,25 +69,31 @@ describe("ArticleHead", () => {
     beforeEach(() => {
       mockUseSession({ email: "baayoo93@gmail.com" });
     });
+
     context("session email과 로그인한 article email 같다면", () => {
       it("수정 버튼이 보여야 한다.", () => {
-        const { getByTestId } = renderArticleHead({ ...props, router });
-        const modifyButton = getByTestId("modify-article");
+        renderArticleHead({ ...props, router });
+
+        const modifyButton = screen.getByRole("button", { name: /수정/i });
 
         expect(modifyButton).toBeInTheDocument();
       });
 
       it("삭제 버튼이 보여야 한다.", () => {
-        const { getByTestId } = renderArticleHead({ ...props, router });
-        const removeButton = getByTestId("remove-article");
+        renderArticleHead({ ...props, router });
+
+        const removeButton = screen.getByRole("button", { name: /삭제/i });
 
         expect(removeButton).toBeInTheDocument();
       });
 
       context("수정 버튼을 누르면", () => {
         it("/write 페이지로 이동한다.", () => {
-          const { getByTestId } = renderArticleHead({ ...props, router });
-          const writeLink = getByTestId("modify-article").closest("a");
+          renderArticleHead({ ...props, router });
+
+          const writeLink = screen
+            .getByRole("button", { name: /수정/i })
+            .closest("a");
 
           expect(writeLink).toHaveAttribute("href", `/write?id=${props._id}`);
         });
@@ -101,9 +107,9 @@ describe("ArticleHead", () => {
             }),
           );
           it(`/${props.email} 페이지로 이동한다.`, async () => {
-            const { getByTestId } = renderArticleHead({ ...props, router });
-            const removeButton = getByTestId("remove-article");
+            renderArticleHead({ ...props, router });
 
+            const removeButton = screen.getByRole("button", { name: /삭제/i });
             await fireEvent.click(removeButton);
 
             await waitFor(() =>
@@ -112,6 +118,7 @@ describe("ArticleHead", () => {
           });
         });
       });
+
       context("삭제에 실패하면", () => {
         beforeEach(() =>
           (deleteArticle as jest.Mock).mockRejectedValue({
@@ -120,9 +127,9 @@ describe("ArticleHead", () => {
         );
 
         it(`삭제 실패 alert가 뜬다`, async () => {
-          const { getByTestId } = renderArticleHead({ ...props, router });
-          const removeButton = getByTestId("remove-article");
+          renderArticleHead({ ...props, router });
 
+          const removeButton = screen.getByRole("button", { name: /삭제/i });
           await fireEvent.click(removeButton);
 
           await waitFor(async () =>
@@ -137,17 +144,19 @@ describe("ArticleHead", () => {
         mockUseSession({ email: "baayoo91@gmail.com" });
       });
       it("수정 버튼이 안보여야 한다.", () => {
-        const { queryByTestId } = renderArticleHead({ ...props, router });
-        const modifyButton = queryByTestId("modify-article");
+        renderArticleHead({ ...props, router });
 
-        expect(modifyButton).toBeNull();
+        const modifyButton = screen.queryByRole("button", { name: /수정/i });
+
+        expect(modifyButton).not.toBeInTheDocument();
       });
 
       it("삭제 버튼이 안보여야 한다.", () => {
-        const { queryByTestId } = renderArticleHead({ ...props, router });
-        const removeButton = queryByTestId("remove-article");
+        renderArticleHead({ ...props, router });
 
-        expect(removeButton).toBeNull();
+        const removeButton = screen.queryByRole("button", { name: /삭제/i });
+
+        expect(removeButton).not.toBeInTheDocument();
       });
     });
   });

@@ -24,9 +24,7 @@ export const useArticle = (id: findArticleRequest) => {
 };
 
 export const usePostArticle = () => {
-  return useMutation(postArticle, {
-    onError: (err) => console.error(err),
-  });
+  return useMutation({ mutationFn: postArticle });
 };
 
 export const useDeleteArticle = () => {

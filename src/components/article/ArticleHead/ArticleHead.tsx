@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Button, TagList } from "src/components/commons";
 import { useDeleteArticle } from "src/hooks/api/useArticle";
-import { deleteArticle } from "src/api/article";
 
 export interface Props {
   title: string;
@@ -42,16 +41,11 @@ const ArticleHead: React.FC<Props> = (article) => {
       {session?.user.email === email && (
         <EndContainer>
           <Link href={{ pathname: "/write", query: { id: _id } }}>
-            <Button data-testid="modify-article" variant="primary" size="mini">
+            <Button variant="primary" size="mini">
               수정
             </Button>
           </Link>
-          <Button
-            data-testid="remove-article"
-            variant="primary"
-            size="mini"
-            onClick={handleRemoveArticle}
-          >
+          <Button variant="primary" size="mini" onClick={handleRemoveArticle}>
             삭제
           </Button>
         </EndContainer>

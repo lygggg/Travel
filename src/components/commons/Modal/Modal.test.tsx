@@ -12,12 +12,13 @@ describe("Modal", () => {
     );
 
   context("isActive가 true면", () => {
-    const { getByTestId } = rederModal({
+    rederModal({
       children: "modal",
       isActive: true,
     });
     it("portal에 modal이 존재해야 한다.", () => {
-      const modal = getByTestId("modal");
+      const modal = screen.getByText("modal");
+
       expect(modal).toBeInTheDocument();
     });
   });
@@ -27,8 +28,9 @@ describe("Modal", () => {
       children: "modal",
       isActive: false,
     });
-    it("portal에 modal이 존재하지 않아야 한다.", async () => {
-      const modal = await screen.queryByText("modal");
+    it("portal에 modal이 존재하지 않아야 한다.", () => {
+      const modal = screen.queryByText("modal");
+
       expect(modal).not.toBeInTheDocument();
     });
   });

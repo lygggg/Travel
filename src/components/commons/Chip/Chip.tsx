@@ -25,7 +25,7 @@ const Chip: React.FC<Props> = ({
   };
   return (
     <>
-      <ChipStyle data-testid="chip-item" size={size}>
+      <ChipStyle aria-label={children} size={size}>
         <TextContainer clickable={onClick} onClick={handleClick}>
           {children}
         </TextContainer>
@@ -45,7 +45,7 @@ const Chip: React.FC<Props> = ({
   );
 };
 
-const ChipStyle = styled.li<{ size: string }>`
+const ChipStyle = styled.div<{ size: string }>`
   display: flex;
   color: ${(props) => props.theme.white};
   font-weight: 500;
@@ -77,7 +77,7 @@ const ChipStyle = styled.li<{ size: string }>`
   }}
 `;
 
-const TextContainer = styled.span<{ clickable?: (chip: string) => void }>`
+const TextContainer = styled.button<{ clickable?: (chip: string) => void }>`
   ${(props) =>
     props.clickable &&
     `&:hover {
