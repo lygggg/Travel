@@ -14,11 +14,11 @@ describe("HeadMeta", () => {
     router,
     ...rest
   }: Props & { router?: NextRouter }) =>
-    render(<HeadMeta {...rest}></HeadMeta>, { router: router });
+    render(<HeadMeta {...rest}></HeadMeta>, { router });
 
   it("renders title", async () => {
     renderHeadMeta({
-      router: router,
+      router,
     });
 
     expect(document.title).toEqual("mlog");
