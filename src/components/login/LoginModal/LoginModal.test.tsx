@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import LoginModal from "./LoginModal";
 import { theme } from "src/styles/globalStyle";
 import { ThemeProvider } from "@emotion/react";
@@ -13,43 +13,57 @@ describe("LoginModal", () => {
   const renderLoginModal = () =>
     render(
       <ThemeProvider theme={theme}>
-        <LoginModal isActive={true} handleClose={handleClose} />{" "}
+        <LoginModal isActive={true} handleClose={handleClose} />
       </ThemeProvider>,
     );
 
   context("isActive가 true일때", () => {
     context("google 로그인 버튼을 클릭하면", () => {
       it("signIn이 호출된다. ", () => {
-        const { getByTestId } = renderLoginModal();
-        const googleButton = getByTestId("google-login-button");
+        renderLoginModal();
+
+        const googleButton = screen.getByRole("button", {
+          name: /Google 로그인/i,
+        });
         fireEvent.click(googleButton);
+
         expect(signIn).toBeCalled();
       });
     });
 
     context("Github 로그인 버튼을 클릭하면", () => {
       it("signIn이 호출된다. ", () => {
-        const { getByTestId } = renderLoginModal();
-        const gitHubButton = getByTestId("github-login-button");
+        renderLoginModal();
+
+        const gitHubButton = screen.getByRole("button", {
+          name: /Github 로그인/i,
+        });
         fireEvent.click(gitHubButton);
+
         expect(signIn).toBeCalled();
       });
     });
 
     context("Kakao 로그인 버튼을 클릭하면", () => {
       it("ssignIn이 호출된다. ", () => {
-        const { getByTestId } = renderLoginModal();
-        const kakaoButton = getByTestId("kakao-login-button");
+        renderLoginModal();
+
+        const kakaoButton = screen.getByRole("button", {
+          name: /Kakao 로그인/i,
+        });
         fireEvent.click(kakaoButton);
+
         expect(signIn).toBeCalled();
       });
     });
 
     context("취소 버튼을 누르면 ", () => {
       it("handleClose 가 호출되어야 한다.", () => {
-        const { getByTestId } = renderLoginModal();
-        const closeButton = getByTestId("login-close");
+        renderLoginModal();
+
+        const closeButton = screen.getByRole("button", { name: /취소/i });
         fireEvent.click(closeButton);
+
         expect(handleClose).toBeCalled();
       });
     });
@@ -57,8 +71,10 @@ describe("LoginModal", () => {
 
   context("isActive가 false일 때", () => {
     it("loginModal이 not render 되어야 한다.", () => {
-      const { getByText } = renderLoginModal();
-      const loginModalTitle = getByText("소셜 계정으로 로그인");
+      renderLoginModal();
+
+      const loginModalTitle = screen.getByText("소셜 계정으로 로그인");
+
       expect(loginModalTitle).toBeInTheDocument();
     });
   });

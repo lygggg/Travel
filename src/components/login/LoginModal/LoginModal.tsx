@@ -17,33 +17,19 @@ const LoginModal: React.FC<Props> = ({ isActive, handleClose }) => {
       <Modal isActive={isActive}>
         <ModalContainer>
           <Title>소셜 계정으로 로그인</Title>
-          <LoginButton
-            data-testid="google-login-button"
-            onClick={() => signIn("google")}
-            variant="primary"
-          >
+          <LoginButton onClick={() => signIn("google")} variant="primary">
             <Image src={googleIcon} alt="google" width={25} height={25} />
             <LoginText>Google 로그인</LoginText>
           </LoginButton>
-          <LoginButton
-            data-testid="github-login-button"
-            onClick={() => signIn("github")}
-            variant="default"
-          >
+          <LoginButton onClick={() => signIn("github")} variant="default">
             <Image src={githubIcon} alt="google" width={25} height={25} />
             <LoginText>Github 로그인</LoginText>
           </LoginButton>
-          <LoginButton
-            data-testid="kakao-login-button"
-            onClick={() => signIn("kakao")}
-            variant="secondary"
-          >
+          <LoginButton onClick={() => signIn("kakao")} variant="secondary">
             <Image src={kakaoIcon} alt="google" width={25} height={25} />
             <LoginText>Kakao 로그인</LoginText>
           </LoginButton>
-          <Exit data-testid="login-close" onClick={handleClose}>
-            취소
-          </Exit>
+          <Exit onClick={handleClose}>취소</Exit>
         </ModalContainer>
       </Modal>
     </>
@@ -60,7 +46,7 @@ const Title = styled.div`
   margin-bottom: 1.3rem;
 `;
 
-const Exit = styled.div`
+const Exit = styled.button`
   color: ${(props) => props.theme.gray[400]};
   font-size: 1rem;
   font-weight: 500;
