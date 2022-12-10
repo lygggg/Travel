@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { ThemeProvider } from "@emotion/react";
 import IconButton from "./IconButton";
 
 describe("Button", () => {
@@ -12,8 +11,8 @@ describe("Button", () => {
     );
 
   it("Iconbutton을 클릭하면 onClick이 호출된다. ", () => {
-    const { getByText } = renderIconButton();
-    const button = getByText("버튼");
+    renderIconButton();
+    const button = screen.getByRole("button", { name: /버튼/i });
     fireEvent.click(button);
     expect(onClick).toBeCalled();
   });

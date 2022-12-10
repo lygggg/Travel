@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Button, TagList } from "src/components/commons";
 import { useDeleteArticle } from "src/hooks/api/useArticle";
-import { deleteArticle } from "src/api/article";
 
 export interface Props {
   title: string;
