@@ -1,7 +1,6 @@
 import { useState, useEffect, KeyboardEvent } from "react";
 import styled from "@emotion/styled";
 import { Input, TagList } from "src/components/commons";
-import { ArticleTag } from "src/models/article";
 
 interface Props {
   onChange: (tags: string[]) => void;

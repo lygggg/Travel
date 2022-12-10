@@ -1,9 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import LoginModal from "./LoginModal";
-import { theme } from "src/styles/globalStyle";
-import { ThemeProvider } from "@emotion/react";
-
 import { signIn } from "next-auth/react";
+import LoginModal from "./LoginModal";
+import { ThemeWrapper } from "src/test-utils";
 
 jest.mock("next-auth/react");
 
@@ -11,11 +9,9 @@ describe("LoginModal", () => {
   const handleClose = jest.fn();
 
   const renderLoginModal = () =>
-    render(
-      <ThemeProvider theme={theme}>
-        <LoginModal isActive={true} handleClose={handleClose} />
-      </ThemeProvider>,
-    );
+    render(<LoginModal isActive={true} handleClose={handleClose} />, {
+      wrapper: ThemeWrapper,
+    });
 
   context("isActive가 true일때", () => {
     context("google 로그인 버튼을 클릭하면", () => {
