@@ -4,6 +4,7 @@ import { ThemeWrapper } from "src/test-utils";
 
 describe("InputTag", () => {
   const onChange = jest.fn();
+
   const renderInputTag = () =>
     render(<InputTag onChange={onChange} />, { wrapper: ThemeWrapper });
   const text = "tag1";
