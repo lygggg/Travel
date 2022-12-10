@@ -23,9 +23,7 @@ const HeaderBar = () => {
             </Title>
             {session && (
               <Link href={`/${session.user.email}`}>
-                <UserTitle data-testid="nav-username">
-                  {session.user.name + ".log"}
-                </UserTitle>
+                <UserTitle>{session.user.name + ".log"}</UserTitle>
               </Link>
             )}
           </HeaderLeftContainer>
