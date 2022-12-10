@@ -5,7 +5,7 @@ import UploadModal, { Props } from "./UploadModal";
 import { createMockRouter } from "__mocks__/createMockRouter";
 import { articleState } from "src/store/article";
 import { render } from "src/test-utils/customRender";
-import { RecoilObserver, RecoilRootWrapper } from "src/test-utils";
+import { RecoilRootWrapper } from "src/test-utils";
 import { postArticle } from "src/api/article";
 
 jest.mock("next-auth/react");
@@ -25,7 +25,6 @@ describe("UploadModal", () => {
   const mockAlert = jest.fn();
   global.alert = mockAlert;
   const handleClose = jest.fn();
-  const onChange = jest.fn();
 
   const router = createMockRouter({
     query: { userId: "baayoo93@gmail.com", id: "idfsdfds" },
@@ -41,7 +40,6 @@ describe("UploadModal", () => {
   }) =>
     render(
       <RecoilRootWrapper initializeState={initializeState}>
-        <RecoilObserver node={articleState} onChange={onChange} />
         <UploadModal isActive={isActive} handleClose={handleClose} />
       </RecoilRootWrapper>,
       {
@@ -84,7 +82,7 @@ describe("UploadModal", () => {
           initializeState: initialStateNotTitle,
         });
 
-        const button = screen.getByRole("upload-button");
+        const button = screen.getByRole("button", { name: /완료/i });
         fireEvent.click(button);
 
         await waitFor(() =>
@@ -108,7 +106,7 @@ describe("UploadModal", () => {
             initializeState: initialState,
           });
 
-          const button = screen.getByRole("upload-button");
+          const button = screen.getByRole("button", { name: /완료/i });
           fireEvent.click(button);
 
           await waitFor(() =>
@@ -132,7 +130,7 @@ describe("UploadModal", () => {
           initializeState: initialState,
         });
 
-        const button = screen.getByRole("upload-button");
+        const button = screen.getByRole("button", { name: /완료/i });
         fireEvent.click(button);
 
         await waitFor(() =>
@@ -151,7 +149,7 @@ describe("UploadModal", () => {
         handleClose,
       });
 
-      const textArea = screen.getByRole("textarea");
+      const textArea = screen.getByLabelText("짧게 소개하기");
       fireEvent.change(textArea, { target: { value: "짧은 소개글" } });
 
       expect(screen.getByDisplayValue(/짧은 소개글/i)).toBeInTheDocument();

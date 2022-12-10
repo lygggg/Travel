@@ -69,7 +69,6 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 size="large"
                 rounded={true}
                 onClick={handleFileUpload}
-                role="upload-button"
               >
                 완료
               </Button>
