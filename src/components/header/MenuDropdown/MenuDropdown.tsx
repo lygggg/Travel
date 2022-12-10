@@ -16,7 +16,7 @@ const MenuDropdown = () => {
   ];
 
   return (
-    <MenuContainer>
+    <MenuContainer data-testid="nav-menu-dropdown">
       <span ref={dropdownRef}>
         <IconButton
           width="30px"
