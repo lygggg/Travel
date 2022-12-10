@@ -1,34 +1,29 @@
-import { fireEvent, render } from "@testing-library/react";
-import { ThemeProvider } from "@emotion/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { theme } from "src/styles/globalStyle";
 import Button, { ButtonStyled } from "./Button";
+import { ThemeWrapper } from "src/test-utils";
 
 describe("Button", () => {
   const onClick = jest.fn();
   const renderButton = ({ children, variant, rounded, size }: ButtonStyled) =>
     render(
-      <ThemeProvider theme={theme}>
-        <Button
-          variant={variant}
-          size={size}
-          rounded={rounded}
-          onClick={onClick}
-        >
-          {children}
-        </Button>
-        ,
-      </ThemeProvider>,
+      <Button variant={variant} size={size} rounded={rounded} onClick={onClick}>
+        {children}
+      </Button>,
+      { wrapper: ThemeWrapper },
     );
 
   it("button을 클릭하면 onClick이 호출된다. ", () => {
-    const { getByText } = renderButton({
+    renderButton({
       children: "버튼",
       variant: "default",
       rounded: true,
       size: "large",
     });
-    const button = getByText("버튼");
+
+    const button = screen.getByRole("button", { name: /버튼/i });
     fireEvent.click(button);
+
     expect(onClick).toBeCalled();
   });
 
@@ -63,14 +58,15 @@ describe("Button", () => {
     // TODO 빨간줄??
     styleMock.forEach((style) => {
       it(`variant, size, rounded를 테스트한다.`, () => {
-        const { getByText } = renderButton({
+        renderButton({
           children: "버튼",
           variant: style.variant as ButtonStyled["variant"],
           rounded: style.rounded,
           size: style.size as ButtonStyled["size"],
         });
 
-        const button = getByText("버튼");
+        const button = screen.getByRole("button", { name: /버튼/i });
+
         expect(button).toHaveStyle(
           `background-color: ${style.backgroundColor}`,
         );
