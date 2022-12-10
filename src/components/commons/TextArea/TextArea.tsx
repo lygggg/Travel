@@ -29,11 +29,12 @@ const TextArea = (props: TextAreaStyled) => {
         <TextAreaStyled
           {...props}
           ref={ref}
+          aria-label={props.label}
           value={props.value}
           onChange={handleChange}
-          role="textarea"
+          placeholder="소개를 입력해주세요."
         />
-        <TextLength role="textarea-length">
+        <TextLength aria-label="textarea-length">
           {props.maxLength && `${textLength}/${props.maxLength}`}
         </TextLength>
       </Label>

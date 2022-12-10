@@ -18,9 +18,9 @@ describe("TextArea", () => {
     );
 
   it("textarea에 글을 입력하면 onChange가 호출되어야 한다.", () => {
-    rederTextArea({ onChange, label: "라벨" });
+    rederTextArea({ onChange, label: "짧게 소개하기" });
 
-    const textArea = screen.getByRole("textarea");
+    const textArea = screen.getByLabelText("짧게 소개하기");
     const value = "textarea입력";
 
     fireEvent.change(textArea, { target: { value } });
@@ -42,10 +42,10 @@ describe("TextArea", () => {
   });
 
   it("textarea에 입력하면 TextLength의 text가 변경되어야함", () => {
-    rederTextArea({ onChange, label: "라벨" });
+    rederTextArea({ onChange, label: "짧게 소개하기" });
 
-    const textArea = screen.getByRole("textarea");
-    const textAreaLen = screen.getByRole("textarea-length");
+    const textArea = screen.getByLabelText("짧게 소개하기");
+    const textAreaLen = screen.getByLabelText("textarea-length");
     const value = "textarea입력";
 
     fireEvent.change(textArea, { target: { value } });
