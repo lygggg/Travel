@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { ThemeProvider } from "@emotion/react";
 import { theme } from "src/styles/globalStyle";
 import Input, { InputStyled } from "./Input";
+import { ThemeWrapper } from "src/test-utils";
 
 describe("Input", () => {
   const onChange = jest.fn();
@@ -12,16 +12,14 @@ describe("Input", () => {
     fontSize,
   }: InputStyled) =>
     render(
-      <ThemeProvider theme={theme}>
-        <Input
-          variant={variant}
-          rounded={rounded}
-          fontSize={fontSize}
-          onChange={onChange}
-          placeholder={placeholder}
-        />
-        ,
-      </ThemeProvider>,
+      <Input
+        variant={variant}
+        rounded={rounded}
+        fontSize={fontSize}
+        onChange={onChange}
+        placeholder={placeholder}
+      />,
+      { wrapper: ThemeWrapper },
     );
 
   const placeholder = "placeholder";
@@ -33,22 +31,22 @@ describe("Input", () => {
       fontSize: "mini",
     });
 
-    screen.getByPlaceholderText(placeholder);
-
-    expect(screen.queryByPlaceholderText(placeholder)).not.toBeNull();
+    expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
   });
 
   it("input에 입력하면 onChange 호출된다. ", () => {
-    const { getByPlaceholderText } = renderInput({
+    renderInput({
       placeholder: placeholder,
       variant: "default",
       rounded: "default",
       fontSize: "mini",
     });
 
-    const input = getByPlaceholderText(placeholder);
+    const input = screen.getByPlaceholderText(placeholder);
     const value = "입력값";
+
     fireEvent.change(input, { target: { value } });
+
     expect(onChange).toBeCalled();
   });
 
@@ -92,16 +90,16 @@ describe("Input", () => {
       },
     ];
 
-    // TODO 빨간줄??
     styleMock.forEach((style) => {
       it(`variant, rounded, fontSize를 테스트한다.`, () => {
-        const { getByPlaceholderText } = renderInput({
+        renderInput({
           placeholder: placeholder,
           variant: style.variant as InputStyled["variant"],
           rounded: style.rounded as InputStyled["rounded"],
           fontSize: style.fontSize as InputStyled["fontSize"],
         });
-        const input = getByPlaceholderText(placeholder);
+
+        const input = screen.getByPlaceholderText(placeholder);
 
         expect(input).toHaveStyle(`background-color: ${style.backgroundColor}`);
         expect(input).toHaveStyle(`font-size:  ${style.fontScale}`);
