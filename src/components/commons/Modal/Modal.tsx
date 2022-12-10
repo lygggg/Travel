@@ -19,10 +19,7 @@ const Modal = (props: Props) => {
 
   if (!props.isActive) return null;
 
-  return createPortal(
-    <Overlay data-testid="modal">{props.children}</Overlay>,
-    modalRoot,
-  );
+  return createPortal(<Overlay>{props.children}</Overlay>, modalRoot);
 };
 
 export default Modal;
