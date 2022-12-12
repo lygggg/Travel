@@ -1,34 +1,43 @@
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor, screen } from "@testing-library/react";
 import { render } from "src/test-utils/customRender";
-import DropdDown, { DropDownContext, DropDownContent } from "./DropDown";
+import DropdDown from "./DropDown";
 
 describe("DropdDown", () => {
-  const setIsActive = jest.fn();
-  const renderDropdDown = (value: DropDownContent) =>
+  const renderDropdDown = () =>
     render(
-      <DropDownContext.Provider value={value}>
-        <DropdDown trigger={<button>버튼</button>}>
-          <DropdDown.List>
-            <DropdDown.Item>버튼</DropdDown.Item>
-          </DropdDown.List>
-        </DropdDown>
-      </DropDownContext.Provider>,
+      <DropdDown trigger={<button>드랍다운 버튼</button>}>
+        <DropdDown.List>
+          <DropdDown.Item>버튼</DropdDown.Item>
+        </DropdDown.List>
+      </DropdDown>,
       {},
     );
 
   context("dropdown이 닫혀있을 때", () => {
     context("버튼 누르면", () => {
       it("dropdown이 열린다.", async () => {
-        const { queryByTestId, getByTestId } = renderDropdDown({
-          isActive: false,
-          setIsActive,
-        });
+        renderDropdDown();
 
-        const button = getByTestId("dropdown-trigger");
+        const button = screen.getByRole("button", { name: /드랍다운 버튼/i });
         fireEvent.click(button);
 
-        const dropdown = queryByTestId("dropdown-list");
-        waitFor(() => expect(dropdown).toBeInTheDocument());
+        const dropdown = screen.getByTestId("dropdown-list");
+        expect(dropdown).toHaveStyle(`visibility: visible`);
+      });
+    });
+
+    context("버튼을 한번 더 누르면", () => {
+      it("dropdown이 닫힌다.", async () => {
+        renderDropdDown();
+
+        const trigger = screen.getByRole("button", { name: /드랍다운 버튼/i });
+        const dropdown = screen.getByTestId("dropdown-list");
+
+        fireEvent.click(trigger);
+        expect(dropdown).toHaveStyle(`visibility: visible`);
+
+        fireEvent.click(trigger);
+        expect(dropdown).toHaveStyle(`visibility: hidden`);
       });
     });
   });
@@ -36,11 +45,13 @@ describe("DropdDown", () => {
   context("dropdown이 열려있을 때", () => {
     context("esc 버튼을 누르면", () => {
       it("dropdown이 닫힌다.", async () => {
-        const { queryAllByTestId } = renderDropdDown({
-          isActive: true,
-          setIsActive,
+        renderDropdDown();
+
+        const trigger = screen.getByRole("button", {
+          name: /드랍다운 버튼/i,
         });
 
+        fireEvent.click(trigger);
         fireEvent.keyDown(global.document, {
           key: "Escape",
           code: "Escape",
@@ -48,23 +59,9 @@ describe("DropdDown", () => {
           charCode: 27,
         });
 
-        const dropdown = queryAllByTestId("dropdown-list");
-        waitFor(() => expect(dropdown).not.toBeInTheDocument());
-      });
-    });
+        const dropdown = screen.queryByTestId("dropdown-list");
 
-    context("버튼을 한번 더 누르면", () => {
-      it("dropdown이 닫힌다.", () => {
-        const { getByTestId } = renderDropdDown({
-          isActive: true,
-          setIsActive,
-        });
-
-        const trigger = getByTestId("dropdown-trigger");
-        fireEvent.click(trigger);
-
-        const dropdown = getByTestId("dropdown-list");
-        waitFor(() => expect(dropdown).not.toBeInTheDocument());
+        await waitFor(() => expect(dropdown).toHaveStyle(`visibility: hidden`));
       });
     });
   });
