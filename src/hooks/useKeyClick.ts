@@ -1,38 +1,16 @@
 import { useEffect } from "react";
-
-type KeyType = "Escape" | "Space";
+import { keys, KeyType } from "src/constant/keyboard";
 
 interface KeyEvent {
   key: KeyType;
   keyEvent: (event: KeyboardEvent) => void;
 }
 
-interface KeyboardHandlerProps {
+interface Props {
   events: KeyEvent[];
 }
 
-const keys = {
-  Space: " ",
-  Enter: "Enter",
-  Escape: "Escape",
-  Backspace: "Backspace",
-  Delete: "Delete",
-
-  ArrowLeft: "ArrowLeft",
-  ArrowUp: "ArrowUp",
-  ArrowRight: "ArrowRight",
-  ArrowDown: "ArrowDown",
-
-  Home: "Home",
-  End: "End",
-
-  PageUp: "PageUp",
-  PageDown: "PageDown",
-
-  Tab: "Tab",
-} as const;
-
-const useKeyClick = ({ events }: KeyboardHandlerProps) => {
+const useKeyClick = ({ events }: Props) => {
   useEffect(() => {
     const keyEvent = (e: KeyboardEvent) => {
       events.forEach(({ key, keyEvent }) => {
