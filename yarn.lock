@@ -6302,6 +6302,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-jsx-ally@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "eslint-plugin-jsx-ally@npm:6.0.3"
+  checksum: 04e48fc71957265eb851293b6571467001f8aa348ab7930192f93087d65023b26a524c9f92900327849bd69163e71e4a81794025d03a5ef42efac236c24390c5
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-prettier@npm:^4.2.1":
   version: 4.2.1
   resolution: "eslint-plugin-prettier@npm:4.2.1"
@@ -6317,7 +6324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^4.5.0":
+"eslint-plugin-react-hooks@npm:^4.5.0, eslint-plugin-react-hooks@npm:^4.6.0":
   version: 4.6.0
   resolution: "eslint-plugin-react-hooks@npm:4.6.0"
   peerDependencies:
@@ -9608,7 +9615,9 @@ __metadata:
     eslint-config-next: ^13.0.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-jest-dom: ^4.0.3
+    eslint-plugin-jsx-ally: ^6.0.3
     eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-testing-library: ^5.9.1
     framer-motion: ^7.6.1
     intercept-stdout: ^0.1.2
