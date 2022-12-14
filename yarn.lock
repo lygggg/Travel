@@ -6279,7 +6279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsx-a11y@npm:^6.5.1":
+"eslint-plugin-jsx-a11y@npm:^6.5.1, eslint-plugin-jsx-a11y@npm:^6.6.1":
   version: 6.6.1
   resolution: "eslint-plugin-jsx-a11y@npm:6.6.1"
   dependencies:
@@ -6299,13 +6299,6 @@ __metadata:
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
   checksum: baae7377f0e25a0cc9b34dc333a3dc6ead9ee8365e445451eff554c3ca267a0a6cb88127fe90395c578ab1b92cfed246aef7dc8d2b48b603389e10181799e144
-  languageName: node
-  linkType: hard
-
-"eslint-plugin-jsx-ally@npm:^6.0.3":
-  version: 6.0.3
-  resolution: "eslint-plugin-jsx-ally@npm:6.0.3"
-  checksum: 04e48fc71957265eb851293b6571467001f8aa348ab7930192f93087d65023b26a524c9f92900327849bd69163e71e4a81794025d03a5ef42efac236c24390c5
   languageName: node
   linkType: hard
 
@@ -9615,7 +9608,7 @@ __metadata:
     eslint-config-next: ^13.0.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-jest-dom: ^4.0.3
-    eslint-plugin-jsx-ally: ^6.0.3
+    eslint-plugin-jsx-a11y: ^6.6.1
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-testing-library: ^5.9.1
