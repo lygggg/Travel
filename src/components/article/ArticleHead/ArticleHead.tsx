@@ -41,11 +41,20 @@ const ArticleHead: React.FC<Props> = (article) => {
       {session?.user.email === email && (
         <EndContainer>
           <Link href={{ pathname: "/write", query: { id: _id } }}>
-            <Button variant="primary" size="mini">
+            <Button
+              variant="primary"
+              size="mini"
+              aria-label="블로그 글 수정하기"
+            >
               수정
             </Button>
           </Link>
-          <Button variant="primary" size="mini" onClick={handleRemoveArticle}>
+          <Button
+            variant="primary"
+            size="mini"
+            onClick={handleRemoveArticle}
+            aria-label="블로그 글 삭제하기"
+          >
             삭제
           </Button>
         </EndContainer>

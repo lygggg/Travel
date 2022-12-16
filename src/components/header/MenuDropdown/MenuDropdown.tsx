@@ -23,6 +23,7 @@ const MenuDropdown = () => {
           height="30px"
           position="-10px -107px"
           onClick={setIsActive}
+          aria-label="메뉴 펼치기"
         />
       </span>
 

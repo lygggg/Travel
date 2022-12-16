@@ -17,7 +17,13 @@ const Button = ({
   ...rest
 }: ButtonStyled) => {
   return (
-    <ButtonStyled variant={variant} rounded={rounded} size={size} {...rest}>
+    <ButtonStyled
+      type="button"
+      variant={variant}
+      rounded={rounded}
+      size={size}
+      {...rest}
+    >
       {children}
     </ButtonStyled>
   );

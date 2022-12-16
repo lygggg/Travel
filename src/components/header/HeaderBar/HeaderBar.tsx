@@ -19,7 +19,9 @@ const HeaderBar = () => {
         <HeaderLayout>
           <HeaderLeftContainer>
             <Title>
-              <StyledLink href={"/"}>MLOG</StyledLink>
+              <h1>
+                <StyledLink href={"/"}>MLOG</StyledLink>
+              </h1>
             </Title>
             {session && (
               <Link href={`/${session.user.email}`}>
@@ -28,8 +30,18 @@ const HeaderBar = () => {
             )}
           </HeaderLeftContainer>
           <HeaderRightContainer>
-            <IconButton width="30px" height="30px" position="-110px -10px" />
-            <IconButton width="30px" height="30px" position="-10px -10px" />
+            <IconButton
+              width="30px"
+              height="30px"
+              position="-110px -10px"
+              aria-label="검색하기"
+            />
+            <IconButton
+              width="30px"
+              height="30px"
+              position="-10px -10px"
+              aria-label="다크모드로 변환하기"
+            />
 
             {session ? (
               <MenuDropdown />
@@ -39,6 +51,7 @@ const HeaderBar = () => {
                 size="medium"
                 rounded={true}
                 onClick={handleModalOpen}
+                aria-label="로그인하기"
               >
                 로그인
               </Button>
@@ -92,7 +105,7 @@ const Title = styled.span`
   font-size: 1.8rem;
 `;
 
-const UserTitle = styled.span`
+const UserTitle = styled.h2`
   font-weight: 700;
   font-size: 1.1rem;
 `;

@@ -1,4 +1,4 @@
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState } from "react";
 import { useS3Upload } from "next-s3-upload";
 import styled from "@emotion/styled";
 import Image from "next/image";
@@ -42,6 +42,7 @@ const ImageUpload: React.FC = () => {
             size="large"
             rounded={true}
             onClick={handleFileRemove}
+            aria-label="사진 제거하기"
           >
             사진 제거
           </Button>
@@ -51,6 +52,7 @@ const ImageUpload: React.FC = () => {
             size="large"
             rounded={true}
             onClick={openFileDialog}
+            aria-label="사진 업로드하기"
           >
             사진 업로드
           </Button>
@@ -62,7 +64,7 @@ const ImageUpload: React.FC = () => {
             src={thumbnailUrl}
             height={250}
             width={400}
-            alt="upload image"
+            alt="썸네일 업로드 하기"
           />
         ) : (
           "사진을 업로드해주세요"

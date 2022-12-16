@@ -29,10 +29,20 @@ const Home: NextPage = () => {
       <MainTitle className={antonFont.className}>MLOG</MainTitle>
       <SubTitle content={WELCOME} speed={100}></SubTitle>
       <ButtonContainer>
-        <Button onClick={handleClickWrite} variant="primary" size="large">
+        <Button
+          onClick={handleClickWrite}
+          variant="primary"
+          size="large"
+          aria-label="블로그 글 작성하러 가기"
+        >
           글 작성하러 가기
         </Button>
-        <Button onClick={handleClickMe} variant="default" size="large">
+        <Button
+          onClick={handleClickMe}
+          variant="default"
+          size="large"
+          aria-label="내 블로그 페이지 가기"
+        >
           내 블로그가 가기
         </Button>
       </ButtonContainer>
