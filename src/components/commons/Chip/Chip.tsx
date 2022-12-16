@@ -26,14 +26,18 @@ const Chip: React.FC<Props> = ({
   return (
     <>
       <ChipStyle aria-label={children} size={size}>
-        <TextContainer clickable={onClick} onClick={handleClick}>
+        <TextContainer
+          clickable={onClick}
+          onClick={handleClick}
+          aria-label={`${children} 태그`}
+        >
           {children}
         </TextContainer>
         {onRemove && (
           <ImageContainer>
             <Image
               src={closeImg}
-              alt="Delete the tag"
+              alt="태그 삭제하기"
               width={20}
               height={20}
               onClick={handleRemove}
@@ -45,7 +49,7 @@ const Chip: React.FC<Props> = ({
   );
 };
 
-const ChipStyle = styled.div<{ size: string }>`
+const ChipStyle = styled.li<{ size: string }>`
   display: flex;
   color: ${(props) => props.theme.white};
   font-weight: 500;
@@ -77,7 +81,7 @@ const ChipStyle = styled.div<{ size: string }>`
   }}
 `;
 
-const TextContainer = styled.button<{ clickable?: (chip: string) => void }>`
+const TextContainer = styled.div<{ clickable?: (chip: string) => void }>`
   ${(props) =>
     props.clickable &&
     `&:hover {
