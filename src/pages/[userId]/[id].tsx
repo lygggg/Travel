@@ -84,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 export default ArticleDetailPage;
 
-const Container = styled.div`
+const Container = styled.article`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

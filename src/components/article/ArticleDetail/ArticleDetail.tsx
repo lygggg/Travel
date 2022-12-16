@@ -49,7 +49,7 @@ const MDXComponent = {
     );
   },
   img: (props: any) => {
-    return <img src={props.src} alt={props.alt} loading="lazy" />;
+    return <Image src={props.src} alt={props.alt} />;
   },
   a: (props: any) => (
     <Tooltip hasArrow label={props.href}>
@@ -70,7 +70,7 @@ const ArticleDetail: React.FC<Props> = ({ content }) => {
 
 export default ArticleDetail;
 
-const Content = styled.article`
+const Content = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 100px;
