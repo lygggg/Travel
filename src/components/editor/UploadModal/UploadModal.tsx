@@ -37,8 +37,8 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
         introduction,
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
       });
-      resetArticle();
       await router.push({ pathname: `/${session?.user.email}` });
+      resetArticle();
     } catch (err) {
       alert("upload failed.");
     }
@@ -69,6 +69,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 size="large"
                 rounded={true}
                 onClick={handleFileUpload}
+                aria-label="블로그 글 작성 완료하기"
               >
                 완료
               </Button>
@@ -77,6 +78,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 size="large"
                 rounded={true}
                 onClick={handleClose}
+                aria-label="블로그 글 작성 취소하기"
               >
                 취소
               </Button>

@@ -44,19 +44,22 @@ const EditorContainer = () => {
         />
         <ButtonContainer>
           <Link href={"/"}>
-            <Button variant="primary" size="large" rounded={true}>
+            <Button
+              variant="primary"
+              size="large"
+              rounded={true}
+              aria-label="글 작성하기에서 나가기"
+            >
               나가기
             </Button>
           </Link>
           <ButtonLayout>
-            <Button variant="primary" size="large" rounded={true}>
-              임시 저장
-            </Button>
             <Button
               variant="default"
               size="large"
               rounded={true}
               onClick={handleModalOpen}
+              aria-label="글 작성 완료하기"
             >
               작성하기
             </Button>

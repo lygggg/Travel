@@ -43,6 +43,7 @@ const ArticlePage = () => {
               size="medium"
               variant="primary"
               onClick={() => setPageNum((page) => page + 1)}
+              aria-label="글 목록 더 가져오기"
             >
               목록 더 보기
             </Button>
