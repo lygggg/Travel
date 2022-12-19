@@ -16,10 +16,11 @@ import {
 } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import Script from "next/script";
-import * as gtag from "src/libs/gtag";
 import { NextComponentType } from "next";
 import styled from "@emotion/styled";
 import { Noto_Sans } from "@next/font/google";
+import * as gtag from "src/libs/gtag";
+import Footer from "src/components/footer/Footer";
 
 const ubuntu = Noto_Sans({
   weight: "400",
@@ -84,6 +85,8 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
                   ) : (
                     <Component {...pageProps} />
                   )}
+
+                  <Footer />
                 </Container>
               </ThemeProvider>
             </SessionProvider>
@@ -98,12 +101,13 @@ interface StyleProps {
   location: string;
 }
 
-const Container = styled.div<StyleProps>`
+const Container = styled.main<StyleProps>`
   margin: 0 auto;
-  height: calc(100vh - 90px);
+  max-width: 870px;
+  height: 100%;
   box-sizing: border-box;
   position: relative;
-  width: 1200px;
+  padding: 30px 25px 50px 25px;
 `;
 
 export default MyApp;

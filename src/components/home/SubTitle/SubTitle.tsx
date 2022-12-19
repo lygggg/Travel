@@ -18,7 +18,7 @@ const SubTitle: React.FC<Props> = ({ content, speed }) => {
 
 const Container = styled.div`
   display: flex;
-  font-size: 3rem;
+  font-size: 2.7rem;
   font-weight: 600;
 `;
 const Cursor = styled.h1`
