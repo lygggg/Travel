@@ -38,3 +38,8 @@ Cypress.Commands.add("login", () => {
   );
   Cypress.Cookies.preserveOnce("next-auth.session-token");
 });
+
+Cypress.Commands.add("logout", () => {
+  cy.visit("/api/auth/signout");
+  cy.get("form").submit();
+});

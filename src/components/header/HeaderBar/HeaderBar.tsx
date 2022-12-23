@@ -39,6 +39,7 @@ const HeaderBar = () => {
                 size="medium"
                 rounded={true}
                 onClick={handleModalOpen}
+                className="login-button"
               >
                 로그인
               </Button>
