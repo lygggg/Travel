@@ -51,7 +51,7 @@ const HeaderBar = () => {
                 size="medium"
                 rounded={true}
                 onClick={handleModalOpen}
-                aria-label="로그인하기"
+                className="login-button"
               >
                 로그인
               </Button>
