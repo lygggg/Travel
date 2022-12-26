@@ -29,7 +29,7 @@ const Chip: React.FC<Props> = ({
         <TextContainer
           clickable={onClick}
           onClick={handleClick}
-          aria-label={`${children} 태그`}
+          aria-label={`${children} tag`}
         >
           {children}
         </TextContainer>

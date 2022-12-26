@@ -18,9 +18,7 @@ describe("LoginModal", () => {
       it("signIn이 호출된다. ", () => {
         renderLoginModal();
 
-        const googleButton = screen.getByRole("button", {
-          name: /Google 로그인/i,
-        });
+        const googleButton = screen.getByLabelText("구글 로그인하기");
         fireEvent.click(googleButton);
 
         expect(signIn).toBeCalled();
@@ -31,9 +29,7 @@ describe("LoginModal", () => {
       it("signIn이 호출된다. ", () => {
         renderLoginModal();
 
-        const gitHubButton = screen.getByRole("button", {
-          name: /Github 로그인/i,
-        });
+        const gitHubButton = screen.getByLabelText("깃허브 로그인하기");
         fireEvent.click(gitHubButton);
 
         expect(signIn).toBeCalled();
@@ -41,12 +37,10 @@ describe("LoginModal", () => {
     });
 
     context("Kakao 로그인 버튼을 클릭하면", () => {
-      it("ssignIn이 호출된다. ", () => {
+      it("signIn이 호출된다. ", () => {
         renderLoginModal();
 
-        const kakaoButton = screen.getByRole("button", {
-          name: /Kakao 로그인/i,
-        });
+        const kakaoButton = screen.getByLabelText("카카오 로그인하기");
         fireEvent.click(kakaoButton);
 
         expect(signIn).toBeCalled();
@@ -57,7 +51,7 @@ describe("LoginModal", () => {
       it("handleClose 가 호출되어야 한다.", () => {
         renderLoginModal();
 
-        const closeButton = screen.getByRole("button", { name: /취소/i });
+        const closeButton = screen.getByLabelText("취소");
         fireEvent.click(closeButton);
 
         expect(handleClose).toBeCalled();

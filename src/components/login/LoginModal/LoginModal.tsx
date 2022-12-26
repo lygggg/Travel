@@ -51,7 +51,9 @@ const LoginModal: React.FC<Props> = ({ isActive, handleClose }) => {
             <Image src={kakaoIcon} alt="카카오 로그인" width={25} height={25} />
             <LoginText>Kakao 로그인</LoginText>
           </LoginButton>
-          <Exit onClick={handleClose}>취소</Exit>
+          <Exit aria-label="취소" href="#" role="button" onClick={handleClose}>
+            취소
+          </Exit>
         </ModalContainer>
       </Modal>
     </>
@@ -68,7 +70,7 @@ const Title = styled.h1`
   margin-bottom: 15px;
 `;
 
-const Exit = styled.p`
+const Exit = styled.a`
   color: ${(props) => props.theme.gray[400]};
   font-size: 1rem;
   font-weight: 500;

@@ -24,8 +24,8 @@ describe("Chip", () => {
           onRemove,
         });
 
-        const img = screen.getByAltText("Delete the tag");
-        fireEvent.click(img);
+      const img = screen.getByAltText("태그 삭제하기");
+      fireEvent.click(img);
 
         expect(onRemove).toBeCalled();
       });
@@ -40,7 +40,7 @@ describe("Chip", () => {
         onClick,
       });
 
-      const chip = screen.getByRole("button", { name: /태그/i });
+      const chip = screen.getByLabelText("태그 tag");
       fireEvent.click(chip);
 
       expect(onClick).toBeCalled();
