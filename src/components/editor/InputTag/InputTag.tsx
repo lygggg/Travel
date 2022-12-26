@@ -56,7 +56,7 @@ const InputTag: React.FC<Props> = ({ onChange, tagList }) => {
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 13px;
 `;
 
 export default InputTag;

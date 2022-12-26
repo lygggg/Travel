@@ -71,19 +71,19 @@ const EditorContainer = () => {
 };
 
 const Container = styled.div`
-  padding: 1rem;
+  padding: 25px;
 `;
 const InputContainer = styled.div`
   display: flex;
   flex-flow: column;
-  margin-bottom: 2rem;
-  gap: 1rem;
+  margin-bottom: 20px;
+  gap: 15px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   place-content: space-between;
-  margin-top: 2rem;
+  margin-top: 15px;
 `;
 
 const ButtonLayout = styled.span`

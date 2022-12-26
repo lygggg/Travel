@@ -45,7 +45,7 @@ export default TextArea;
 
 const TextAreaStyled = styled.textarea<TextAreaStyled>`
   width: 100%;
-  padding: 0.75rem;
+  padding: 10px;
   font-size: 1rem;
   background-color: ${(props) => props.theme.black[500]};
   color: ${(props) => props.theme.white};
@@ -60,7 +60,7 @@ const TextLength = styled.div`
 const Label = styled.label`
   flex-direction: column;
   display: flex;
-  gap: 1rem;
+  gap: 15px;
 `;
 
 const LabelText = styled.span`
