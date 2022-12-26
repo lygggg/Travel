@@ -81,12 +81,12 @@ const Container = styled.div`
   height: 450px;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 13px;
 `;
 
 const EndContainer = styled.div`
   display: flex;
-  gap: 0.3rem;
+  gap: 10px;
   align-self: end;
 `;
 

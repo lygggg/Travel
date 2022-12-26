@@ -93,5 +93,5 @@ const Container = styled.article`
   flex-grow: 10;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5.5rem;
+  margin-top: 60px;
 `;

@@ -65,14 +65,14 @@ const Title = styled.h1`
   color: ${(props) => props.theme.white};
   font-size: 1.3rem;
   font-weight: 500;
-  margin-bottom: 1.3rem;
+  margin-bottom: 15px;
 `;
 
 const Exit = styled.p`
   color: ${(props) => props.theme.gray[400]};
   font-size: 1rem;
   font-weight: 500;
-  margin-top: 0.8rem;
+  margin-top: 12px;
   cursor: pointer;
 `;
 
@@ -83,20 +83,19 @@ const LoginButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.4rem;
+  padding: 25px;
 `;
 
 const ModalContainer = styled.div`
   display: flex;
-  gap: 0.6rem;
+  gap: 11px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 420px;
   height: 320px;
   background-color: ${(props) => props.theme.gray[700]};
-  padding: 1.5rem;
-  border-radius: 0.3rem;
+  border-radius: 5px;
 `;
 
 export default LoginModal;

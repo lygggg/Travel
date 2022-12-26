@@ -52,7 +52,7 @@ const Home: NextPage = () => {
 
 const Container = styled.div`
   display: flex;
-  row-gap: 4rem;
+  row-gap: 70px;
   flex-direction: column;
   place-items: center;
   width: 100%;
@@ -78,7 +78,7 @@ const MainTitle = styled.h1`
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 40px;
 `;
 
 export default Home;

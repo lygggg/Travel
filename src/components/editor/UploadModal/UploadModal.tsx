@@ -113,7 +113,7 @@ const H2 = styled.h2`
   color: white;
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
 `;
 const UploadContainer = styled.div`
   place-self: center;
@@ -124,7 +124,7 @@ const UploadContainer = styled.div`
 const IntroductionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 15px;
 `;
 const ButtonContainer = styled.div`
   display: flex;
