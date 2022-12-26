@@ -1,5 +1,6 @@
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { Tooltip } from "@chakra-ui/react";
+import Image from "next/image";
 import {
   Prism as SyntaxHighlighter,
   SyntaxHighlighterProps,
@@ -49,7 +50,7 @@ const MDXComponent = {
     );
   },
   img: (props: any) => {
-    return <Image src={props.src} alt={props.alt} />;
+    return <img src={props.src} alt={props.alt} />;
   },
   a: (props: any) => (
     <Tooltip hasArrow label={props.href}>
