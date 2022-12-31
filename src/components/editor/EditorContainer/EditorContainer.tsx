@@ -26,6 +26,7 @@ const EditorContainer = () => {
             rounded="default"
             fontSize="large"
             aria-label="editor-title-input"
+            data-testid="editor-title-input"
             value={title}
             onChange={(e) =>
               setArticle({ ...ArticleState, title: e.target.value })
@@ -59,6 +60,7 @@ const EditorContainer = () => {
               size="large"
               rounded={true}
               onClick={handleModalOpen}
+              data-testid="write-button"
               aria-label="글 작성 완료하기"
             >
               작성하기
