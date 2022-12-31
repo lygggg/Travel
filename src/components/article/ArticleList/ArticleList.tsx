@@ -1,4 +1,4 @@
-import { Article as ArticleProps } from "src/models";
+import { Article as ArticleProps } from "src/models/article";
 import { ArticleBox } from "src/components/article";
 import styled from "@emotion/styled";
 

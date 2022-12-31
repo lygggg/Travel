@@ -10,5 +10,6 @@ export const articleState = atom<PostArticleRequest>({
     thumbnailUrl: "",
     introduction: "",
     syncTime: "",
+    _id: "",
   },
 });

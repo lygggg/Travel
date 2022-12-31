@@ -2,29 +2,48 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
 import { useSession } from "next-auth/react";
-import { Button, TagList } from "src/components/commons";
+import { Button, Chip } from "src/components/commons";
 import { useDeleteArticle } from "src/hooks/api/useArticle";
+import { articleState } from "src/store/article";
+import { Article } from "src/models/article";
 
 export interface Props {
-  title: string;
-  tags: string[];
-  thumbnailUrl: string;
-  base64: string;
-  syncTime: string;
-  _id: string;
-  name: string;
-  email: string;
+  article: Article;
 }
-const ArticleHead: React.FC<Props> = (article) => {
+const ArticleHead: React.FC<Props> = ({ article }) => {
   const {
     query: { userId, id },
     push,
   } = useRouter();
   const { data: session } = useSession();
-  const { title, tags, thumbnailUrl, base64, syncTime, _id, email } = article;
 
+  const {
+    title,
+    tags,
+    thumbnailUrl,
+    syncTime,
+    _id,
+    email,
+    content,
+    introduction,
+  } = article;
+
+  const setArticle = useSetRecoilState(articleState);
   const deleteArticleMutation = useDeleteArticle();
+
+  const handleModifyArticle = () => {
+    setArticle({
+      content,
+      tags,
+      title,
+      thumbnailUrl,
+      introduction,
+      syncTime,
+      _id,
+    });
+  };
 
   const handleRemoveArticle = async () => {
     try {
@@ -37,14 +56,16 @@ const ArticleHead: React.FC<Props> = (article) => {
 
   return (
     <Container>
-      <Title>{title}</Title>
+      <Title data-testid="article-head">{title}</Title>
       {session?.user.email === email && (
         <EndContainer>
           <Link href={{ pathname: "/write", query: { id: _id } }}>
             <Button
               variant="primary"
               size="mini"
+              data-testid="article-modify"
               aria-label="블로그 글 수정하기"
+              onClick={handleModifyArticle}
             >
               수정
             </Button>
@@ -52,24 +73,27 @@ const ArticleHead: React.FC<Props> = (article) => {
           <Button
             variant="primary"
             size="mini"
-            onClick={handleRemoveArticle}
+            data-testid="article-delete"
             aria-label="블로그 글 삭제하기"
+            onClick={handleRemoveArticle}
           >
             삭제
           </Button>
         </EndContainer>
       )}
       {syncTime}
-      <TagList tags={tags} size="small" />
-      <ImageContainer>
-        <Image
-          src={thumbnailUrl}
-          fill
-          placeholder="blur"
-          blurDataURL={base64}
-          alt={title}
-        />
-      </ImageContainer>
+      <TagContainer>
+        {tags.map((tag: string) => (
+          <Chip size="small" key={tag} data-testid="article-head-tag">
+            {tag}
+          </Chip>
+        ))}
+      </TagContainer>
+      {thumbnailUrl && (
+        <ImageContainer>
+          <Image src={thumbnailUrl} fill alt={title} />{" "}
+        </ImageContainer>
+      )}
     </Container>
   );
 };
@@ -82,6 +106,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 13px;
+`;
+
+const TagContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
 `;
 
 const EndContainer = styled.div`
