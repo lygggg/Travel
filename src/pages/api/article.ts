@@ -1,11 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import { getToken } from "next-auth/jwt";
-import { withSentry } from "@sentry/nextjs";
 import { ArticleModel } from "./models/article";
 import { TagModel } from "./models/tag";
 import { connectMongo } from "./utils/connectMongo.js";
-import next from "next";
 
 const secret = process.env.SECRET;
 
@@ -25,14 +23,67 @@ handler
   })
   .post(async (req, res, next) => {
     try {
-      const { content, tags, title, thumbnailUrl, introduction, syncTime } =
-        req.body;
+      const {
+        content,
+        tags,
+        title,
+        thumbnailUrl,
+        introduction,
+        syncTime,
+        _id,
+      } = req.body;
 
       const { name, email }: any = await getToken({
         req: req,
         secret: secret,
       });
-      const article = await ArticleModel.create({});
+
+      if (_id) {
+        try {
+          const article = await ArticleModel.updateOne(
+            { _id: _id },
+            {
+              content,
+              tags,
+              title,
+              name,
+              email,
+              thumbnailUrl,
+              introduction,
+              syncTime,
+            },
+          );
+          await TagModel.deleteMany({
+            articleId: _id,
+          });
+
+          await Promise.all(
+            tags.map((tag: string) => {
+              return TagModel.create({
+                tagName: tag,
+                userId: email,
+                articleId: _id,
+              });
+            }),
+          );
+
+          res.status(201).json(article);
+          return;
+        } catch (err) {
+          next(err);
+        }
+      }
+
+      const article = await ArticleModel.create({
+        content,
+        tags,
+        title,
+        name,
+        email,
+        thumbnailUrl,
+        introduction,
+        syncTime,
+      });
 
       await Promise.all(
         tags.map((tag: string) => {
@@ -43,7 +94,7 @@ handler
           });
         }),
       );
-      res.json(article);
+      res.status(201).json(article);
     } catch (err) {
       console.log(err);
       next(err);
