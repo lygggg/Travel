@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { withPlaiceholder } = require("@plaiceholder/next");
 const { withSentryConfig } = require("@sentry/nextjs");
 const intercept = require("intercept-stdout");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -43,7 +42,6 @@ const sentryWebpackPluginOptions = {
 
 module.exports = (_phase, { defaultConfig }) => {
   const plugins = [
-    withPlaiceholder,
     withBundleAnalyzer,
     (nextConfig) => withSentryConfig(nextConfig, sentryWebpackPluginOptions),
   ];
