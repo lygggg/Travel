@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { TagList } from "src/components/commons";
+import { Chip } from "src/components/commons";
 
 export interface Props {
   tags: string[];
@@ -16,7 +16,18 @@ const ArticleTagList: React.FC<Props> = ({ tags }) => {
   };
   return (
     <Container data-testid="article-taglist">
-      <TagList tags={tags} size="small" onClick={moveUrl} />
+      <TagContainer>
+        {tags.map((tag: string) => (
+          <Chip
+            size="small"
+            key={tag}
+            onClick={moveUrl}
+            data-testid="article-tag"
+          >
+            {tag}
+          </Chip>
+        ))}
+      </TagContainer>
     </Container>
   );
 };
@@ -28,6 +39,12 @@ const Container = styled.div`
   margin-right: auto;
   padding: 3rem;
   gap: 0.6rem;
+`;
+
+const TagContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
 `;
 
 export default ArticleTagList;
