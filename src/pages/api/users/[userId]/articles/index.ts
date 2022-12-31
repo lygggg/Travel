@@ -29,7 +29,7 @@ handler
 
     if (q === "all") {
       const articles = await ArticleModel.find({ email: userId })
-        .sort({ syncTime: 1 })
+        .sort({ syncTime: -1 })
         .limit(pageNum);
       res.json({ articles, total });
       return;
