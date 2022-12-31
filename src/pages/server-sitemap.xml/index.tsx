@@ -1,9 +1,10 @@
-import { GetServerSidePropsContext } from "next";
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { GetServerSideProps } from "next";
 import { getServerSideSitemap } from "next-sitemap";
 import { ArticleModel } from "src/pages/api/models/article";
 import { connectMongo } from "src/pages/api/utils/connectMongo";
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   await connectMongo();
   const articles = await ArticleModel.find();
   const lastmod = new Date().toISOString();
@@ -28,7 +29,4 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return getServerSideSitemap(ctx, fields);
 };
 
-// Default export to prevent next.js errors
-export default () => {
-  return;
-};
+export default function Sitemap() {}
