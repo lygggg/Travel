@@ -17,7 +17,8 @@ export interface Props {
 const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
   const resetArticle = useResetRecoilState(articleState);
   const [ArticleState, setArticle] = useRecoilState(articleState);
-  const { thumbnailUrl, introduction, title, tags, content } = ArticleState;
+  const { thumbnailUrl, introduction, title, tags, content, _id } =
+    ArticleState;
   const router = useRouter();
   const { data: session } = useSession();
   const postArticleMutation = usePostArticle();
@@ -36,6 +37,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
         thumbnailUrl,
         introduction,
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
+        _id,
       });
       resetArticle();
       await router.push({ pathname: `/${session?.user.email}` });
@@ -58,6 +60,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 maxLength={30}
                 label={"짧게 소개하기"}
                 value={introduction}
+                className="editor-description-input"
                 onChange={(text: any) =>
                   setArticle({ ...ArticleState, introduction: text })
                 }
@@ -69,6 +72,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 size="large"
                 rounded={true}
                 onClick={handleFileUpload}
+                data-testid="send-write-button"
               >
                 완료
               </Button>
