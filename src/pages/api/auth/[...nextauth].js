@@ -22,5 +22,24 @@ export const authOptions = {
       clientSecret: process.env.KAKAO_SECRET,
     }),
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
+  jwt: {
+    secret: process.env.SECRET,
+  },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        path: "/",
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      },
+    },
+  },
 };
 export default NextAuth(authOptions);
