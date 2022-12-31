@@ -16,40 +16,45 @@ describe("TextArea", () => {
       ></TextArea>,
       { wrapper: ThemeWrapper },
     );
+  context("textarea에 글을 입력하면", () => {
+    it("onChange가 호출되어야 한다.", () => {
+      rederTextArea({ onChange, label: "짧게 소개하기" });
 
-  it("textarea에 글을 입력하면 onChange가 호출되어야 한다.", () => {
-    rederTextArea({ onChange, label: "짧게 소개하기" });
+      const textArea = screen.getByLabelText("짧게 소개하기");
+      const value = "textarea입력";
 
-    const textArea = screen.getByLabelText("짧게 소개하기");
-    const value = "textarea입력";
+      fireEvent.change(textArea, { target: { value } });
 
-    fireEvent.change(textArea, { target: { value } });
-
-    expect(onChange).toBeCalled();
-  });
-
-  it("label을 입력하면 label이 보여야 한다.", () => {
-    const labelText = "라벨";
-
-    rederTextArea({
-      onChange,
-      label: labelText,
+      expect(onChange).toBeCalled();
     });
-
-    const labelNode = screen.getByText(labelText);
-
-    expect(labelNode).toBeInTheDocument();
   });
 
-  it("textarea에 입력하면 TextLength의 text가 변경되어야함", () => {
-    rederTextArea({ onChange, label: "짧게 소개하기" });
+  context("label을 입력하면", () => {
+    it("label이 보여야 한다.", () => {
+      const labelText = "라벨";
 
-    const textArea = screen.getByLabelText("짧게 소개하기");
-    const textAreaLen = screen.getByLabelText("textarea-length");
-    const value = "textarea입력";
+      rederTextArea({
+        onChange,
+        label: labelText,
+      });
 
-    fireEvent.change(textArea, { target: { value } });
+      const labelNode = screen.getByText(labelText);
 
-    expect(textAreaLen).toHaveTextContent("10/30");
+      expect(labelNode).toBeInTheDocument();
+    });
+  });
+
+  context("textarea에 텍스트를 입력하면 ", () => {
+    it("TextLength의 text가 변경되어야함", () => {
+      rederTextArea({ onChange, label: "짧게 소개하기" });
+
+      const textArea = screen.getByLabelText("짧게 소개하기");
+      const textAreaLen = screen.getByLabelText("textarea-length");
+      const value = "textarea입력";
+
+      fireEvent.change(textArea, { target: { value } });
+
+      expect(textAreaLen).toHaveTextContent("10/30");
+    });
   });
 });
