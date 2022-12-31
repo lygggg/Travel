@@ -1,6 +1,6 @@
 import { useState, useEffect, KeyboardEvent } from "react";
 import styled from "@emotion/styled";
-import { Input, TagList } from "src/components/commons";
+import { Input, Chip } from "src/components/commons";
 
 interface Props {
   onChange: (tags: string[]) => void;
@@ -43,12 +43,19 @@ const InputTag: React.FC<Props> = ({ onChange, tagList }) => {
         variant="default"
         rounded="default"
         fontSize="small"
+        data-testid="editor-tag-input"
         onChange={(e) => setTag(e.target.value)}
         onKeyUp={onKeyUp}
         onKeyDown={onKeyDown}
         value={tag}
       />
-      <TagList tags={tags} size="small" onRemove={onRemove} />
+      <TagContainer>
+        {tags.map((tag: string) => (
+          <Chip size="small" key={tag} onRemove={onRemove}>
+            {tag}
+          </Chip>
+        ))}
+      </TagContainer>
     </Container>
   );
 };
@@ -57,6 +64,12 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 13px;
+`;
+
+const TagContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
 `;
 
 export default InputTag;

@@ -15,6 +15,7 @@ const Chip: React.FC<Props> = ({
   onClick,
   onRemove,
   size = "mini",
+  ...rest
 }) => {
   const handleRemove = () => {
     onRemove?.(children);
@@ -25,7 +26,7 @@ const Chip: React.FC<Props> = ({
   };
   return (
     <>
-      <ChipStyle aria-label={children} size={size}>
+      <ChipStyle {...rest} aria-label={children} size={size}>
         <TextContainer
           clickable={onClick}
           onClick={handleClick}
