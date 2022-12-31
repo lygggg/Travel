@@ -32,9 +32,11 @@ Cypress.Commands.add("login", () => {
   // We are currently unsure about this part.
   // We need to refresh this cookie once in a while.
   // We are unsure if this is true and if true, when it needs to be refreshed.
+  cy.setCookie("next-auth.session-token", Cypress.env("SESSION_TOKEN"));
   cy.setCookie(
-    "next-auth.session-token",
-    "a valid cookie from your browser session",
+    "__Secure-next-auth.session-token",
+    Cypress.env("SESSION_TOKEN"),
+    { secure: true },
   );
   Cypress.Cookies.preserveOnce("next-auth.session-token");
 });
