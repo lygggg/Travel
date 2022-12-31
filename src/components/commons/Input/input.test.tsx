@@ -23,34 +23,38 @@ describe("Input", () => {
     );
 
   const placeholder = "placeholder";
-  it("넘겨준 placeholder가 input placeholder에 반영된다.", () => {
-    renderInput({
-      placeholder: placeholder,
-      variant: "default",
-      rounded: "default",
-      fontSize: "mini",
-    });
+  context("placeholder을 props로 넘기면", () => {
+    it("input에 placeholder에 반영된다.", () => {
+      renderInput({
+        placeholder: placeholder,
+        variant: "default",
+        rounded: "default",
+        fontSize: "mini",
+      });
 
-    expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
+      expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
+    });
   });
 
-  it("input에 입력하면 onChange 호출된다. ", () => {
-    renderInput({
-      placeholder: placeholder,
-      variant: "default",
-      rounded: "default",
-      fontSize: "mini",
+  context("input에 텍스트를 입력하면", () => {
+    it("onChange이 호출된다. ", () => {
+      renderInput({
+        placeholder: placeholder,
+        variant: "default",
+        rounded: "default",
+        fontSize: "mini",
+      });
+
+      const input = screen.getByPlaceholderText(placeholder);
+      const value = "입력값";
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(onChange).toBeCalled();
     });
-
-    const input = screen.getByPlaceholderText(placeholder);
-    const value = "입력값";
-
-    fireEvent.change(input, { target: { value } });
-
-    expect(onChange).toBeCalled();
   });
 
-  describe("스타일", () => {
+  describe("input style test", () => {
     const styleMock = [
       {
         variant: "primary",

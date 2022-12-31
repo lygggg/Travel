@@ -15,23 +15,25 @@ describe("Chip", () => {
       { wrapper: ThemeWrapper },
     );
 
-  describe("onRemove가 있다면 chip에 x이미지가 보인다.", () => {
-    it("x 이미지를 클릭하면 chip을 삭제한다. ", () => {
-      renderChip({
-        size: "mini",
-        children: chipName,
-        onRemove,
+  context("onRemove가 있다면 ", () => {
+    context("Chip컴포넌트의 x 이미지를 클릭하면", () => {
+      it("chip이 삭제된다. ", () => {
+        renderChip({
+          size: "mini",
+          children: chipName,
+          onRemove,
+        });
+
+        const img = screen.getByAltText("Delete the tag");
+        fireEvent.click(img);
+
+        expect(onRemove).toBeCalled();
       });
-
-      const img = screen.getByAltText("Delete the tag");
-      fireEvent.click(img);
-
-      expect(onRemove).toBeCalled();
     });
   });
 
-  describe("onClick 있으면 태그를 클릭할 수 있다", () => {
-    it("클릭하면 onClick 호출한다. ", () => {
+  context("onClick 있으면", () => {
+    it("태그를 클릭하면 onClick 호출한다. ", () => {
       renderChip({
         size: "mini",
         children: chipName,
@@ -45,7 +47,7 @@ describe("Chip", () => {
     });
   });
 
-  describe("스타일", () => {
+  describe("Chip style test", () => {
     const styleMock = [
       {
         size: "medium",

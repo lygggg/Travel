@@ -13,21 +13,23 @@ describe("Button", () => {
       { wrapper: ThemeWrapper },
     );
 
-  it("button을 클릭하면 onClick이 호출된다. ", () => {
-    renderButton({
-      children: "버튼",
-      variant: "default",
-      rounded: true,
-      size: "large",
+  context("button을 클릭하면", () => {
+    it("onClick이 호출된다. ", () => {
+      renderButton({
+        children: "버튼",
+        variant: "default",
+        rounded: true,
+        size: "large",
+      });
+
+      const button = screen.getByRole("button", { name: /버튼/i });
+      fireEvent.click(button);
+
+      expect(onClick).toBeCalled();
     });
-
-    const button = screen.getByRole("button", { name: /버튼/i });
-    fireEvent.click(button);
-
-    expect(onClick).toBeCalled();
   });
 
-  describe("스타일", () => {
+  describe("button style test", () => {
     const styleMock = [
       {
         variant: "primary",
@@ -55,7 +57,6 @@ describe("Button", () => {
       },
     ];
 
-    // TODO 빨간줄??
     styleMock.forEach((style) => {
       it(`variant, size, rounded를 테스트한다.`, () => {
         renderButton({
