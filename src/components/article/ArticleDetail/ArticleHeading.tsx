@@ -1,33 +1,107 @@
-import { Heading, Text } from "@chakra-ui/react";
-
-type headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+import styled from "@emotion/styled";
+import { getTextFragment } from "src/utils/getTextFragment";
 
 export interface Props {
-  children: React.ReactNode;
-  level: headings;
+  children: string;
 }
 
-const CustomHeading: React.FC<Props> = ({ children, level }: Props) => {
-  const headingHref = children?.toString().split(" ").join("-");
+export const CustomHeadingOne: React.FC<Props> = ({ children }: Props) => {
+  const headingHref = getTextFragment(children);
 
   return (
-    <Heading
-      css={{ "&:hover a": { display: "inline" } }}
-      id={headingHref}
-      as={level}
-    >
-      {children}{" "}
-      <Text
-        display="none"
-        as="a"
-        textDecoration="none"
-        href={`#${headingHref}`}
-        aria-label={headingHref}
-      >
-        클릭
-      </Text>
-    </Heading>
+    <H1 id={headingHref}>
+      <a href={`#${headingHref}`}>{children}</a>
+    </H1>
   );
 };
 
-export default CustomHeading;
+export const CustomHeadingTwo: React.FC<Props> = ({ children }: Props) => {
+  const headingHref = getTextFragment(children);
+
+  return (
+    <H2 id={headingHref}>
+      <a href={`#${headingHref}`}>{children}</a>
+    </H2>
+  );
+};
+
+export const CustomHeadingThree: React.FC<Props> = ({ children }: Props) => {
+  const headingHref = getTextFragment(children);
+
+  return (
+    <H3 id={headingHref}>
+      <a href={`#${headingHref}`}>{children}</a>
+    </H3>
+  );
+};
+
+export const CustomHeadingFour: React.FC<Props> = ({ children }: Props) => {
+  const headingHref = getTextFragment(children);
+
+  return (
+    <H4 id={headingHref}>
+      <a href={`#${headingHref}`}>{children}</a>
+    </H4>
+  );
+};
+
+export const CustomHeadingFive: React.FC<Props> = ({ children }: Props) => {
+  const headingHref = getTextFragment(children);
+  return (
+    <H5 id={headingHref}>
+      <a href={`#${headingHref}`}>{children}</a>
+    </H5>
+  );
+};
+
+export const CustomHeadingSix: React.FC<Props> = ({ children }: Props) => {
+  const headingHref = getTextFragment(children);
+
+  return (
+    <H6 id={headingHref}>
+      <a href={`#${headingHref}`}>{children}</a>
+    </H6>
+  );
+};
+
+const H1 = styled.h1`
+  & a {
+    color: white;
+    text-decoration: none;
+  }
+`;
+
+const H2 = styled.h2`
+  & a {
+    color: white;
+    text-decoration: none;
+  }
+`;
+
+const H3 = styled.h3`
+  & a {
+    color: white;
+    text-decoration: none;
+  }
+`;
+
+const H4 = styled.h4`
+  & a {
+    color: white;
+    text-decoration: none;
+  }
+`;
+
+const H5 = styled.h5`
+  & a {
+    color: white;
+    text-decoration: none;
+  }
+`;
+
+const H6 = styled.h6`
+  & a {
+    color: white;
+    text-decoration: none;
+  }
+`;

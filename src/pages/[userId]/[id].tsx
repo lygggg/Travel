@@ -4,55 +4,41 @@ import {
   InferGetServerSidePropsType,
 } from "next";
 import styled from "@emotion/styled";
-import { serialize } from "next-mdx-remote/serialize";
 import { ArticleDetail, ArticleHead } from "src/components/article";
 import { HeadMeta } from "src/components/commons";
 import { findArticle } from "src/api/article";
+import { mdxToHtml } from "src/libs/mdx";
 
 const ArticleDetailPage = (
   article: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) => {
-  const {
-    thumbnailUrl,
-    title,
-    MDXdata,
-    introduction,
-    _id,
-    tags,
-    content,
-    syncTime,
-    name,
-    email,
-  } = article;
-
   const articleHead = {
-    _id,
-    tags,
-    content,
-    syncTime,
-    name,
-    email,
-    thumbnailUrl,
-    title,
-    introduction,
+    _id: article._id,
+    tags: article.tags,
+    content: article.content,
+    syncTime: article.syncTime,
+    name: article.name,
+    email: article.email,
+    thumbnailUrl: article.thumbnailUrl,
+    title: article.title,
+    introduction: article.introduction,
   };
 
   return (
     <Container>
       <HeadMeta
-        title={title}
-        image={thumbnailUrl}
-        introduction={introduction}
+        title={article.title}
+        image={article.thumbnailUrl}
+        introduction={article.introduction}
       />
       <ArticleHead article={articleHead}></ArticleHead>
-      <ArticleDetail content={MDXdata} />
+      <ArticleDetail content={article.MDXdata} />
     </Container>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({
   query,
-  res,
 }: GetServerSidePropsContext) => {
   const { userId, id } = query;
   try {
@@ -60,12 +46,11 @@ export const getServerSideProps: GetServerSideProps = async ({
       userId,
       id,
     });
-
-    const MDXdata = await serialize(data.content);
+    const { html } = await mdxToHtml(data.content);
     const article = {
       ...data,
       thumbnailUrl: data.thumbnailUrl,
-      MDXdata,
+      MDXdata: html,
     };
     return { props: article };
   } catch (err) {

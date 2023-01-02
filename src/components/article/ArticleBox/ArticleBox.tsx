@@ -66,8 +66,7 @@ const Time = styled.h3`
 `;
 
 const ImageContainer = styled.div`
-  width: 768px;
-  height: 400px;
+  height: 320px;
   position: relative;
 `;
 export default ArticleBox;

@@ -1,12 +1,14 @@
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { Tooltip } from "@chakra-ui/react";
-import Image from "next/image";
-import {
-  Prism as SyntaxHighlighter,
-  SyntaxHighlighterProps,
-} from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import ArticleHeading from "./ArticleHeading";
+import {
+  CustomHeadingOne,
+  CustomHeadingTwo,
+  CustomHeadingThree,
+  CustomHeadingFour,
+  CustomHeadingFive,
+  CustomHeadingSix,
+} from "./ArticleHeading";
 import styled from "@emotion/styled";
 
 interface Props {
@@ -15,24 +17,12 @@ interface Props {
 
 // TODO any type
 const MDXComponent = {
-  h1: (props: any) => (
-    <ArticleHeading level="h1">{props.children}</ArticleHeading>
-  ),
-  h2: (props: any) => (
-    <ArticleHeading level="h2">{props.children}</ArticleHeading>
-  ),
-  h3: (props: any) => (
-    <ArticleHeading level="h3">{props.children}</ArticleHeading>
-  ),
-  h4: (props: any) => (
-    <ArticleHeading level="h4">{props.children}</ArticleHeading>
-  ),
-  h5: (props: any) => (
-    <ArticleHeading level="h5">{props.children}</ArticleHeading>
-  ),
-  h6: (props: any) => (
-    <ArticleHeading level="h6">{props.children}</ArticleHeading>
-  ),
+  h1: (props: any) => <CustomHeadingOne>{props.children}</CustomHeadingOne>,
+  h2: (props: any) => <CustomHeadingTwo>{props.children}</CustomHeadingTwo>,
+  h3: (props: any) => <CustomHeadingThree>{props.children}</CustomHeadingThree>,
+  h4: (props: any) => <CustomHeadingFour>{props.children}</CustomHeadingFour>,
+  h5: (props: any) => <CustomHeadingFive>{props.children}</CustomHeadingFive>,
+  h6: (props: any) => <CustomHeadingSix>{props.children}</CustomHeadingSix>,
   pre: ({ children }: any) => {
     const { className, ...rest } = children.props;
     const match = /language-(\w+)/.exec(className || "");
@@ -49,14 +39,8 @@ const MDXComponent = {
       <code>{rest}</code>
     );
   },
-  img: (props: any) => {
-    return <img src={props.src} alt={props.alt} />;
-  },
-  a: (props: any) => (
-    <Tooltip hasArrow label={props.href}>
-      <a href={props.href}>{props.children}</a>
-    </Tooltip>
-  ),
+  img: (props: any) => <img src={props.src} alt={props.alt} loading="lazy" />,
+  a: (props: any) => <a href={props.href}>{props.children}</a>,
 };
 
 const ArticleDetail: React.FC<Props> = ({ content }) => {
@@ -188,9 +172,9 @@ const Content = styled.div`
       font-weight: 200;
       border-width: 1px 1px 3px;
       background-color: ${(props) => props.theme.gray[500]};
-      font-size: 1.3rem;
       border-radius: 0.5rem;
       padding: 0.05rem;
+      font-size: 1.2rem;
     }
   }
 `;
