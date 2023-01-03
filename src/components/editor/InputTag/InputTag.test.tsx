@@ -43,8 +43,8 @@ describe("InputTag", () => {
       fireEvent.change(input, { target: { value: text } });
       await fireEvent.keyUp(input, { key: "Enter", code: 13, charCode: 13 });
 
-    const closeImg = screen.getByAltText("태그 삭제하기");
-    await fireEvent.click(closeImg);
+      const closeImg = screen.getByAltText("태그 삭제하기");
+      await fireEvent.click(closeImg);
 
       expect(screen.queryByText(text)).not.toBeInTheDocument();
     });

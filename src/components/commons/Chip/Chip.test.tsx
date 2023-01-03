@@ -24,8 +24,8 @@ describe("Chip", () => {
           onRemove,
         });
 
-      const img = screen.getByAltText("태그 삭제하기");
-      fireEvent.click(img);
+        const img = screen.getByAltText("태그 삭제하기");
+        fireEvent.click(img);
 
         expect(onRemove).toBeCalled();
       });
