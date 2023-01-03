@@ -32,7 +32,16 @@ handler
         req: req,
         secret: secret,
       });
-      const article = await ArticleModel.create({});
+      const article = await ArticleModel.create({
+        content,
+        tags,
+        title,
+        name,
+        email,
+        thumbnailUrl,
+        introduction,
+        syncTime,
+      });
 
       await Promise.all(
         tags.map((tag: string) => {

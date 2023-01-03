@@ -26,8 +26,7 @@ const Container = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  padding: 3rem;
-  gap: 0.6rem;
+  padding: 60px;
 `;
 
 export default ArticleTagList;

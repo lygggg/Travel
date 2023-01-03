@@ -10,7 +10,11 @@ const PaginationButton = ({ button, total, dataLength, event }: Props) => {
     event();
   };
 
-  return <span onClick={handleOnClick}>{dataLength < total && button}</span>;
+  return (
+    <div onKeyDown={handleOnClick} onClick={handleOnClick} role="presentation">
+      {dataLength < total && button}
+    </div>
+  );
 };
 
 export default PaginationButton;

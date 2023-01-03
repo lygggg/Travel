@@ -33,7 +33,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  gap: 0.6rem;
+  gap: 15px;
 `;
 
 const Title = styled.h1`

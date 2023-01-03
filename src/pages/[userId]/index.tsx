@@ -43,6 +43,7 @@ const ArticlePage = () => {
               size="medium"
               variant="primary"
               onClick={() => setPageNum((page) => page + 1)}
+              aria-label="글 목록 더 가져오기"
             >
               목록 더 보기
             </Button>
@@ -82,10 +83,10 @@ export default ArticlePage;
 
 const PaginationContainer = styled.div`
   text-align: center;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 50px;
+  margin-bottom: 40px;
 `;
 
 const Container = styled.div`
-  padding-bottom: 2rem;
+  padding-bottom: 35px;
 `;

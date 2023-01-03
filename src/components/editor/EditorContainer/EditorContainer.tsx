@@ -44,19 +44,22 @@ const EditorContainer = () => {
         />
         <ButtonContainer>
           <Link href={"/"}>
-            <Button variant="primary" size="large" rounded={true}>
+            <Button
+              variant="primary"
+              size="large"
+              rounded={true}
+              aria-label="글 작성하기에서 나가기"
+            >
               나가기
             </Button>
           </Link>
           <ButtonLayout>
-            <Button variant="primary" size="large" rounded={true}>
-              임시 저장
-            </Button>
             <Button
               variant="default"
               size="large"
               rounded={true}
               onClick={handleModalOpen}
+              aria-label="글 작성 완료하기"
             >
               작성하기
             </Button>
@@ -68,19 +71,19 @@ const EditorContainer = () => {
 };
 
 const Container = styled.div`
-  padding: 1rem;
+  padding: 25px;
 `;
 const InputContainer = styled.div`
   display: flex;
   flex-flow: column;
-  margin-bottom: 2rem;
-  gap: 1rem;
+  margin-bottom: 20px;
+  gap: 15px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   place-content: space-between;
-  margin-top: 2rem;
+  margin-top: 15px;
 `;
 
 const ButtonLayout = styled.span`
