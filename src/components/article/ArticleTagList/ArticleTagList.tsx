@@ -46,4 +46,10 @@ const TagContainer = styled.ul`
   gap: 0.7rem;
 `;
 
+const TagContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+`;
+
 export default ArticleTagList;
