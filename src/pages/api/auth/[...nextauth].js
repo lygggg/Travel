@@ -22,18 +22,6 @@ export const authOptions = {
       clientSecret: process.env.KAKAO_SECRET,
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = user.role;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      session.role = token.role;
-      return session;
-    },
-  },
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
@@ -45,23 +33,6 @@ export const authOptions = {
   cookies: {
     sessionToken: {
       name: `next-auth.session-token`,
-      options: {
-        path: "/",
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-      },
-    },
-    callbackUrl: {
-      name: `next-auth.callback-url`,
-      options: {
-        path: "/",
-        sameSite: "none",
-        secure: true,
-      },
-    },
-    csrfToken: {
-      name: `next-auth.csrf-token`,
       options: {
         path: "/",
         httpOnly: true,
