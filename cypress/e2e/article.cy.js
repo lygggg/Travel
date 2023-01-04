@@ -135,26 +135,21 @@ describe("article spec", () => {
 
       context("삭제 버튼을 클릭하면", () => {
         it("해당 글은 태그와 함께 삭제 되어야 한다.", () => {
-          cy.get("[data-testid='article-title']").then((articles) => {
-            const articleCount = articles.length;
+          cy.get("[data-testid='article-tag']").then((tags) => {
+            const tagCount = tags.length;
 
-            cy.get("[data-testid='article-tag']").then((tags) => {
-              const tagCount = tags.length;
+            cy.get("[data-testid='article-title']").first().click();
 
-              cy.get("[data-testid='article-title']").first().click();
+            cy.get("[data-testid='article-head-tag']").then((removeTags) => {
+              const removeTagCount = removeTags.length;
 
-              cy.get("[data-testid='article-head-tag']").then((removeTags) => {
-                const removeTagCount = removeTags.length;
+              cy.get("[data-testid='article-delete']").click();
 
-                cy.get("[data-testid='article-delete']").click();
+              const article = cy.get("[data-testid='article-title']");
+              article.should("not.contain", "수정 테스트 title 입니다.");
 
-                cy.get("[data-testid='article-title']").then((titles) => {
-                  expect(titles.length).to.eq(articleCount - 1);
-                });
-
-                cy.get("[data-testid='article-tag']").then((tags) => {
-                  expect(tags.length).to.eq(tagCount - removeTagCount);
-                });
+              cy.get("[data-testid='article-tag']").then((tags) => {
+                expect(tags.length).to.eq(tagCount - removeTagCount);
               });
             });
           });
