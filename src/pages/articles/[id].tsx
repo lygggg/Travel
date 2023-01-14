@@ -1,16 +1,18 @@
 import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
+  GetStaticProps,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
 } from "next";
 import styled from "@emotion/styled";
 import { ArticleDetail, ArticleHead } from "src/components/article";
 import { HeadMeta } from "src/components/commons";
-import { findArticle } from "src/api/article";
 import { mdxToHtml } from "src/libs/mdx";
+import { connectMongo } from "../api/utils/connectMongo";
+import { ArticleModel } from "../api/models/article";
+import { Article } from "src/models/article";
 
 const ArticleDetailPage = (
-  article: InferGetServerSidePropsType<typeof getServerSideProps>,
+  article: InferGetStaticPropsType<typeof getStaticProps>,
 ) => {
   const articleHead = {
     _id: article._id,
@@ -37,15 +39,27 @@ const ArticleDetailPage = (
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query,
-}: GetServerSidePropsContext) => {
-  const { userId, id } = query;
+export const getStaticPaths = async () => {
   try {
-    const data = await findArticle({
-      userId,
-      id,
-    });
+    await connectMongo();
+    const res = await ArticleModel.find();
+    const articles = JSON.parse(JSON.stringify(res));
+    const paths = articles.map((article: Article) => ({
+      params: { id: article?._id },
+    }));
+    return { paths, fallback: false };
+  } catch (error) {
+    console.log(error);
+    return { paths: [], fallback: false };
+  }
+};
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: GetStaticPropsContext) => {
+  try {
+    await connectMongo();
+    const res = await ArticleModel.findOne({ _id: params?.id }).lean();
+    const data = JSON.parse(JSON.stringify(res));
     const { html } = await mdxToHtml(data.content);
     const article = {
       ...data,
