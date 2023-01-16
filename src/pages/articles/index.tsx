@@ -14,9 +14,12 @@ const ITEMCOUNT = 5;
 
 const ArticlePage = () => {
   const [limit, setLimit] = useState(1);
-  const { data: articles = [] } = useArticles();
+  const { data: articles = [], isLoading } = useArticles();
   const { data: tags = [] } = useTag();
-  console.log(articles);
+
+  if (isLoading) {
+    return null;
+  }
   return (
     <Container>
       <ArticleTagList tags={tags} />

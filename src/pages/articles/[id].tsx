@@ -21,7 +21,11 @@ const ArticleDetailPage = ({
   const {
     query: { id },
   } = useRouter();
-  const { data } = useArticle(id as string);
+  const { data, isLoading } = useArticle(id as string);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <Container>
