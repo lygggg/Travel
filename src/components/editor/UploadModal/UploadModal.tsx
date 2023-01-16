@@ -39,7 +39,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
         _id,
       });
-      await router.push({ pathname: `/${session?.user.email}` });
+      await router.push({ pathname: `/articles` });
       resetArticle();
     } catch (err) {
       alert("upload failed.");

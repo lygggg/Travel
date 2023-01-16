@@ -3,38 +3,35 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import { ArticleDetail, ArticleHead } from "src/components/article";
 import { HeadMeta } from "src/components/commons";
 import { mdxToHtml } from "src/libs/mdx";
 import { connectMongo } from "../api/utils/connectMongo";
 import { ArticleModel } from "../api/models/article";
 import { Article } from "src/models/article";
+import { findArticle } from "src/api/article";
+import { useArticle } from "src/hooks/api/useArticle";
 
-const ArticleDetailPage = (
-  article: InferGetStaticPropsType<typeof getStaticProps>,
-) => {
-  const articleHead = {
-    _id: article._id,
-    tags: article.tags,
-    content: article.content,
-    syncTime: article.syncTime,
-    name: article.name,
-    email: article.email,
-    thumbnailUrl: article.thumbnailUrl,
-    title: article.title,
-    introduction: article.introduction,
-  };
+const ArticleDetailPage = ({
+  MDXdata,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const {
+    query: { id },
+  } = useRouter();
+  const { data } = useArticle(id as string);
 
   return (
     <Container>
       <HeadMeta
-        title={article.title}
-        image={article.thumbnailUrl}
-        introduction={article.introduction}
+        title={data.title}
+        image={data.thumbnailUrl}
+        introduction={data.introduction}
       />
-      <ArticleHead article={articleHead}></ArticleHead>
-      <ArticleDetail content={article.MDXdata} />
+      <ArticleHead article={data}></ArticleHead>
+      <ArticleDetail content={MDXdata} />
     </Container>
   );
 };
@@ -58,15 +55,20 @@ export const getStaticProps: GetStaticProps = async ({
 }: GetStaticPropsContext) => {
   try {
     await connectMongo();
-    const res = await ArticleModel.findOne({ _id: params?.id }).lean();
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery(["article"], () =>
+      findArticle(params?.id as string),
+    );
+    const res = queryClient.getQueryData(["article"]);
     const data = JSON.parse(JSON.stringify(res));
+
     const { html } = await mdxToHtml(data.content);
-    const article = {
-      ...data,
-      thumbnailUrl: data.thumbnailUrl,
-      MDXdata: html,
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+        MDXdata: html,
+      },
     };
-    return { props: article };
   } catch (err) {
     alert("get article failed.");
     return {
