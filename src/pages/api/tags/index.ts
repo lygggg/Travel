@@ -1,7 +1,6 @@
 import { TagModel } from "src/pages/api/models/tag";
 import type { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import { withSentry } from "@sentry/nextjs";
 import { connectMongo } from "src/pages/api/utils/connectMongo";
 
 const handler = nc<NextApiRequest, NextApiResponse>({
@@ -23,4 +22,4 @@ handler
     res.json(tags);
   });
 
-export default withSentry(handler);
+export default handler;

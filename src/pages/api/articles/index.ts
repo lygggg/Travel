@@ -1,4 +1,3 @@
-import { withSentry } from "@sentry/nextjs";
 import { ArticleModel } from "src/pages/api/models/article";
 import type { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
@@ -22,4 +21,4 @@ handler
     res.json(articles);
   });
 
-export default withSentry(handler);
+export default handler;

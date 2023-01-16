@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import { deleteImage } from "./utils/s3Client.js";
-import { withSentry } from "@sentry/nextjs";
 
 const handler = nc<NextApiRequest, NextApiResponse>({
   onError: (err, req, res) => {
@@ -25,4 +24,4 @@ handler
     res.status(200).end();
   });
 
-export default withSentry(handler);
+export default handler;
