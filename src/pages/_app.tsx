@@ -18,13 +18,8 @@ import { RecoilRoot } from "recoil";
 import Script from "next/script";
 import { NextComponentType } from "next";
 import styled from "@emotion/styled";
-import { Noto_Sans } from "@next/font/google";
 import * as gtag from "src/libs/gtag";
 import Footer from "src/components/footer/Footer";
-
-const ubuntu = Noto_Sans({
-  weight: "400",
-});
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & { needAuth?: boolean };
@@ -74,10 +69,7 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
               <ThemeProvider theme={theme}>
                 <GlobalStyle />
                 <HeaderBar />
-                <Container
-                  location={router.pathname}
-                  className={ubuntu.className}
-                >
+                <Container location={router.pathname}>
                   {Component?.needAuth ? (
                     <Auth>
                       <Component {...pageProps} />
