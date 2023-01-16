@@ -24,13 +24,6 @@ const nextConfig = {
       { loader: "@next/font/google", options: { subsets: ["latin"] } },
     ],
   },
-  webpack: (config) => {
-    config.node = {
-      fs: "empty",
-      child_process: "empty",
-      inspector: "empty",
-    };
-  },
 };
 
 // safely ignore recoil stdout warning messages
@@ -47,10 +40,8 @@ const sentryWebpackPluginOptions = {
   silent: true,
 };
 
-module.exports = (_phase, { defaultConfig }) => {
-  const plugins = [
-    withBundleAnalyzer,
-    (nextConfig) => withSentryConfig(nextConfig, sentryWebpackPluginOptions),
-  ];
-  return plugins.reduce((acc, plugin) => plugin(acc), { ...nextConfig });
-};
+module.exports = withSentryConfig(
+  nextConfig,
+  sentryWebpackPluginOptions,
+  withBundleAnalyzer,
+);
