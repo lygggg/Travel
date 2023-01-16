@@ -18,9 +18,8 @@ handler
     await next();
   })
   .get(async (req, res) => {
-    const total = await ArticleModel.find().count();
     const articles = await ArticleModel.find().sort({ syncTime: -1 });
-    res.json({ articles, total });
+    res.json(articles);
   });
 
 export default withSentry(handler);

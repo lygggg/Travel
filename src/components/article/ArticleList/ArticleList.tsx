@@ -3,7 +3,7 @@ import { ArticleBox } from "src/components/article";
 import styled from "@emotion/styled";
 
 interface Props {
-  articles: Array<ArticleProps>;
+  articles: ArticleProps[];
   limit: number;
   count: number;
 }

@@ -14,18 +14,16 @@ const ITEMCOUNT = 5;
 
 const ArticlePage = () => {
   const [limit, setLimit] = useState(1);
-  const {
-    data: { articles, total },
-  } = useArticles();
-  const { data: tags } = useTag();
-
+  const { data: articles = [] } = useArticles();
+  const { data: tags = [] } = useTag();
+  console.log(articles);
   return (
     <Container>
       <ArticleTagList tags={tags} />
       <ArticleList articles={articles} limit={limit} count={ITEMCOUNT} />
       <PaginationContainer>
         <PaginationButton
-          total={total}
+          total={articles?.length}
           dataLength={limit * ITEMCOUNT || 0}
           event={() => setLimit((limit) => limit + 1)}
           button={

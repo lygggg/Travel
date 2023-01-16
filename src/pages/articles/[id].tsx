@@ -21,7 +21,11 @@ const ArticleDetailPage = ({
   const {
     query: { id },
   } = useRouter();
-  const { data } = useArticle(id as string);
+  const { data, isLoading } = useArticle(id as string);
+
+  if (!data) {
+    return <div>loading</div>;
+  }
 
   return (
     <Container>
@@ -41,28 +45,31 @@ export const getStaticPaths = async () => {
     await connectMongo();
     const res = await ArticleModel.find();
     const articles = JSON.parse(JSON.stringify(res));
+
     const paths = articles.map((article: Article) => ({
       params: { id: article?._id },
     }));
+
     return { paths, fallback: false };
   } catch (error) {
     console.log(error);
     return { paths: [], fallback: false };
   }
 };
+
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   try {
-    await connectMongo();
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery(["article"], () =>
       findArticle(params?.id as string),
     );
+
     const res = queryClient.getQueryData(["article"]);
     const data = JSON.parse(JSON.stringify(res));
-
     const { html } = await mdxToHtml(data.content);
+
     return {
       props: {
         dehydratedState: dehydrate(queryClient),
@@ -70,7 +77,7 @@ export const getStaticProps: GetStaticProps = async ({
       },
     };
   } catch (err) {
-    alert("get article failed.");
+    console.log("get article failed.");
     return {
       props: {},
     };
