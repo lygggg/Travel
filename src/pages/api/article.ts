@@ -22,58 +22,49 @@ handler
     await next();
   })
   .post(async (req, res, next) => {
-    try {
-      const {
-        content,
-        tags,
-        title,
-        thumbnailUrl,
-        introduction,
-        syncTime,
-        _id,
-      } = req.body;
+    const { content, tags, title, thumbnailUrl, introduction, syncTime, _id } =
+      req.body;
+    const { name, email }: any = await getToken({
+      req: req,
+      secret: secret,
+    });
 
-      const { name, email }: any = await getToken({
-        req: req,
-        secret: secret,
-      });
+    if (_id) {
+      try {
+        const article = await ArticleModel.updateOne(
+          { _id: _id },
+          {
+            content,
+            tags,
+            title,
+            name,
+            email,
+            thumbnailUrl,
+            introduction,
+            syncTime,
+          },
+        );
+        await TagModel.deleteMany({
+          articleId: _id,
+        });
 
-      if (_id) {
-        try {
-          const article = await ArticleModel.updateOne(
-            { _id: _id },
-            {
-              content,
-              tags,
-              title,
-              name,
-              email,
-              thumbnailUrl,
-              introduction,
-              syncTime,
-            },
-          );
-          await TagModel.deleteMany({
-            articleId: _id,
-          });
+        await Promise.all(
+          tags.map((tag: string) => {
+            return TagModel.create({
+              tagName: tag,
+              userId: email,
+              articleId: _id,
+            });
+          }),
+        );
 
-          await Promise.all(
-            tags.map((tag: string) => {
-              return TagModel.create({
-                tagName: tag,
-                userId: email,
-                articleId: _id,
-              });
-            }),
-          );
-
-          res.status(201).json(article);
-          return;
-        } catch (err) {
-          next(err);
-        }
+        res.status(201).json(article);
+        return;
+      } catch (err) {
+        next(err);
       }
-
+    }
+    try {
       const article = await ArticleModel.create({
         content,
         tags,
