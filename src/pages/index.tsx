@@ -6,46 +6,15 @@ import { Anton } from "@next/font/google";
 import { Button } from "src/components/commons";
 import { SubTitle } from "src/components/home";
 
-const WELCOME = "블로그에서 나만의 스토리를 공유해 보세요.";
+const WELCOME = "안녕하세요 제 블로그에 오신걸 환영합니다.";
 
 const antonFont = Anton({ weight: "400", subsets: ["latin"] });
 
 const Home: NextPage = () => {
-  const { data: session } = useSession();
-  const { push } = useRouter();
-
-  const handleClickWrite = () => {
-    if (!session) return;
-    push("/write");
-  };
-
-  const handleClickMe = () => {
-    if (!session) return;
-    push(`/${session?.user.email}`);
-  };
-
   return (
     <Container>
       <MainTitle className={antonFont.className}>MLOG</MainTitle>
       <SubTitle content={WELCOME} speed={100}></SubTitle>
-      <ButtonContainer>
-        <Button
-          onClick={handleClickWrite}
-          variant="primary"
-          size="large"
-          aria-label="블로그 글 작성하러 가기"
-        >
-          글 작성하러 가기
-        </Button>
-        <Button
-          onClick={handleClickMe}
-          variant="default"
-          size="large"
-          aria-label="내 블로그 페이지 가기"
-        >
-          내 블로그가 가기
-        </Button>
-      </ButtonContainer>
     </Container>
   );
 };
@@ -74,11 +43,6 @@ const MainTitle = styled.h1`
       transform: none;
     }
   }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 40px;
 `;
 
 export default Home;

@@ -12,7 +12,7 @@ const ArticleBox: React.FC<Props> = ({ article }: Props) => {
   const { title, tags, syncTime, thumbnailUrl, introduction, email } = article;
   return (
     <>
-      <Link href={`/${email}/${article._id}`}>
+      <Link href={`/articles/${article._id}`}>
         <Container>
           {thumbnailUrl && (
             <ImageContainer>

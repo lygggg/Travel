@@ -2,18 +2,14 @@ import { useRef } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { IconButton } from "src/components/commons";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useDetectOutsideClick } from "src/hooks";
 
 const MenuDropdown = () => {
   const dropdownRef = useRef<HTMLElement>(null);
-  const { data: session } = useSession();
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
-  const menus = [
-    { title: "새 글 작성", url: "/write" },
-    { title: "내 블로그 가기", url: `/${session?.user.email}` },
-  ];
+  const menus = [{ title: "새 글 작성", url: "/write" }];
 
   return (
     <MenuContainer data-testid="nav-menu-dropdown">

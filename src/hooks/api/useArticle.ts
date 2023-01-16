@@ -5,22 +5,15 @@ import {
   findArticle,
   deleteArticle,
 } from "src/api/article";
-import { findArticlesRequest, findArticleRequest } from "src/models/article";
 
-export const useArticles = ({ userId, tag, pageNum }: findArticlesRequest) => {
-  return useQuery(
-    ["articles", userId],
-    () => findArticles({ userId, tag, pageNum }),
-    {
-      keepPreviousData: true,
-      refetchOnMount: true,
-      refetchOnWindowFocus: false,
-    },
-  );
+export const useArticles = () => {
+  return useQuery(["articles"], () => findArticles(), {
+    refetchOnWindowFocus: false,
+  });
 };
 
-export const useArticle = (id: findArticleRequest) => {
-  return useQuery(["article", id], () => findArticle(id));
+export const useArticle = (id: string) => {
+  return useQuery(["article"], () => findArticle(id));
 };
 
 export const usePostArticle = () => {

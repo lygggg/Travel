@@ -4,14 +4,16 @@ import styled from "@emotion/styled";
 
 interface Props {
   articles: Array<ArticleProps>;
+  limit: number;
+  count: number;
 }
 
-const ArticleList: React.FC<Props> = ({ articles }: Props) => {
+const ArticleList: React.FC<Props> = ({ articles, limit, count }: Props) => {
   return (
     <Container>
-      {articles.map((article) => (
-        <ArticleBox key={article._id} article={article} />
-      ))}
+      {articles
+        .map((article) => <ArticleBox key={article._id} article={article} />)
+        .slice(0, limit * count)}
     </Container>
   );
 };
