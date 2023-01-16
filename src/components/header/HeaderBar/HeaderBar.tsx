@@ -23,26 +23,22 @@ const HeaderBar = () => {
                 <StyledLink href={"/"}>MLOG</StyledLink>
               </h1>
             </Title>
-            {session && (
-              <Link href={`/${session.user.email}`}>
-                <UserTitle>{session.user.name + ".log"}</UserTitle>
-              </Link>
-            )}
           </HeaderLeftContainer>
           <HeaderRightContainer>
+            <Link href={"/articles"}>Posts</Link>
+
             <IconButton
               width="30px"
               height="30px"
               position="-110px -10px"
               aria-label="검색하기"
             />
-            <IconButton
+            {/* <IconButton
               width="30px"
               height="30px"
               position="-10px -10px"
               aria-label="다크모드로 변환하기"
-            />
-
+            /> */}
             {session ? (
               <MenuDropdown />
             ) : (
@@ -103,11 +99,6 @@ const HeaderLeftContainer = styled.div`
 const Title = styled.span`
   font-weight: 800;
   font-size: 1.8rem;
-`;
-
-const UserTitle = styled.h2`
-  font-weight: 700;
-  font-size: 1.1rem;
 `;
 
 const StyledLink = styled(Link)`

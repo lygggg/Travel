@@ -14,8 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./",
-    "types": ["cypress", "@testing-library/cypress", "@types/gtag.js", "jest"]
+    "baseUrl": "./"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

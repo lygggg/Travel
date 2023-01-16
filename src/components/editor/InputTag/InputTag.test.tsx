@@ -9,7 +9,7 @@ describe("InputTag", () => {
     render(<InputTag onChange={onChange} />, { wrapper: ThemeWrapper });
   const text = "tag1";
 
-  context("tagInput에 에 입력하면", () => {
+  context("태그 입력칸에 text를 입력하면", () => {
     it("input text가 변경된다.", () => {
       renderInputTag();
 
@@ -20,7 +20,7 @@ describe("InputTag", () => {
     });
   });
 
-  context("입력된 input을 enter하면", () => {
+  context("입력된 input에서 enter를 누르면", () => {
     it("tag를 화면에 출력한다.", async () => {
       renderInputTag();
 
@@ -50,7 +50,7 @@ describe("InputTag", () => {
     });
   });
 
-  context("Backspace 누르면", () => {
+  context("태그에서 Backspace 누르면", () => {
     it("태그가 삭제된다.", async () => {
       renderInputTag();
 

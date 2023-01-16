@@ -1,6 +1,7 @@
+import { ArticleModel } from "src/pages/api/models/article";
 import type { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import { deleteImage } from "./utils/s3Client.js";
+import { connectMongo } from "src/pages/api/utils/connectMongo";
 
 const handler = nc<NextApiRequest, NextApiResponse>({
   onError: (err, req, res) => {
@@ -12,16 +13,12 @@ const handler = nc<NextApiRequest, NextApiResponse>({
 });
 handler
   .use(async (req, _, next) => {
+    await connectMongo();
     await next();
   })
-  .post(async (req, res) => {
-    const imageKey = req.body;
-    try {
-      await deleteImage(imageKey);
-    } catch {
-      res.status(400).end();
-    }
-    res.status(200).end();
+  .get(async (req, res) => {
+    const articles = await ArticleModel.find().sort({ syncTime: -1 });
+    res.json(articles);
   });
 
 export default handler;

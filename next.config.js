@@ -40,10 +40,8 @@ const sentryWebpackPluginOptions = {
   silent: true,
 };
 
-module.exports = (_phase, { defaultConfig }) => {
-  const plugins = [
-    withBundleAnalyzer,
-    (nextConfig) => withSentryConfig(nextConfig, sentryWebpackPluginOptions),
-  ];
-  return plugins.reduce((acc, plugin) => plugin(acc), { ...nextConfig });
-};
+module.exports = withSentryConfig(
+  nextConfig,
+  sentryWebpackPluginOptions,
+  withBundleAnalyzer,
+);

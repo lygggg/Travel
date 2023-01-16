@@ -7,7 +7,6 @@ import { Button, Modal, TextArea } from "src/components/commons";
 import { articleState } from "src/store/article";
 import { ImageUpload } from "../index";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
 
 export interface Props {
   isActive: boolean;
@@ -20,7 +19,6 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
   const { thumbnailUrl, introduction, title, tags, content, _id } =
     ArticleState;
   const router = useRouter();
-  const { data: session } = useSession();
   const postArticleMutation = usePostArticle();
   dayjs.locale("ko");
 
@@ -39,7 +37,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
         _id,
       });
-      await router.push({ pathname: `/${session?.user.email}` });
+      await router.push({ pathname: `/articles` });
       resetArticle();
     } catch (err) {
       alert("upload failed.");
@@ -61,7 +59,7 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
                 label={"짧게 소개하기"}
                 value={introduction}
                 className="editor-description-input"
-                onChange={(text: any) =>
+                onChange={(text: string) =>
                   setArticle({ ...ArticleState, introduction: text })
                 }
               />

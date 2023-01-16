@@ -17,17 +17,6 @@ export interface ArticleTag {
   userId: string;
 }
 
-export interface findArticlesRequest {
-  userId: string | string[] | undefined; //TODO type
-  tag: string | string[] | undefined;
-  pageNum: number;
-}
-
-export interface findArticleRequest {
-  userId: string | string[] | undefined; //TODO type
-  id: string | string[] | undefined;
-}
-
 export interface PostArticleRequest {
   content: string;
   tags: string[];

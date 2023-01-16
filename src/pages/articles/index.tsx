@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { useRouter } from "next/router";
+import type { GetStaticProps } from "next";
 import styled from "@emotion/styled";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ArticleList, ArticleTagList } from "src/components/article";
@@ -10,39 +8,28 @@ import { useArticles } from "src/hooks/api/useArticle";
 import { useTag } from "src/hooks/api/useTag";
 import { PaginationButton } from "src/components/commons/PaginationButton";
 import { Button } from "src/components/commons";
+import { useState } from "react";
+
+const ITEMCOUNT = 5;
 
 const ArticlePage = () => {
-  const [pageNum, setPageNum] = useState(1);
-  const {
-    query: { userId, tag = "all" },
-  } = useRouter();
-  const {
-    data: { articles, total },
-    refetch,
-  } = useArticles({ userId, tag, pageNum });
-  const { data: tags } = useTag(userId as string);
-
-  const handleNextPage = () => {
-    refetch();
-  };
-
-  useEffect(() => {
-    setPageNum(2);
-  }, []);
+  const [limit, setLimit] = useState(1);
+  const { data: articles = [] } = useArticles();
+  const { data: tags = [] } = useTag();
+  console.log(articles);
   return (
     <Container>
       <ArticleTagList tags={tags} />
-      <ArticleList articles={articles} />
+      <ArticleList articles={articles} limit={limit} count={ITEMCOUNT} />
       <PaginationContainer>
         <PaginationButton
-          total={total}
-          dataLength={articles.length || 0}
-          event={handleNextPage}
+          total={articles?.length}
+          dataLength={limit * ITEMCOUNT || 0}
+          event={() => setLimit((limit) => limit + 1)}
           button={
             <Button
               size="medium"
               variant="primary"
-              onClick={() => setPageNum((page) => page + 1)}
               aria-label="글 목록 더 가져오기"
             >
               목록 더 보기
@@ -54,22 +41,11 @@ const ArticlePage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query,
-  res,
-}: GetServerSidePropsContext) => {
-  const { userId, tag = "all", page } = query;
-  let pageNum = 0;
-
-  if (page) pageNum = parseInt(page as string);
-
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
-
   await Promise.all([
-    queryClient.prefetchQuery(["articles", userId], () =>
-      findArticles({ userId, tag, pageNum }),
-    ),
-    queryClient.prefetchQuery(["tag", userId], () => findTag(userId as string)),
+    queryClient.prefetchQuery(["articles"], () => findArticles()),
+    queryClient.prefetchQuery(["tag"], () => findTag()),
   ]);
 
   return {
