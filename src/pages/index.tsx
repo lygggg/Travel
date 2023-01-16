@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { Anton } from "@next/font/google";
-import { Button } from "src/components/commons";
 import { SubTitle } from "src/components/home";
 
 const WELCOME = "안녕하세요 제 블로그에 오신걸 환영합니다.";

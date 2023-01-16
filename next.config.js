@@ -24,6 +24,13 @@ const nextConfig = {
       { loader: "@next/font/google", options: { subsets: ["latin"] } },
     ],
   },
+  webpack: (config) => {
+    config.node = {
+      fs: "empty",
+      child_process: "empty",
+      inspector: "empty",
+    };
+  },
 };
 
 // safely ignore recoil stdout warning messages
