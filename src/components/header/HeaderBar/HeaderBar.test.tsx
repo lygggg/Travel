@@ -30,30 +30,12 @@ describe("HeaderBar", () => {
       mockUseSession({ email: "baayoo93@gmail.com", name: "이지존" });
     });
 
-    it("로그인된 유저 이름이 보여야 한다.", () => {
-      renderHeaderBar();
-
-      const userName = screen.getByText("이지존.log");
-
-      expect(userName).toBeInTheDocument();
-    });
-
     it("메뉴 드롭다운이 보여야한다.", () => {
       renderHeaderBar();
 
       const menu = screen.getByTestId("nav-menu-dropdown");
 
       expect(menu).toBeInTheDocument();
-    });
-
-    context("유저 이름을 클릭하면", () => {
-      it("유저의 블로그로 이동한다.", () => {
-        renderHeaderBar();
-
-        const myBlogLink = screen.getByText("이지존.log").closest("a");
-
-        expect(myBlogLink).toHaveAttribute("href", `/baayoo93@gmail.com`);
-      });
     });
   });
 

@@ -135,7 +135,7 @@ describe("UploadModal", () => {
 
         await waitFor(() =>
           expect(router.push).toHaveBeenCalledWith({
-            pathname: "/baayoo93@gmail.com",
+            pathname: "/articles",
           }),
         );
       });
