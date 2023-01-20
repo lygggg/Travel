@@ -44,7 +44,9 @@ const DropDown = ({ trigger, children }: Props) => {
     <DropDownContext.Provider value={{ isActive, setIsActive }}>
       <Container>
         <span ref={dropdownRef}>
-          <span onClick={setIsActive}>{trigger}</span>
+          <span role="presentation" onClick={setIsActive}>
+            {trigger}
+          </span>
         </span>
         {children}
       </Container>
