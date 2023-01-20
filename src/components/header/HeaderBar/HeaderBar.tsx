@@ -12,6 +12,11 @@ const HeaderBar = () => {
 
   const handleModalOpen = () => openModal();
 
+  const menus = [
+    { title: "새 글 작성", url: "/write" },
+    { title: "내 블로그 가기", url: `/${session?.user.email}` },
+  ];
+
   return (
     <>
       <LoginModal isActive={modalOpen} handleClose={closeModal} />
@@ -40,7 +45,17 @@ const HeaderBar = () => {
               aria-label="다크모드로 변환하기"
             /> */}
             {session ? (
-              <MenuDropdown />
+              <MenuDropdown
+                items={menus}
+                trigger={
+                  <IconButton
+                    data-testid="nav-menu-dropdown"
+                    width="30px"
+                    height="30px"
+                    position="-10px -110px"
+                  />
+                }
+              />
             ) : (
               <Button
                 variant="primary"
