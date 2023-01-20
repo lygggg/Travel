@@ -49,6 +49,7 @@ const HeaderBar = () => {
                 items={menus}
                 trigger={
                   <IconButton
+                    data-testid="nav-menu-dropdown"
                     width="30px"
                     height="30px"
                     position="-10px -110px"
