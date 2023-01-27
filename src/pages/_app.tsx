@@ -18,6 +18,7 @@ import { RecoilRoot } from "recoil";
 import Script from "next/script";
 import { NextComponentType } from "next";
 import styled from "@emotion/styled";
+import CombinedContextProviders from "src/contexts/CombinedContextProviders";
 import * as gtag from "src/libs/gtag";
 import Footer from "src/components/footer/Footer";
 
@@ -71,30 +72,32 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
         `,
         }}
       />
-      <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <SessionProvider session={pageProps.session}>
-              <HeadMeta />
-              <ThemeProvider theme={theme}>
-                <GlobalStyle />
-                <HeaderBar />
-                <Container location={router.pathname}>
-                  {Component?.needAuth ? (
-                    <Auth>
+      <CombinedContextProviders>
+        <RecoilRoot>
+          <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <SessionProvider session={pageProps.session}>
+                <HeadMeta />
+                <ThemeProvider theme={theme}>
+                  <GlobalStyle />
+                  <HeaderBar />
+                  <Container location={router.pathname}>
+                    {Component?.needAuth ? (
+                      <Auth>
+                        <Component {...pageProps} />
+                      </Auth>
+                    ) : (
                       <Component {...pageProps} />
-                    </Auth>
-                  ) : (
-                    <Component {...pageProps} />
-                  )}
+                    )}
 
-                  <Footer />
-                </Container>
-              </ThemeProvider>
-            </SessionProvider>
-          </Hydrate>
-        </QueryClientProvider>
-      </RecoilRoot>
+                    <Footer />
+                  </Container>
+                </ThemeProvider>
+              </SessionProvider>
+            </Hydrate>
+          </QueryClientProvider>
+        </RecoilRoot>
+      </CombinedContextProviders>
     </>
   );
 }
