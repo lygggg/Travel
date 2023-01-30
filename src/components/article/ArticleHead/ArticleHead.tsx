@@ -56,7 +56,7 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
   return (
     <Container>
       <Title data-testid="article-head">{title}</Title>
-      {session?.isAdmin && (
+      {session?.user.email === email && (
         <EndContainer>
           <Link href={{ pathname: "/write", query: { id: _id } }}>
             <Button
