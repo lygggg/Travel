@@ -2,21 +2,22 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { Button, Input } from "src/components/commons";
-import { EditorBox, UploadModal, InputTag } from "../index";
-import useModal from "src/hooks/useModal";
+import { EditorBox, InputTag } from "../index";
 import { articleState } from "src/store/article";
+import { useModalActions } from "src/contexts/modalContext";
+import { modals } from "src/components/commons/Modal/GlobalModal";
 
 const EditorContainer = () => {
-  const [openModal, closeModal, modalOpen] = useModal();
+  const modalDispatch = useModalActions();
   const [ArticleState, setArticle] = useRecoilState(articleState);
   const { title, tags, content } = ArticleState;
 
   // 모달 오픈
-  const handleModalOpen = () => openModal();
+  const handleModalOpen = () =>
+    modalDispatch?.({ type: "open", component: modals.CREATE_ARTICLE_MODAL });
 
   return (
     <>
-      <UploadModal isActive={modalOpen} handleClose={closeModal} />
       <Container>
         <InputContainer>
           <Input
