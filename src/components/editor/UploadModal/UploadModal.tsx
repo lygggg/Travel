@@ -3,21 +3,23 @@ import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { usePostArticle } from "src/hooks/api/useArticle";
-import { Button, Modal, TextArea } from "src/components/commons";
+import { Button, TextArea } from "src/components/commons";
 import { articleState } from "src/store/article";
 import { ImageUpload } from "../index";
 import { useRouter } from "next/router";
+import { ModalProps } from "src/contexts/modalContext";
 
 export interface Props {
   isActive: boolean;
   handleClose: () => void;
 }
 
-const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
+const UploadModal = ({ onClose }: ModalProps) => {
   const resetArticle = useResetRecoilState(articleState);
   const [ArticleState, setArticle] = useRecoilState(articleState);
   const { thumbnailUrl, introduction, title, tags, content, _id } =
     ArticleState;
+
   const router = useRouter();
   const postArticleMutation = usePostArticle();
   dayjs.locale("ko");
@@ -45,50 +47,48 @@ const UploadModal: React.FC<Props> = ({ isActive, handleClose }) => {
   };
 
   return (
-    <Modal isActive={isActive}>
-      <ModalContainer>
-        <ModalLayout>
-          <H2>썸네일 미리보기</H2>
-          <UploadContainer>
-            <ImageUpload />
-            <IntroductionContainer>
-              <h1>{title}</h1>
-              <TextArea
-                rows={4}
-                maxLength={30}
-                label={"짧게 소개하기"}
-                value={introduction}
-                className="editor-description-input"
-                onChange={(text: string) =>
-                  setArticle({ ...ArticleState, introduction: text })
-                }
-              />
-            </IntroductionContainer>
-            <ButtonContainer>
-              <Button
-                variant="primary"
-                size="large"
-                rounded={true}
-                onClick={handleFileUpload}
-                data-testid="send-write-button"
-                aria-label="블로그 글 작성 완료하기"
-              >
-                완료
-              </Button>
-              <Button
-                variant="primary"
-                size="large"
-                rounded={true}
-                onClick={handleClose}
-                aria-label="블로그 글 작성 취소하기"
-              >
-                취소
-              </Button>
-            </ButtonContainer>
-          </UploadContainer>
-        </ModalLayout>
-      </ModalContainer>
-    </Modal>
+    <ModalContainer>
+      <ModalLayout>
+        <H2>썸네일 미리보기</H2>
+        <UploadContainer>
+          <ImageUpload />
+          <IntroductionContainer>
+            <h1>{title}</h1>
+            <TextArea
+              rows={4}
+              maxLength={30}
+              label={"짧게 소개하기"}
+              value={introduction}
+              className="editor-description-input"
+              onChange={(text: string) =>
+                setArticle({ ...ArticleState, introduction: text })
+              }
+            />
+          </IntroductionContainer>
+          <ButtonContainer>
+            <Button
+              variant="primary"
+              size="large"
+              rounded={true}
+              onClick={handleFileUpload}
+              data-testid="send-write-button"
+              aria-label="블로그 글 작성 완료하기"
+            >
+              완료
+            </Button>
+            <Button
+              variant="primary"
+              size="large"
+              rounded={true}
+              onClick={onClose}
+              aria-label="블로그 글 작성 취소하기"
+            >
+              취소
+            </Button>
+          </ButtonContainer>
+        </UploadContainer>
+      </ModalLayout>
+    </ModalContainer>
   );
 };
 
