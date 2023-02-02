@@ -6,34 +6,51 @@ import {
   Dispatch,
 } from "react";
 
+export interface ModalProps {
+  onClose?: () => void;
+}
+
+type Component = (props: ModalProps) => JSX.Element;
 type ModalDispatch = Dispatch<Action>;
 type Action =
   | {
       type: "open";
-      Component: ReactNode | null;
+      component: Component;
+      onConfirm?: () => void;
+      onClose?: () => void;
     }
   | { type: "close" };
 type State = {
   isOpen: boolean;
-  modal: ReactNode | null;
+  ModalComponent: Component | null;
+  onConfirm?: () => void;
+  onClose?: () => void;
 };
 type ModalProviderProps = { children: ReactNode };
 
-const ModalValueContext = createContext<State | null>(null);
-const ModalDispatchContext = createContext<ModalDispatch | null>(null);
+const ModalValueContext = createContext<State | undefined>(undefined);
+const ModalDispatchContext = createContext<ModalDispatch | undefined>(
+  undefined,
+);
 
-function modalReducer(state: State, action: Action) {
+function modalReducer(state: State, action: Action): State {
   switch (action.type) {
     case "open": {
       return {
+        ...state,
         isOpen: true,
-        modal: action.Component,
+        ModalComponent: action.component,
+        onConfirm: action.onConfirm,
+        onClose: action.onClose,
       };
     }
     case "close": {
       return {
+        ...state,
         isOpen: false,
-        modal: null,
+        ModalComponent: null,
+        onConfirm: undefined,
+        onClose: undefined,
       };
     }
     default: {
@@ -45,15 +62,15 @@ function modalReducer(state: State, action: Action) {
 const ModalProvider = ({ children }: ModalProviderProps) => {
   const [state, dispatch] = useReducer(modalReducer, {
     isOpen: false,
-    modal: null,
+    ModalComponent: null,
   });
 
   return (
-    <ModalDispatchContext.Provider value={dispatch}>
-      <ModalValueContext.Provider value={state}>
+    <ModalValueContext.Provider value={state}>
+      <ModalDispatchContext.Provider value={dispatch}>
         {children}
-      </ModalValueContext.Provider>
-    </ModalDispatchContext.Provider>
+      </ModalDispatchContext.Provider>
+    </ModalValueContext.Provider>
   );
 };
 
