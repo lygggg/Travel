@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { Aboreto } from "@next/font/google";
 import { Button, IconButton } from "src/components/commons";
 import { LoginModal } from "src/components/login/LoginModal";
 import useModal from "src/hooks/useModal";
 import { MenuDropdown } from "../index";
+
+const aboretoFont = Aboreto({ weight: "400" });
 
 const HeaderBar = () => {
   const { data: session } = useSession();
@@ -25,19 +28,26 @@ const HeaderBar = () => {
           <HeaderLeftContainer>
             <Title>
               <h1>
-                <StyledLink href={"/"}>MLOG</StyledLink>
+                <TitleLink className={aboretoFont.className} href={"/"}>
+                  MLOG
+                </TitleLink>
               </h1>
             </Title>
           </HeaderLeftContainer>
+          <HeaderCenterContainer>
+            <MenuLink href={"/"}>Home</MenuLink>
+            <MenuLink href={"/articles"}>Posts</MenuLink>
+            <MenuLink href={"/articles"}>Tags</MenuLink>
+            <MenuLink href={"/articles"}>About</MenuLink>
+          </HeaderCenterContainer>
           <HeaderRightContainer>
-            <Link href={"/articles"}>Posts</Link>
-
-            <IconButton
+            {" "}
+            {/* <IconButton
               width="30px"
               height="30px"
               position="-110px -10px"
               aria-label="검색하기"
-            />
+            /> */}
             {/* <IconButton
               width="30px"
               height="30px"
@@ -104,6 +114,12 @@ const HeaderRightContainer = styled.div`
   gap: 20px;
 `;
 
+const HeaderCenterContainer = styled.div`
+  display: flex;
+  gap: 50px;
+  font-size: 1.1rem;
+`;
+
 const HeaderLeftContainer = styled.div`
   display: flex;
   gap: 20px;
@@ -116,8 +132,12 @@ const Title = styled.span`
   font-size: 1.8rem;
 `;
 
-const StyledLink = styled(Link)`
+const TitleLink = styled(Link)`
   color: ${(props) => props.theme.green[700]};
+`;
+
+const MenuLink = styled(Link)`
+  color: ${(props) => props.theme.gray[300]};
 `;
 
 export default HeaderBar;
