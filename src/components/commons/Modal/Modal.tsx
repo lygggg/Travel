@@ -2,11 +2,18 @@ import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
-export interface Props {
+export interface ModalProps {
   children: ReactNode;
-  isActive: boolean;
+  isActive?: boolean;
+  closeModal?: () => void;
 }
-const Modal = (props: Props) => {
+
+interface ModalPortalProps {
+  children: ReactNode;
+  isActive?: boolean;
+}
+
+const ModalPortal = ({ children, isActive }: ModalPortalProps) => {
   if (typeof document == "undefined") return null;
 
   let modalRoot = document.getElementById("portal");
@@ -17,9 +24,17 @@ const Modal = (props: Props) => {
     document.body.appendChild(modalRoot);
   }
 
-  if (!props.isActive) return null;
+  if (!isActive) return null;
 
-  return createPortal(<Overlay>{props.children}</Overlay>, modalRoot);
+  return createPortal(children, modalRoot);
+};
+
+const Modal = ({ children, isActive }: ModalProps) => {
+  return (
+    <ModalPortal isActive={isActive}>
+      <Overlay>{children}</Overlay>
+    </ModalPortal>
+  );
 };
 
 export default Modal;

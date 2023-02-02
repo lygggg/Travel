@@ -21,6 +21,7 @@ import styled from "@emotion/styled";
 import CombinedContextProviders from "src/contexts/CombinedContextProviders";
 import * as gtag from "src/libs/gtag";
 import Footer from "src/components/footer/Footer";
+import GlobalModal from "src/components/commons/Modal/GlobalModal";
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & { needAuth?: boolean };
@@ -89,9 +90,9 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
                     ) : (
                       <Component {...pageProps} />
                     )}
-
                     <Footer />
                   </Container>
+                  <GlobalModal />
                 </ThemeProvider>
               </SessionProvider>
             </Hydrate>
