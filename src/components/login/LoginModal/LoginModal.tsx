@@ -1,61 +1,60 @@
 import styled from "@emotion/styled";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import { Modal, Button } from "src/components/commons";
+import { Button } from "src/components/commons";
 import googleIcon from "/public/icons-google.png"; // TODO image sprite로 바꿀예정
 import kakaoIcon from "/public/icons-kakao.png";
 import githubIcon from "/public/icons-github.png";
+import { ModalProps } from "src/contexts/modalContext";
+import useKeyClick from "src/hooks/useKeyClick";
+import useOutsideClick from "src/hooks/useOutsideClick";
+import { useRef } from "react";
 
-export interface Props {
-  isActive: boolean;
-  handleClose: () => void;
-}
+const LoginModal = ({ onClose }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(modalRef, onClose);
 
-const LoginModal: React.FC<Props> = ({ isActive, handleClose }) => {
+  useKeyClick({
+    events: [
+      {
+        key: "Escape",
+        keyEvent: () => onClose?.(),
+      },
+    ],
+  });
+
   return (
     <>
-      <Modal isActive={isActive}>
-        <ModalContainer>
-          <Title>소셜 계정으로 로그인</Title>
-          <LoginButton
-            onClick={() => signIn("google")}
-            variant="primary"
-            aria-label="구글 로그인하기"
-          >
-            <Image
-              src={googleIcon}
-              alt="google 로그인"
-              width={25}
-              height={25}
-            />
-            <LoginText>Google 로그인</LoginText>
-          </LoginButton>
-          <LoginButton
-            onClick={() => signIn("github")}
-            variant="default"
-            aria-label="깃허브 로그인하기"
-          >
-            <Image
-              src={githubIcon}
-              alt="깃허브 로그인"
-              width={25}
-              height={25}
-            />
-            <LoginText>Github 로그인</LoginText>
-          </LoginButton>
-          <LoginButton
-            onClick={() => signIn("kakao")}
-            variant="secondary"
-            aria-label="카카오 로그인하기"
-          >
-            <Image src={kakaoIcon} alt="카카오 로그인" width={25} height={25} />
-            <LoginText>Kakao 로그인</LoginText>
-          </LoginButton>
-          <Exit aria-label="취소" href="#" role="button" onClick={handleClose}>
-            취소
-          </Exit>
-        </ModalContainer>
-      </Modal>
+      <ModalContainer ref={modalRef}>
+        <Title>소셜 계정으로 로그인</Title>
+        <LoginButton
+          onClick={() => signIn("google")}
+          variant="primary"
+          aria-label="구글 로그인하기"
+        >
+          <Image src={googleIcon} alt="google 로그인" width={25} height={25} />
+          <LoginText>Google 로그인</LoginText>
+        </LoginButton>
+        <LoginButton
+          onClick={() => signIn("github")}
+          variant="default"
+          aria-label="깃허브 로그인하기"
+        >
+          <Image src={githubIcon} alt="깃허브 로그인" width={25} height={25} />
+          <LoginText>Github 로그인</LoginText>
+        </LoginButton>
+        <LoginButton
+          onClick={() => signIn("kakao")}
+          variant="secondary"
+          aria-label="카카오 로그인하기"
+        >
+          <Image src={kakaoIcon} alt="카카오 로그인" width={25} height={25} />
+          <LoginText>Kakao 로그인</LoginText>
+        </LoginButton>
+        <Exit aria-label="취소" href="#" role="button" onClick={onClose}>
+          취소
+        </Exit>
+      </ModalContainer>
     </>
   );
 };

@@ -6,10 +6,10 @@ import { ThemeWrapper } from "src/test-utils";
 jest.mock("next-auth/react");
 
 describe("LoginModal", () => {
-  const handleClose = jest.fn();
+  const onClose = jest.fn();
 
   const renderLoginModal = () =>
-    render(<LoginModal isActive={true} handleClose={handleClose} />, {
+    render(<LoginModal onClose={onClose} />, {
       wrapper: ThemeWrapper,
     });
 
@@ -54,7 +54,7 @@ describe("LoginModal", () => {
         const closeButton = screen.getByLabelText("취소");
         fireEvent.click(closeButton);
 
-        expect(handleClose).toBeCalled();
+        expect(onClose).toBeCalled();
       });
     });
   });
