@@ -4,6 +4,7 @@ import { RouterContext } from "next/dist/shared/lib/router-context";
 import { createMockRouter } from "__mocks__/createMockRouter";
 import ReactQueryWrapper, { defaultQueryClient } from "./ReactQueryWrapper";
 import ThemeWrapper, { defaultTheme } from "./ThemeWrapper";
+import CombinedContextProviders from "src/contexts/CombinedContextProviders";
 
 interface Props {
   children: ReactNode;
@@ -22,13 +23,15 @@ const customRender = (
 ) => {
   function Wrapper({ children }: Props) {
     return (
-      <ThemeWrapper>
-        <ReactQueryWrapper>
-          <RouterContext.Provider value={router}>
-            {children}
-          </RouterContext.Provider>
-        </ReactQueryWrapper>
-      </ThemeWrapper>
+      <CombinedContextProviders>
+        <ThemeWrapper>
+          <ReactQueryWrapper>
+            <RouterContext.Provider value={router}>
+              {children}
+            </RouterContext.Provider>
+          </ReactQueryWrapper>
+        </ThemeWrapper>
+      </CombinedContextProviders>
     );
   }
   return render(ui, { wrapper: Wrapper, ...renderOptions });
