@@ -18,7 +18,6 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
     push,
   } = useRouter();
   const { data: session } = useSession();
-
   const {
     title,
     tags,
