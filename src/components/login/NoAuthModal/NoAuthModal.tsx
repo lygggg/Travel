@@ -4,16 +4,24 @@ import { ModalProps } from "src/contexts/modalContext";
 import useKeyClick from "src/hooks/useKeyClick";
 import useOutsideClick from "src/hooks/useOutsideClick";
 import { useRef } from "react";
+import { useRouter } from "next/router";
 
 const NoAuthModal = ({ onClose }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(modalRef, onClose);
+  const router = useRouter();
+
+  const goHome = () => {
+    if (onClose) onClose();
+    router.push({ pathname: "/" });
+  };
+
+  useOutsideClick(modalRef, goHome);
 
   useKeyClick({
     events: [
       {
         key: "Escape",
-        keyEvent: () => onClose?.(),
+        keyEvent: () => goHome?.(),
       },
     ],
   });
@@ -23,7 +31,7 @@ const NoAuthModal = ({ onClose }: ModalProps) => {
       <ModalContainer ref={modalRef}>
         <Title>관리자의 승인이 필요한 페이지입니다.</Title>
         <ExitButton
-          onClick={onClose}
+          onClick={goHome}
           variant="secondary"
           aria-label="카카오 로그인하기"
         >
