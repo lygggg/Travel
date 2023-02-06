@@ -1,17 +1,11 @@
 import styled from "@emotion/styled";
 import type { NextPage } from "next";
-import { Anton } from "@next/font/google";
-import { SubTitle } from "src/components/home";
-
-const WELCOME = "안녕하세요 제 블로그에 오신걸 환영합니다.";
-
-const antonFont = Anton({ weight: "400", subsets: ["latin"] });
+import { Main } from "src/components/home/Main";
 
 const Home: NextPage = () => {
   return (
     <Container>
-      <MainTitle className={antonFont.className}>MLOG</MainTitle>
-      <SubTitle content={WELCOME} speed={100}></SubTitle>
+      <Main />
     </Container>
   );
 };

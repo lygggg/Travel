@@ -105,7 +105,7 @@ interface StyleProps {
 
 const Container = styled.main<StyleProps>`
   margin: 0 auto;
-  max-width: 870px;
+  max-width: 1200px;
   height: 100%;
   box-sizing: border-box;
   position: relative;

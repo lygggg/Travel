@@ -1,1 +1,1 @@
-export * from "./SubTitle";
+export * from "./MainTitle";
