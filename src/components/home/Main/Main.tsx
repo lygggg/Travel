@@ -6,17 +6,17 @@ import { MainTitle } from "../index";
 
 const WELCOME = "반갑습니다. 제 이름은 이영규입니다.";
 
-const antonFont = Noto_Sans_KR({ weight: "300", subsets: ["korean", "latin"] });
+const sansFont = Noto_Sans_KR({ weight: "300" });
 
 const Main = () => {
   return (
     <Container>
       <TitleContainer>
-        <FirstTitle className={antonFont.className}>
+        <FirstTitle className={sansFont.className}>
           생각을 끄적이는 블로그입니다.
         </FirstTitle>
         <MainTitle content={WELCOME} speed={100}></MainTitle>
-        <SubTitle className={antonFont.className}>
+        <SubTitle className={sansFont.className}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
           maximus congue diam sit amet tempus. Sed Sodales ligula. in sodales
         </SubTitle>
