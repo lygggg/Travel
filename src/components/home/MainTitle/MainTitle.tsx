@@ -9,7 +9,6 @@ interface Props {
 
 const Font = Noto_Sans_KR({
   weight: "400",
-  subsets: ["korean", "latin"],
 });
 
 const MainTitle: React.FC<Props> = ({ content, speed }) => {
