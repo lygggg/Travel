@@ -3,26 +3,23 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Aboreto } from "@next/font/google";
 import { Button, IconButton } from "src/components/commons";
-import { LoginModal } from "src/components/login/LoginModal";
-import useModal from "src/hooks/useModal";
+import { modals } from "src/components/commons/Modal/GlobalModal";
+import { useModalActions } from "src/contexts/modalContext";
 import { MenuDropdown } from "../index";
 
 const aboretoFont = Aboreto({ weight: "400" });
 
 const HeaderBar = () => {
   const { data: session } = useSession();
-  const [openModal, closeModal, modalOpen] = useModal();
+  const modalDispatch = useModalActions();
 
-  const handleModalOpen = () => openModal();
+  const handleModalOpen = () =>
+    modalDispatch?.({ type: "open", component: modals.LOGIN_MODAL });
 
-  const menus = [
-    { title: "새 글 작성", url: "/write" },
-    { title: "내 블로그 가기", url: `/${session?.user.email}` },
-  ];
+  const menus = [{ title: "새 글 작성", url: "/write" }];
 
   return (
     <>
-      <LoginModal isActive={modalOpen} handleClose={closeModal} />
       <HeaderContainer>
         <HeaderLayout>
           <HeaderLeftContainer>

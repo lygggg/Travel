@@ -1,6 +1,6 @@
-import { screen, render } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { render } from "src/test-utils/customRender";
 import { useSession } from "next-auth/react";
-import { ThemeWrapper } from "src/test-utils";
 import HeaderBar from "./HeaderBar";
 
 jest.mock("next-auth/react");
@@ -22,8 +22,7 @@ const mockNotUseSession = () => {
 };
 
 describe("HeaderBar", () => {
-  const renderHeaderBar = () =>
-    render(<HeaderBar />, { wrapper: ThemeWrapper });
+  const renderHeaderBar = () => render(<HeaderBar />, {});
 
   context("로그인 상태일 때", () => {
     beforeEach(() => {
