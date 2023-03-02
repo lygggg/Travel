@@ -15,11 +15,9 @@ interface ItemProps {
 
 const Item = ({ children, style, id }: ItemProps) => {
   return (
-    <>
-      <Link href={`/articles/${id}`}>
-        <li css={style}>{children}</li>
-      </Link>
-    </>
+    <Link href={`/articles/${id}`}>
+      <li css={style}>{children}</li>
+    </Link>
   );
 };
 
