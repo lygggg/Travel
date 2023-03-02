@@ -1,7 +1,6 @@
 import { screen } from "@testing-library/react";
 import { render } from "src/test-utils/customRender";
 import { useSession } from "next-auth/react";
-import { ThemeWrapper } from "src/test-utils";
 import NavBar from "./NavBar";
 
 jest.mock("next-auth/react");
@@ -28,7 +27,7 @@ const mockNotUseSession = () => {
 };
 
 describe("NavBar", () => {
-  const renderNavBar = () => render(<NavBar />, { wrapper: ThemeWrapper });
+  const renderNavBar = () => render(<NavBar />, {});
 
   context("로그인 상태일 때", () => {
     beforeEach(() => {

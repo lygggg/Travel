@@ -9,11 +9,6 @@ import { ImageUpload } from "../index";
 import { useRouter } from "next/router";
 import { ModalProps } from "src/contexts/modalContext";
 
-export interface Props {
-  isActive: boolean;
-  handleClose: () => void;
-}
-
 const UploadModal = ({ onClose }: ModalProps) => {
   const resetArticle = useResetRecoilState(articleState);
   const [ArticleState, setArticle] = useRecoilState(articleState);
