@@ -1,6 +1,7 @@
+import { css } from "@emotion/react";
 import { Article as ArticleProps } from "src/models/article";
-import { ArticleBox } from "src/components/article";
-import styled from "@emotion/styled";
+import { List } from "src/components/commons";
+import { ArticleItem } from "../ArticleItem";
 
 interface Props {
   articles: ArticleProps[];
@@ -8,25 +9,34 @@ interface Props {
   count: number;
 }
 
-const ArticleList: React.FC<Props> = ({ articles, limit, count }: Props) => {
+const list_css = {
+  list: css({
+    display: "flex",
+    width: "100%",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    flexGrow: "10",
+    justifyContent: "center",
+    cursor: "pointer",
+    gap: "100px",
+    marginLeft: "auto",
+    marginRight: "auto",
+  }),
+};
+``;
+
+const ArticleList: React.FC<Props> = ({ articles, limit, count }) => {
   return (
-    <Container>
-      {articles
-        .map((article) => <ArticleBox key={article._id} article={article} />)
-        .slice(0, limit * count)}
-    </Container>
+    <>
+      <List style={list_css.list}>
+        {articles
+          .map((article) => (
+            <ArticleItem key={article._id} article={article}></ArticleItem>
+          ))
+          .slice(0, limit * count)}
+      </List>
+    </>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 100px;
-  width: 100%;
-  flex-grow: 10;
-  margin-left: auto;
-  margin-right: auto;
-`;
 
 export default ArticleList;

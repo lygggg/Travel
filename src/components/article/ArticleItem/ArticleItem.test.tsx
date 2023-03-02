@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { ThemeWrapper } from "src/test-utils";
-import ArticleBox from "./ArticleBox";
+import ArticleItem from "./ArticleItem";
 
-describe("ArticleBox", () => {
+describe("ArticleItem", () => {
   it("should render correctly", () => {
     const props = {
       _id: "id입니다",
@@ -13,11 +13,11 @@ describe("ArticleBox", () => {
       name: "이름",
       email: "이메일",
       base64: "base64",
-      introduction: "소개",
+      description: "소개",
       thumbnailUrl:
         "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/f4a284de-7dd2-49db-a0c5-96e43e373de4/mlog.png",
     };
-    render(<ArticleBox article={props} />, { wrapper: ThemeWrapper });
+    render(<ArticleItem article={props} />, { wrapper: ThemeWrapper });
 
     expect(screen.getByText(/타이틀입니다./)).toBeInTheDocument();
     expect(screen.getByText(/소개/)).toBeInTheDocument();
