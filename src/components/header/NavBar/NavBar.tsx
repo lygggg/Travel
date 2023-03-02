@@ -9,7 +9,7 @@ import { MenuDropdown } from "../index";
 
 const aboretoFont = Aboreto({ weight: "400" });
 
-const HeaderBar = () => {
+const NavBar = () => {
   const { data: session } = useSession();
   const modalDispatch = useModalActions();
 
@@ -137,4 +137,4 @@ const MenuLink = styled(Link)`
   color: ${(props) => props.theme.gray[300]};
 `;
 
-export default HeaderBar;
+export default NavBar;

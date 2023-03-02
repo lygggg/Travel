@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { render } from "src/test-utils/customRender";
 import { useSession } from "next-auth/react";
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "./NavBar";
 
 jest.mock("next-auth/react");
 
