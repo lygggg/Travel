@@ -146,7 +146,7 @@ export const GlobalStyle = () => (
     styles={css`
       ${resetCSS};
       body {
-        background-color: ${theme.black[500]};
+        background-color: ${theme.gray[900]};
         color: ${theme.white};
       }
       * {
