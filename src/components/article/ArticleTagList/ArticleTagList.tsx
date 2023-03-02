@@ -1,19 +1,28 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { Chip } from "src/components/commons";
-
+import { convertToForceArray, checkInArr, isArray } from "src/utils/array";
+import { searchFilterAndExecute } from "src/utils/params";
 export interface Props {
   tags: string[];
 }
 
 const ArticleTagList: React.FC<Props> = ({ tags }) => {
   const router = useRouter();
+
   const moveUrl = (tag: string) => {
+    const urlParams = searchFilterAndExecute(tag, "tags");
+
     router.push({
-      pathname: router.query.userId as string,
-      query: { tag },
+      pathname: router.pathname,
+      search: urlParams.toString(),
     });
   };
+
+  const checkSelected = (arr: string[], value: string) => {
+    return checkInArr(arr, value);
+  };
+
   return (
     <Container data-testid="article-taglist">
       <TagContainer>
@@ -22,6 +31,10 @@ const ArticleTagList: React.FC<Props> = ({ tags }) => {
             size="small"
             key={tag}
             onClick={moveUrl}
+            selected={checkSelected(
+              convertToForceArray(router.query.tags),
+              tag,
+            )}
             data-testid="article-tag"
           >
             {tag}
@@ -33,11 +46,10 @@ const ArticleTagList: React.FC<Props> = ({ tags }) => {
 };
 
 const Container = styled.div`
-  width: 768px;
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  padding: 60px;
+  margin-top: 60px;
 `;
 
 const TagContainer = styled.ul`
