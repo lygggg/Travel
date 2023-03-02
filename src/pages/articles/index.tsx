@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import type { GetStaticProps } from "next";
 import styled from "@emotion/styled";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
@@ -8,13 +10,14 @@ import { useArticles } from "src/hooks/api/useArticle";
 import { useTag } from "src/hooks/api/useTag";
 import { PaginationButton } from "src/components/commons/PaginationButton";
 import { Button } from "src/components/commons";
-import { useState } from "react";
+import { Hero } from "src/components/commons/Hero";
 
 const ITEMCOUNT = 5;
 
 const ArticlePage = () => {
   const [limit, setLimit] = useState(1);
-  const { data: articles = [], isLoading } = useArticles();
+  const { query } = useRouter();
+  const { data: articles = [], isLoading } = useArticles(query.tags);
   const { data: tags = [] } = useTag();
 
   if (isLoading) {
@@ -22,7 +25,10 @@ const ArticlePage = () => {
   }
   return (
     <Container>
+      <Hero text="Articles" listLength={articles.length} />
+
       <ArticleTagList tags={tags} />
+      <Hr />
       <ArticleList articles={articles} limit={limit} count={ITEMCOUNT} />
       <PaginationContainer>
         <PaginationButton
@@ -68,4 +74,16 @@ const PaginationContainer = styled.div`
 
 const Container = styled.div`
   padding-bottom: 35px;
+  margin: 0 auto;
+  margin-top: 70px;
+  max-width: 700px;
+  height: 100%;
+`;
+
+const Hr = styled.hr`
+  margin: 2rem 0px;
+  flex-shrink: 0;
+  border-width: 0px 0px thin;
+  border-style: solid;
+  border-color: var(--color-border);
 `;
