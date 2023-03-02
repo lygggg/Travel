@@ -1,6 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": ["prettier", "@typescript-eslint", "testing-library"],
+  "react/no-unknown-property": ["error", { "ignore": ["css"] }],
   "extends": [
     "next/core-web-vitals",
     "plugin:react/recommended",
