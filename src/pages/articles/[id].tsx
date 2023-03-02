@@ -32,7 +32,7 @@ const ArticleDetailPage = ({
       <HeadMeta
         title={data.title}
         image={data.thumbnailUrl}
-        introduction={data.introduction}
+        description={data.description}
       />
       <ArticleHead article={data}></ArticleHead>
       <ArticleDetail content={MDXdata} />

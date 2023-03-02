@@ -26,7 +26,7 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
     _id,
     email,
     content,
-    introduction,
+    description,
   } = article;
 
   const setArticle = useSetRecoilState(articleState);
@@ -38,7 +38,7 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
       tags,
       title,
       thumbnailUrl,
-      introduction,
+      description,
       syncTime,
       _id,
     });

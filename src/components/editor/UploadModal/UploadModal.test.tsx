@@ -56,7 +56,7 @@ describe("UploadModal", () => {
       title: "제목",
       thumbnailUrl:
         "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/f4a284de-7dd2-49db-a0c5-96e43e373de4/mlog.png",
-      introduction: "introduction",
+      description: "description",
       syncTime: "syncTime",
     });
   };
@@ -70,7 +70,7 @@ describe("UploadModal", () => {
           title: "",
           thumbnailUrl:
             "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/f4a284de-7dd2-49db-a0c5-96e43e373de4/mlog.png",
-          introduction: "introduction",
+          description: "description",
           syncTime: "syncTime",
         });
       };

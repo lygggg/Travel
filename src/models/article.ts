@@ -6,7 +6,7 @@ export interface Article {
   syncTime: string;
   name: string;
   email: string;
-  introduction: string;
+  description: string;
   thumbnailUrl: string;
   MDXdata?: object;
 }
@@ -22,7 +22,7 @@ export interface PostArticleRequest {
   tags: string[];
   title: string;
   thumbnailUrl: string;
-  introduction: string;
+  description: string;
   syncTime: string;
   _id: string;
 }

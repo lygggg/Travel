@@ -17,9 +17,7 @@ export interface Props {
 const UploadModal = ({ onClose }: ModalProps) => {
   const resetArticle = useResetRecoilState(articleState);
   const [ArticleState, setArticle] = useRecoilState(articleState);
-  const { thumbnailUrl, introduction, title, tags, content, _id } =
-    ArticleState;
-
+  const { thumbnailUrl, description, title, tags, content, _id } = ArticleState;
   const router = useRouter();
   const postArticleMutation = usePostArticle();
   dayjs.locale("ko");
@@ -35,7 +33,7 @@ const UploadModal = ({ onClose }: ModalProps) => {
         tags,
         title,
         thumbnailUrl,
-        introduction,
+        description,
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
         _id,
       });
@@ -123,7 +121,7 @@ const UploadContainer = styled.div`
   flex-direction: column;
   gap: 30px;
 `;
-const IntroductionContainer = styled.div`
+const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;

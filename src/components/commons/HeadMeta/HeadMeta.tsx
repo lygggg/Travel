@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 export interface Props {
   title?: string;
   image?: string;
-  introduction?: string;
+  description?: string;
 }
 
-const HeadMeta: React.FC<Props> = ({ title, image, introduction }) => {
+const HeadMeta: React.FC<Props> = ({ title, image, description }) => {
   const router = useRouter();
   const metaTag = {
     title: "mlog",
-    introduction: "나만의 블로그를 작성해보세요.",
+    description: "나만의 블로그를 작성해보세요.",
     thumbnailUrl:
       "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/mlog.png",
   };
@@ -23,7 +23,7 @@ const HeadMeta: React.FC<Props> = ({ title, image, introduction }) => {
       <meta property="og:title" content={title ?? metaTag.title} />
       <meta
         property="og:description"
-        content={introduction ?? metaTag.introduction}
+        content={description ?? metaTag.description}
       />
       <meta
         property="og:url"

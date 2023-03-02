@@ -7,7 +7,7 @@ const articleSchema = new Schema({
   name: { type: String },
   email: { type: String },
   thumbnailUrl: { type: String },
-  introduction: { type: String },
+  description: { type: String },
   syncTime: { type: String },
 });
 export const ArticleModel = models.Article || model("Article", articleSchema);

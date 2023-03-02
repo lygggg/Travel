@@ -39,7 +39,7 @@ describe("ArticleHead", () => {
     thumbnailUrl:
       "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/b15b6ee2-fcab-4520-8d11-09bd2a51a7c9/mlog.png",
     title: "타이틀",
-    introduction: "소개",
+    description: "소개",
   };
 
   const router = createMockRouter({

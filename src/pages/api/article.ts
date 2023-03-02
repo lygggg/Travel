@@ -22,7 +22,7 @@ handler
     await next();
   })
   .post(async (req, res, next) => {
-    const { content, tags, title, thumbnailUrl, introduction, syncTime, _id } =
+    const { content, tags, title, thumbnailUrl, description, syncTime, _id } =
       req.body;
     const { name, email }: any = await getToken({
       req: req,
@@ -40,7 +40,7 @@ handler
             name,
             email,
             thumbnailUrl,
-            introduction,
+            description,
             syncTime,
           },
         );
@@ -72,7 +72,7 @@ handler
         name,
         email,
         thumbnailUrl,
-        introduction,
+        description,
         syncTime,
       });
 
