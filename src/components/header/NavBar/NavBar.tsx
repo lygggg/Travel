@@ -6,7 +6,7 @@ import { Aboreto } from "@next/font/google";
 import { Button, IconButton } from "src/components/commons";
 import { modals } from "src/components/commons/Modal/GlobalModal";
 import { useModalActions } from "src/contexts/modalContext";
-import { MenuDropdown } from "../index";
+import { MenuDropdown, CategoryList } from "../index";
 
 const aboretoFont = Aboreto({ weight: "400" });
 

@@ -50,19 +50,19 @@ const UploadModal = ({ onClose }: ModalProps) => {
         <H2>썸네일 미리보기</H2>
         <UploadContainer>
           <ImageUpload />
-          <IntroductionContainer>
+          <DescriptionContainer>
             <h1>{title}</h1>
             <TextArea
               rows={4}
               maxLength={30}
               label={"짧게 소개하기"}
-              value={introduction}
+              value={description}
               className="editor-description-input"
               onChange={(text: string) =>
-                setArticle({ ...ArticleState, introduction: text })
+                setArticle({ ...ArticleState, description: text })
               }
             />
-          </IntroductionContainer>
+          </DescriptionContainer>
           <ButtonContainer>
             <Button
               variant="primary"
