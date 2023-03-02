@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { Noto_Sans_KR } from "@next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "src/components/commons";
 import { MainTitle } from "../index";
 
 const WELCOME = "반갑습니다. 제 이름은 이영규입니다.";
-
 const sansFont = Noto_Sans_KR({ weight: "300" });
 
 const Main = () => {
@@ -20,9 +20,11 @@ const Main = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
           maximus congue diam sit amet tempus. Sed Sodales ligula. in sodales
         </SubTitle>
-        <ReadMoreButton variant="primary" aria-label="read more">
-          READ MORE
-        </ReadMoreButton>
+        <Link href={"/about"}>
+          <ReadMoreButton variant="primary" aria-label="read more">
+            READ MORE
+          </ReadMoreButton>
+        </Link>
       </TitleContainer>
       <ImageContainer>
         <Image
