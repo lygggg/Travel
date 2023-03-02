@@ -27,7 +27,7 @@ const list_css = {
 };
 ``;
 
-const FeaturedArticleList: React.FC<Props> = ({ articles, limit, count }) => {
+const FeatureArticleList: React.FC<Props> = ({ articles, limit, count }) => {
   return (
     <List style={list_css.list}>
       {articles
@@ -42,4 +42,4 @@ const FeaturedArticleList: React.FC<Props> = ({ articles, limit, count }) => {
   );
 };
 
-export default FeaturedArticleList;
+export default FeatureArticleList;

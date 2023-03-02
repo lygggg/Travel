@@ -1,1 +1,1 @@
-export { default as FeaturedArticleList } from "./FeaturedArticleList";
+export { default as FeatureArticleList } from "./FeatureArticleList";
