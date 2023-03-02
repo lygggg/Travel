@@ -47,7 +47,7 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
   const handleRemoveArticle = async () => {
     try {
       await deleteArticleMutation.mutateAsync(id);
-      await push(`/${userId}`);
+      await push(`/articles`);
     } catch (err) {
       await alert("삭제 실패");
     }

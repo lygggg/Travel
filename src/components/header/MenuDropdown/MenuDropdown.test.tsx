@@ -18,10 +18,7 @@ describe("MenuDropdown", () => {
   const renderMenuDropdown = (props: Props) =>
     render(<MenuDropdown {...props}></MenuDropdown>, {});
 
-  const menus = [
-    { title: "새 글 작성", url: "/write" },
-    { title: "내 블로그 가기", url: "/write" },
-  ];
+  const menus = [{ title: "새 글 작성", url: "/write" }];
 
   beforeEach(() => {
     mockUseSession({ email: "baayoo93@gmail.com" });

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from "next/link";
 import { CategoryItem } from "../CategoryItem";
 
@@ -12,14 +11,15 @@ const CategoryList: React.FC<Props> = ({ categorys, selected, onSelected }) => {
   return (
     <>
       {categorys.map((category) => (
-        <Link href={`${category.url}`}>
-          <CategoryItem
-            onSelected={onSelected}
-            selected={selected}
-            key={category.title}
-            tag={category.title}
-          />
-        </Link>
+        <div key={category.title}>
+          <Link href={`${category.url}`}>
+            <CategoryItem
+              onSelected={onSelected}
+              selected={selected}
+              tag={category.title}
+            />
+          </Link>
+        </div>
       ))}
     </>
   );

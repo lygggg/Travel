@@ -1,5 +1,5 @@
 import { checkIncludeArr } from "./../../utils/array";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   findArticles,
   postArticle,
@@ -10,7 +10,7 @@ import { convertToForceArray } from "src/utils/array";
 import { Article } from "src/models/article";
 import { query } from "src/models/query";
 
-export const useArticles = (tags: query) => {
+export const useArticles = (tags?: query) => {
   const arr = convertToForceArray(tags);
   return useQuery(["articles"], () => findArticles(), {
     select: (data) => {

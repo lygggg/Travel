@@ -52,17 +52,17 @@ describe("Chip", () => {
       {
         size: "medium",
         fontScale: "1.7rem",
-        padding: "0.5rem",
+        padding: "9px 22px !important",
       },
       {
         size: "small",
-        fontScale: "1.2rem",
-        padding: "0.4rem",
+        fontScale: "1.1rem",
+        padding: "9px 20px !important",
       },
       {
         size: "large",
         fontScale: "2rem",
-        padding: "0.7rem",
+        padding: "9px 22px !important",
       },
     ];
 

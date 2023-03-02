@@ -28,8 +28,8 @@ describe("ArticleTagList", () => {
       fireEvent.click(tag);
 
       expect(router.push).toHaveBeenCalledWith({
-        pathname: router.query.userId,
-        query: { tag: "태그1" },
+        pathname: router.pathname,
+        search: `tags=%ED%83%9C%EA%B7%B81`,
       });
     });
   });

@@ -96,7 +96,8 @@ const ChipStyle = styled.li<StyleProps>`
         `;
       case "large":
         return css`
-          font-size: 9px 22px !important;
+          padding: 9px 22px !important;
+          font-size: 2rem;
           padding: 0.7rem;
         `;
     }

@@ -1,9 +1,15 @@
 import { screen } from "@testing-library/react";
 import { render } from "src/test-utils/customRender";
 import { useSession } from "next-auth/react";
-import HeaderBar from "./NavBar";
+import { ThemeWrapper } from "src/test-utils";
+import NavBar from "./NavBar";
 
 jest.mock("next-auth/react");
+jest.mock("@next/font/google", () => ({
+  Aboreto: () => ({
+    className: "mockedClassName",
+  }),
+}));
 
 const mockUseSession = (data: { email: string; name: string }) => {
   (useSession as jest.Mock).mockImplementation(() => {
@@ -21,8 +27,8 @@ const mockNotUseSession = () => {
   });
 };
 
-describe("HeaderBar", () => {
-  const renderHeaderBar = () => render(<HeaderBar />, {});
+describe("NavBar", () => {
+  const renderNavBar = () => render(<NavBar />, { wrapper: ThemeWrapper });
 
   context("로그인 상태일 때", () => {
     beforeEach(() => {
@@ -30,7 +36,7 @@ describe("HeaderBar", () => {
     });
 
     it("메뉴 드롭다운이 보여야한다.", () => {
-      renderHeaderBar();
+      renderNavBar();
 
       const menu = screen.getByTestId("nav-menu-dropdown");
 
@@ -43,7 +49,7 @@ describe("HeaderBar", () => {
       mockNotUseSession();
     });
     it("로그인된 유저 이름이 안보여야 한다.", () => {
-      renderHeaderBar();
+      renderNavBar();
 
       const userName = screen.queryByText("이지존.log");
 
@@ -51,7 +57,7 @@ describe("HeaderBar", () => {
     });
 
     it("로그인 버튼이 보여야 한다.", () => {
-      renderHeaderBar();
+      renderNavBar();
 
       const userName = screen.getByRole("button", { name: /로그인/i });
 

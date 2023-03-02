@@ -88,14 +88,14 @@ describe("ArticleHead", () => {
               response: { status: 200 },
             }),
           );
-          it(`/${props.email} 페이지로 이동한다.`, async () => {
+          it(`/articles 페이지로 이동한다.`, async () => {
             renderArticleHead({ article: props, router });
 
             const removeButton = screen.getByRole("button", { name: /삭제/i });
             await fireEvent.click(removeButton);
 
             await waitFor(() =>
-              expect(router.push).toHaveBeenCalledWith(`/${props.email}`),
+              expect(router.push).toHaveBeenCalledWith(`/articles`),
             );
           });
         });
