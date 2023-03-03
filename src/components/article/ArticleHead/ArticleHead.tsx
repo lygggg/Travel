@@ -26,7 +26,7 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
     _id,
     email,
     content,
-    introduction,
+    description,
   } = article;
 
   const setArticle = useSetRecoilState(articleState);
@@ -38,7 +38,7 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
       tags,
       title,
       thumbnailUrl,
-      introduction,
+      description,
       syncTime,
       _id,
     });
@@ -47,7 +47,7 @@ const ArticleHead: React.FC<Props> = ({ article }) => {
   const handleRemoveArticle = async () => {
     try {
       await deleteArticleMutation.mutateAsync(id);
-      await push(`/${userId}`);
+      await push(`/articles`);
     } catch (err) {
       await alert("삭제 실패");
     }

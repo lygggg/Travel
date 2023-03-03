@@ -9,17 +9,10 @@ import { ImageUpload } from "../index";
 import { useRouter } from "next/router";
 import { ModalProps } from "src/contexts/modalContext";
 
-export interface Props {
-  isActive: boolean;
-  handleClose: () => void;
-}
-
 const UploadModal = ({ onClose }: ModalProps) => {
   const resetArticle = useResetRecoilState(articleState);
   const [ArticleState, setArticle] = useRecoilState(articleState);
-  const { thumbnailUrl, introduction, title, tags, content, _id } =
-    ArticleState;
-
+  const { thumbnailUrl, description, title, tags, content, _id } = ArticleState;
   const router = useRouter();
   const postArticleMutation = usePostArticle();
   dayjs.locale("ko");
@@ -35,7 +28,7 @@ const UploadModal = ({ onClose }: ModalProps) => {
         tags,
         title,
         thumbnailUrl,
-        introduction,
+        description,
         syncTime: dayjs().format("YYYY년 MM월 DD일 HH:mm"),
         _id,
       });
@@ -52,19 +45,19 @@ const UploadModal = ({ onClose }: ModalProps) => {
         <H2>썸네일 미리보기</H2>
         <UploadContainer>
           <ImageUpload />
-          <IntroductionContainer>
+          <DescriptionContainer>
             <h1>{title}</h1>
             <TextArea
               rows={4}
               maxLength={30}
               label={"짧게 소개하기"}
-              value={introduction}
+              value={description}
               className="editor-description-input"
               onChange={(text: string) =>
-                setArticle({ ...ArticleState, introduction: text })
+                setArticle({ ...ArticleState, description: text })
               }
             />
-          </IntroductionContainer>
+          </DescriptionContainer>
           <ButtonContainer>
             <Button
               variant="primary"
@@ -123,7 +116,7 @@ const UploadContainer = styled.div`
   flex-direction: column;
   gap: 30px;
 `;
-const IntroductionContainer = styled.div`
+const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;

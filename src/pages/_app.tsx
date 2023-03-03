@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
-import { HeaderBar } from "src/components/header";
+import { NavBar } from "src/components/header";
 import { Auth } from "src/components/login";
 import { GlobalStyle, theme } from "src/styles/globalStyle";
 import { ThemeProvider } from "@emotion/react";
@@ -81,8 +81,8 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
                 <HeadMeta />
                 <ThemeProvider theme={theme}>
                   <GlobalStyle />
-                  <HeaderBar />
-                  <Container location={router.pathname}>
+                  <NavBar />
+                  <Container>
                     {Component?.needAuth ? (
                       <Auth>
                         <Component {...pageProps} />
@@ -103,17 +103,12 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
   );
 }
 
-interface StyleProps {
-  location: string;
-}
-
-const Container = styled.main<StyleProps>`
+const Container = styled.main`
   margin: 0 auto;
-  max-width: 1200px;
+  padding: 30px 25px 50px 25px;
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  padding: 30px 25px 50px 25px;
 `;
 
 export default MyApp;

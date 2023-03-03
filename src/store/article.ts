@@ -8,7 +8,7 @@ export const articleState = atom<PostArticleRequest>({
     tags: [],
     title: "",
     thumbnailUrl: "",
-    introduction: "",
+    description: "",
     syncTime: "",
     _id: "",
   },

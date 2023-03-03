@@ -23,22 +23,20 @@ const TextArea = (props: TextAreaStyled) => {
   }, []);
 
   return (
-    <>
-      <Label>
-        <LabelText>{props.label && `${props.label}`}</LabelText>
-        <TextAreaStyled
-          {...props}
-          ref={ref}
-          aria-label={props.label}
-          value={props.value}
-          onChange={handleChange}
-          placeholder="소개를 입력해주세요."
-        />
-        <TextLength aria-label="textarea-length">
-          {props.maxLength && `${textLength}/${props.maxLength}`}
-        </TextLength>
-      </Label>
-    </>
+    <Label>
+      <LabelText>{props.label && `${props.label}`}</LabelText>
+      <TextAreaStyled
+        {...props}
+        ref={ref}
+        aria-label={props.label}
+        value={props.value}
+        onChange={handleChange}
+        placeholder="소개를 입력해주세요."
+      />
+      <TextLength aria-label="textarea-length">
+        {props.maxLength && `${textLength}/${props.maxLength}`}
+      </TextLength>
+    </Label>
   );
 };
 export default TextArea;

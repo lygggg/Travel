@@ -39,7 +39,7 @@ describe("ArticleHead", () => {
     thumbnailUrl:
       "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/b15b6ee2-fcab-4520-8d11-09bd2a51a7c9/mlog.png",
     title: "타이틀",
-    introduction: "소개",
+    description: "소개",
   };
 
   const router = createMockRouter({
@@ -88,14 +88,14 @@ describe("ArticleHead", () => {
               response: { status: 200 },
             }),
           );
-          it(`/${props.email} 페이지로 이동한다.`, async () => {
+          it(`/articles 페이지로 이동한다.`, async () => {
             renderArticleHead({ article: props, router });
 
             const removeButton = screen.getByRole("button", { name: /삭제/i });
             await fireEvent.click(removeButton);
 
             await waitFor(() =>
-              expect(router.push).toHaveBeenCalledWith(`/${props.email}`),
+              expect(router.push).toHaveBeenCalledWith(`/articles`),
             );
           });
         });

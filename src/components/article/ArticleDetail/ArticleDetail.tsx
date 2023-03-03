@@ -45,11 +45,9 @@ const MDXComponent = {
 
 const ArticleDetail: React.FC<Props> = ({ content }) => {
   return (
-    <>
-      <Content>
-        <MDXRemote {...content} components={MDXComponent} />
-      </Content>
-    </>
+    <Content>
+      <MDXRemote {...content} components={MDXComponent} />
+    </Content>
   );
 };
 

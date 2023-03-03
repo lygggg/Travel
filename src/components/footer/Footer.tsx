@@ -12,6 +12,7 @@ const Container = styled.footer`
   justify-content: center;
   font-size: 1.2rem;
   display: flex;
+  margin-top: 4rem;
 `;
 
 const FooterText = styled.span``;

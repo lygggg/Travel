@@ -1,8 +1,9 @@
 import { fireEvent, waitFor, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { MutableSnapshot } from "recoil";
-import UploadModal, { Props } from "./UploadModal";
+import UploadModal from "./UploadModal";
 import { createMockRouter } from "__mocks__/createMockRouter";
+import { ModalProps } from "src/contexts/modalContext";
 import { articleState } from "src/store/article";
 import { render } from "src/test-utils/customRender";
 import { RecoilRootWrapper } from "src/test-utils";
@@ -24,7 +25,7 @@ const mockUseSession = (data: { email: string }) => {
 describe("UploadModal", () => {
   const mockAlert = jest.fn();
   global.alert = mockAlert;
-  const handleClose = jest.fn();
+  const onClose = jest.fn();
 
   const router = createMockRouter({
     query: { userId: "baayoo93@gmail.com", id: "idfsdfds" },
@@ -32,15 +33,14 @@ describe("UploadModal", () => {
   });
 
   const renderUploadModal = ({
-    isActive,
-    handleClose,
+    onClose,
     initializeState,
-  }: Props & {
+  }: ModalProps & {
     initializeState?: (mutableSnapshot: MutableSnapshot) => void;
   }) =>
     render(
       <RecoilRootWrapper initializeState={initializeState}>
-        <UploadModal isActive={isActive} handleClose={handleClose} />
+        <UploadModal onClose={onClose} />
       </RecoilRootWrapper>,
       {
         router: router,
@@ -56,8 +56,9 @@ describe("UploadModal", () => {
       title: "제목",
       thumbnailUrl:
         "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/f4a284de-7dd2-49db-a0c5-96e43e373de4/mlog.png",
-      introduction: "introduction",
+      description: "description",
       syncTime: "syncTime",
+      _id: "fsdsd",
     });
   };
 
@@ -70,15 +71,15 @@ describe("UploadModal", () => {
           title: "",
           thumbnailUrl:
             "https://mlog-lygggg.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/f4a284de-7dd2-49db-a0c5-96e43e373de4/mlog.png",
-          introduction: "introduction",
+          description: "description",
           syncTime: "syncTime",
+          _id: "fsdsd",
         });
       };
 
       it("제목을 작성해주세요 alert가 뜬다.", async () => {
         renderUploadModal({
-          isActive: true,
-          handleClose,
+          onClose,
           initializeState: initialStateNotTitle,
         });
 
@@ -101,8 +102,7 @@ describe("UploadModal", () => {
 
         it("upload failed. alert가 나온다.", async () => {
           renderUploadModal({
-            isActive: true,
-            handleClose,
+            onClose,
             initializeState: initialState,
           });
 
@@ -125,8 +125,7 @@ describe("UploadModal", () => {
 
       it("내 블로그로 이동한다.", async () => {
         renderUploadModal({
-          isActive: true,
-          handleClose,
+          onClose,
           initializeState: initialState,
         });
 
@@ -145,8 +144,7 @@ describe("UploadModal", () => {
   context("짧게 소개하기에 텍스트를 입력하면", () => {
     it("화면에 텍스트가 보인다.", async () => {
       renderUploadModal({
-        isActive: true,
-        handleClose,
+        onClose,
       });
 
       const textArea = screen.getByLabelText("짧게 소개하기");

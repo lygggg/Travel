@@ -12,11 +12,7 @@ const Write: NextPage = () => {
     modalDispatch?.({ type: "open", component: modals.NOAUTH_MODAL });
   }
 
-  return (
-    <>
-      <EditorContainer />
-    </>
-  );
+  return <EditorContainer />;
 };
 
 export default Write;

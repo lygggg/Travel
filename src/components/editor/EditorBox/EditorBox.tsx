@@ -32,20 +32,18 @@ const EditorBox = ({ height, theme, onChange, content }: EditorUiProps) => {
   };
 
   return (
-    <>
-      <Editor
-        height={height}
-        theme={theme}
-        previewStyle="vertical"
-        onChange={onChangeText}
-        hooks={{
-          addImageBlobHook: async (blob, callback) =>
-            addImageBolb(blob, callback),
-        }}
-        initialValue={content || "본문을 작성해주세요"}
-        ref={editorRef}
-      />
-    </>
+    <Editor
+      height={height}
+      theme={theme}
+      previewStyle="vertical"
+      onChange={onChangeText}
+      hooks={{
+        addImageBlobHook: async (blob, callback) =>
+          addImageBolb(blob, callback),
+      }}
+      initialValue={content || "본문을 작성해주세요"}
+      ref={editorRef}
+    />
   );
 };
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -5,11 +6,12 @@ import { Aboreto } from "@next/font/google";
 import { Button, IconButton } from "src/components/commons";
 import { modals } from "src/components/commons/Modal/GlobalModal";
 import { useModalActions } from "src/contexts/modalContext";
-import { MenuDropdown } from "../index";
+import { MenuDropdown, CategoryList } from "../index";
 
 const aboretoFont = Aboreto({ weight: "400" });
 
-const HeaderBar = () => {
+const NavBar = () => {
+  const [selected, setSelected] = useState("");
   const { data: session } = useSession();
   const modalDispatch = useModalActions();
 
@@ -17,6 +19,11 @@ const HeaderBar = () => {
     modalDispatch?.({ type: "open", component: modals.LOGIN_MODAL });
 
   const menus = [{ title: "새 글 작성", url: "/write" }];
+  const categorys = [
+    { title: "Articles", url: "/articles" },
+    { title: "About", url: "/about" },
+    { title: "Blog", url: "/" },
+  ];
 
   return (
     <>
@@ -24,33 +31,23 @@ const HeaderBar = () => {
         <HeaderLayout>
           <HeaderLeftContainer>
             <Title>
-              <h1>
-                <TitleLink className={aboretoFont.className} href={"/"}>
-                  MLOG
-                </TitleLink>
-              </h1>
+              <TitleLink
+                onClick={() => setSelected("home")}
+                className={aboretoFont.className}
+                href={"/"}
+              >
+                Travel
+              </TitleLink>
             </Title>
           </HeaderLeftContainer>
           <HeaderCenterContainer>
-            <MenuLink href={"/"}>Home</MenuLink>
-            <MenuLink href={"/articles"}>Posts</MenuLink>
-            <MenuLink href={"/articles"}>Tags</MenuLink>
-            <MenuLink href={"/articles"}>About</MenuLink>
+            <CategoryList
+              onSelected={setSelected}
+              selected={selected}
+              categorys={categorys}
+            />
           </HeaderCenterContainer>
           <HeaderRightContainer>
-            {" "}
-            {/* <IconButton
-              width="30px"
-              height="30px"
-              position="-110px -10px"
-              aria-label="검색하기"
-            /> */}
-            {/* <IconButton
-              width="30px"
-              height="30px"
-              position="-10px -10px"
-              aria-label="다크모드로 변환하기"
-            /> */}
             {session ? (
               <MenuDropdown
                 items={menus}
@@ -81,8 +78,8 @@ const HeaderBar = () => {
   );
 };
 
-const HeaderContainer = styled.header`
-  background-color: rgba(100, 100, 100, 0.5);
+const HeaderContainer = styled.nav`
+  background-color: ${(props) => props.theme.gray[900]};
   top: 0;
   left: 0;
   right: 0;
@@ -113,7 +110,7 @@ const HeaderRightContainer = styled.div`
 
 const HeaderCenterContainer = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 80px;
   font-size: 1.1rem;
 `;
 
@@ -124,17 +121,13 @@ const HeaderLeftContainer = styled.div`
   align-items: center;
 `;
 
-const Title = styled.span`
+const Title = styled.h1`
   font-weight: 800;
   font-size: 1.8rem;
 `;
 
 const TitleLink = styled(Link)`
-  color: ${(props) => props.theme.green[700]};
+  color: ${(props) => props.theme.white};
 `;
 
-const MenuLink = styled(Link)`
-  color: ${(props) => props.theme.gray[300]};
-`;
-
-export default HeaderBar;
+export default NavBar;

@@ -1,4 +1,5 @@
 import "@emotion/styled";
+import "@emotion/react";
 
 interface Palette {
   50?: Color;
@@ -13,8 +14,10 @@ interface Palette {
   900?: Color;
 }
 
+type ExtendedTheme = typeof theme;
+
 declare module "@emotion/react" {
-  export interface Theme {
+  export interface Theme extends ExtendedTheme {
     primary: Palette;
     red: Palette;
     orange: Palette;
