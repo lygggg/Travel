@@ -39,6 +39,7 @@
     "plaiceholder": "^2.5.0",
     "react": "latest",
     "react-dom": "latest",
+    "react-icons": "^4.8.0",
     "react-syntax-highlighter": "^15.5.0",
     "recoil": "^0.7.6",
     "sharp": "^0.31.1",
