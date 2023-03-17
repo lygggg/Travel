@@ -95,6 +95,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prosemirror-transform", "npm:1.7.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:18.2.0"],\
+            ["react-icons", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.8.0"],\
             ["react-syntax-highlighter", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:15.5.0"],\
             ["recoil", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:0.7.6"],\
             ["remark-gfm", "npm:3.0.1"],\
@@ -11629,6 +11630,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prosemirror-transform", "npm:1.7.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:18.2.0"],\
+            ["react-icons", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.8.0"],\
             ["react-syntax-highlighter", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:15.5.0"],\
             ["recoil", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:0.7.6"],\
             ["remark-gfm", "npm:3.0.1"],\
@@ -13046,6 +13048,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["react-error-boundary", "virtual:33703960b19274a3f78c40185625f33f3858427204179b3f5438f82c351b77bd1a7333c418f37c2941d68cb2722c084fcd8ca6551b30db26650738b113ab995d#npm:3.1.4"],\
             ["@babel/runtime", "npm:7.19.0"],\
+            ["@types/react", "npm:18.0.18"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-icons", [\
+        ["npm:4.8.0", {\
+          "packageLocation": "./.yarn/cache/react-icons-npm-4.8.0-aa5423cd6c-4dbba7ad98.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "npm:4.8.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.8.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-icons-virtual-d5c8b3a162/0/cache/react-icons-npm-4.8.0-aa5423cd6c-4dbba7ad98.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "virtual:fe990f3f5938f8183a6444d64fbb0d6dfcbb403deba81605d5db3eb55749212b46041bd0c1ccf3c0cbe3fbbfe29d09c0664bc9f1d331895440109bd77576bb3e#npm:4.8.0"],\
             ["@types/react", "npm:18.0.18"],\
             ["react", "npm:18.2.0"]\
           ],\
